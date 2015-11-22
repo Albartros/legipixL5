@@ -1,0 +1,447 @@
+@include keyframes(firstAppear) {
+    0% {
+        @include translate(52%, -100%);
+        @include opacity(0)
+    }
+    12.5% {
+        @include translate(52%, -10%);
+        @include opacity(0)
+    }
+    25% {
+        @include translate(52%, 0);
+        @include opacity(1)
+    }
+    75% {
+        @include translate(52%, 0);
+        @include opacity(1)
+    }
+    100% {
+        @include translate(0, 0);
+        @include opacity(1)
+    }
+}
+
+@include keyframes(lastAppear) {
+    0% {
+        @include translate(-52%, -100%);
+        @include opacity(0)
+    }
+    12.5% {
+        @include translate(-52%, -10%);
+        @include opacity(0)
+    }
+    25% {
+        @include translate(-52%, 0);
+        @include opacity(1)
+    }
+    75% {
+        @include translate(-52%, 0);
+        @include opacity(1)
+    }
+    100% {
+        @include translate(0, 0);
+        @include opacity(1)
+    }
+}
+
+@include keyframes(separatorAppear) {
+    0% {
+        @include opacity(0);
+        width: 0;
+    }
+    75% {
+        @include opacity(0);
+        width: 0;
+    }
+    100% {
+        @include opacity(1);
+        width: 20px;
+    }
+}
+
+@include keyframes(animateLeft) {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -25px 0;
+    }
+}
+
+.carnage {
+    @include e(header) {
+        overflow: hidden;
+        padding-top: $ft-size + 22px + 5px;
+        position: relative;
+    }
+
+    @include e(bloc) {
+        background-color: $bg-color;
+    }
+
+    @include e(game) {
+        @include clearfix();
+        @include container(700px);
+        background-color: rgba(#000, 0.5);
+        color: $md-clr-grey-100;
+        font-size: 16px;
+        height: 80px;
+        position: relative;
+
+        @include e(mode) {
+            font-size: 20px;
+
+            @include e(icon) {
+                @include filter(invert(0.9));
+                @include translateY(-50%);
+                height: 60px;
+                position: absolute;
+                top: 50%;
+                width: 60px;
+                left: 10px;
+            }
+        }
+
+        @include e(map) {
+            color: $md-clr-grey-500;
+            text-transform: uppercase;
+        }
+
+        @include e(duration) {
+            @include translateY(-50%);
+            color: $md-clr-grey-500;
+            position: absolute;
+            right: 10px;
+            text-align: right;
+            top: 50%;
+
+            @include e(item) {
+                display: inline-block;
+                text-align: center;
+                width: 45px;
+            }
+        }
+
+        @include e(container) {
+            @include translateY(-50%);
+            position: absolute;
+            top: 50%;
+            left: 75px + 10px;
+        }
+    }
+
+    @include e(score) {
+        color: $md-clr-grey-100;
+        display: inline-block;
+        font-size: 50px;
+        font-weight: 600;
+        height: 125px;
+        line-height: 125px;
+        vertical-align: middle;
+        width: 250px;
+        &:first-of-type {
+            text-align: right;
+        }
+        &:last-of-type {
+            text-align: left;
+        }
+
+        @include e(team) {
+            display: inline-block;
+            height: 125px;
+            vertical-align: middle;
+            width: 125px;
+            
+            @include b(l) {
+                &.launchAnimation {
+                    &:first-of-type {
+                        &:not(.done) { @include animation(firstAppear 2s ease); }
+                    }
+                }
+                &.launchAnimation {
+                    &:last-of-type {
+                        &:not(.done) { @include animation(lastAppear 2s ease); }
+                    }
+                }
+            }
+        }
+
+        @include e(container) {
+            margin: 55px 0;
+            text-align: center;
+        }
+
+        @include e(separator) {
+            display: inline-block;
+            height: 125px;
+            position: relative;
+            vertical-align: middle;
+            width: 20px;
+            @include b(l) {
+                &.launchAnimation {
+                    &:not(.done) { @include animation(separatorAppear 2s ease); }
+                }
+            }
+
+            @include e(box) {
+                @include translateY(-50%);
+                background-color: $md-clr-grey-50;
+                height: 4px;
+                position: absolute;
+                top: 50%;
+                width: 20px;
+            }
+        }
+    }
+
+    @include e(report) {
+        @include container;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+    @include e(table) {
+        @include span(6 of 12);
+        &:last-of-type {
+            @include span(6 of 12 last);
+        }
+        @include m(red) {
+            .carnage__table__head {
+                background-color: mix(#B00000, $md-clr-red-700);
+                border-left-color: mix(#B00000, $md-clr-red-700);
+            }
+            .carnage__table__big {
+                border-left-color: mix(#B00000, $md-clr-red-700);
+            }
+        }
+        @include m(blue) {
+            .carnage__table__head {
+                background-color: mix(#178DD8, $md-clr-blue-700);
+                border-left-color: mix(#178DD8, $md-clr-blue-700);
+            }
+            .carnage__table__big {
+                border-left-color: mix(#178DD8, $md-clr-blue-700);
+            }
+        }
+
+        @include e(head) {
+            border-left: 4px solid $md-clr-grey-900;
+            color: $md-clr-grey-50;
+            font-weight: 600;
+            height: 3em;
+            line-height: 3em;
+
+            @include e(title) {
+                &:first-of-type {
+                    font-size: 18px;
+                    padding-left: 11px;
+                    text-align: left;
+                    text-transform: uppercase;
+                }
+                &:last-of-type {
+                    padding-right: 15px;
+                    text-align: right;
+                }
+            }
+        }
+
+        @include e(row) {
+            height: 4em;
+            line-height: 4em;
+            &:nth-of-type(odd) {
+                background-color: mix($md-clr-grey-400, $md-clr-grey-300);
+            }
+            &:nth-of-type(even) {
+                background-color: $md-clr-grey-300;
+            }
+
+            @include m(left) {
+                @include animation(animateLeft 2.5s linear infinite);
+                @include background-image(repeating-linear-gradient(-51.6deg, rgba(#000, 0.1), rgba(#000, 0.1) 10px, transparent 10px, transparent 20px));
+            }
+        }
+
+        @include e(small) {
+            width: 12.5% - 1.5%;
+            text-align: center;
+            position: relative;
+
+            @include e(value) {
+                @include translate(-50%, -100%);
+                display: block;
+                font-weight: 600;
+                height: 0.5em;
+                left: 50%;
+                position: relative;
+                top: 50%;
+            }
+            @include e(name) {
+                @include translateX(-50%);
+                display: block;
+                font-size: 0.85em;
+                height: 0;
+                left: 50%;
+                position: relative;
+                top: 50%;
+            }
+        }
+
+        @include e(big) {
+            @include clearfix();
+            border-left: 4px solid $md-clr-grey-900;
+            font-weight: 600;
+            width: 50% - 12.5% + 7.5%;
+
+            @include e(emblem) {
+                background-color: $md-clr-grey-900;
+                float: left;
+                height: 4em;
+                width: 4em;
+            }
+
+            @include e(name) {
+                @include translateY(-50%);
+                font-weight: 600;
+                margin-left: 8px;
+                position: relative;
+                top: 50%;
+            }
+        }
+    }
+
+    @include e(player) {
+        padding-top: 50px;
+        position: relative;
+
+        @include e(href) {
+            position: absolute;
+            top: -74px;
+        }
+        @include e(header) {
+            @include container(700px);
+            position: relative;
+
+            @include e(spartan) {
+                @include span(6 of 12);
+                position: relative;
+                top: 3px;
+            }
+            @include e(name) {
+                @include span(6 of 12 last);
+                bottom: 0px;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+
+                @include e(bloc) {
+                    @include translate(-50%,-50%);
+                    background-color: rgba(#000, 0.5);
+                    color: $md-clr-grey-100;
+                    font-size: 25px;
+                    height: 70px;
+                    left: 50%;
+                    line-height: 70px;
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    width: 100%;
+                }
+            }
+        }
+
+        @include e(containerHolder) {
+            background-color: $bg-color;
+        }
+
+        @include e(container) {
+            @include container;
+
+            @include e(name) {
+                font-size: 20px;
+                font-weight: 600;
+                padding: 20px 0;
+                text-transform: uppercase;
+            }
+        }
+
+        @include e(medals) {
+            @include container;
+            @include span(7 of 12);
+            padding-bottom: 15px;
+        }
+
+        @include e(medal) {
+            @include span(2 of 10);
+            margin-bottom: gutter();
+            text-align: center;
+            &:nth-of-type(5n) {
+                @include span(2 of 10 last);
+            }
+
+            @include e(icon) {
+                @include scale(0.8);
+                display: inline-block;
+                margin-bottom: -8px;
+            }
+
+            @include e(name) {
+                font-weight: 600;
+            }
+
+            @include e(count) {
+                &:before {
+                    content: "x";
+                }
+            }
+        }
+
+        @include e(weapons) {
+            @include span(5 of 12 last);
+            padding-bottom: 15px;
+        }
+
+        @include e(weapon) {
+            @include container;
+            height: 75px;
+            overflow: hidden;
+            position: relative;
+
+            @include e(icon) {
+                @include span(3 of 10);
+                margin-right: gutter() * 3;
+            }
+
+            @include e(info) {
+                @include span(3 of 10);
+                height: 100%;
+                margin-right: 0;
+                position: relative;
+
+                @include e(name) {
+                    font-weight: 600;
+                }
+            }
+
+            @include e(stats) {
+                @include span(2 of 10);
+                height: 100%;
+                margin-right: 0;
+                position: relative;
+                text-align: center;
+                &:last-of-type {
+                    @include span(2 of 10 last);
+                }
+
+                @include e(name) {
+                    font-weight: 600;
+                }
+            }
+
+            @include e(holder) {
+                @include translateY(-50%);
+                position: absolute;
+                top: 50%;
+            }
+        }
+    }
+}

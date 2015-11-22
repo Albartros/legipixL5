@@ -1,0 +1,14 @@
+.body {
+    background-color: $bg-color;
+    position: relative;
+    @include m(cristal) {
+        background-attachment: fixed;
+        background-image: url(../img/background/mountains.jpg);
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: auto;
+        @include b(l) {
+            background-attachment: fixed;
+        }
+    }
+}

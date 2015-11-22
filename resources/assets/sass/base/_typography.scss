@@ -1,0 +1,24 @@
+body {
+    color: $ft-color;
+    font: $ft-style $ft-weight $ft-size $ft-family;
+    line-height: $ft-line-height;
+}
+
+strong, b {
+    font-weight: 600;
+}
+
+em, i {
+    font-style: italic;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    &:active {
+        text-decoration: none;
+    }
+    &:visited {
+        text-decoration: none;
+    }
+}

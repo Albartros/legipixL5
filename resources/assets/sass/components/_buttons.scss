@@ -1,0 +1,70 @@
+.button {
+    @include transition(background-color 0.3s);
+    @include border-radius($button-radius);
+    background-color: $button-background-color;
+    color: $button-ft-color;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $ft-family-alt;
+    height: $button-height;
+    line-height: $button-height;
+    padding: $button-padding;
+    &:hover {
+        background-color: lighten($button-background-color, 2.5%);
+    }
+
+    &:not(.button--grey) {
+        .button__icon__path {
+            fill: $md-clr-grey-50;
+        }
+    }
+    @include m(grey) {
+        background-color: mix($md-clr-grey-400, $md-clr-grey-300, 65%);
+        color: $ft-color;
+        &:hover {
+            background-color: lighten(mix($md-clr-grey-400, $md-clr-grey-300, 65%), 2.5%);
+        }
+    }
+    @include m(splash) {
+        @include transition(background-color 0.3s, font-size 0.2s, height 0.2s, line-height 0.2s, margin-top 0.2s, width 0.2s);
+        font-size: 14px;
+        height: $button-height * 1.1;
+        letter-spacing: 1px;
+        line-height: $button-height * 1.1;
+        margin-top: 0;
+        text-transform: uppercase;
+        width: 250px;
+        @include b(m) {
+            font-size: 15px;
+            height: $button-height * 1.2;
+            line-height: $button-height * 1.2;
+            width: 350px;
+        }
+        @include b(l) {
+            height: $button-height * 1.4;
+            line-height: $button-height * 1.4;
+            margin-top: 30px;
+            width: 450px;
+        }
+    }
+    @include m(cookie) {
+        @include transform(scale(0.875) translateY(-50%));
+        height: 1.5em;
+        line-height: 1.5em;
+        position: absolute;
+        right: 0;
+        top: 50%;
+    }
+
+    @include e(icon) {
+        bottom: 1px;
+        height: 1em;
+        position: relative;
+        vertical-align: middle;
+        width: 1em;
+    }
+}
+
+.disabled {
+    cursor: default;
+}

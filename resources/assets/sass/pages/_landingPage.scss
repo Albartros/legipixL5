@@ -1,0 +1,120 @@
+.splash {
+    @include transition(padding 0.2s);
+    @include flexbox((
+        align-items: center,
+        display: flex,
+        flex-direction: column,
+    ));
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    padding: 1.5em 0;
+    text-align: center;
+    @include b(m) {
+        padding: 4em 0;
+    }
+    @include b(l) {
+        &:not(.alt) {
+            padding: 7em 0 8em;
+        }
+    }
+
+    @include e(title) {
+        @include transition(font-size 0.2s);
+        font-size: 22px;
+        font-weight: 400;
+        @include b(m) {
+            font-size: 26px;
+        }
+        @include b(l) {
+            font-size: 32px;
+        }
+    }
+    @include e(subTitle) {
+        @include transition(font-size 0.2s, margin 0.2s);
+        font-size: 18px;
+        font-weight: 100;
+        margin: 0.5em 0;
+        @include b(m) {
+            font-size: 20px;
+            margin: 0.25em 0px 0.5em;
+        }
+        @include b(l) {
+            font-size: 24px;
+            margin: 10px 0 0;
+        }
+    }
+}
+
+.landingFeature {
+    @include container;
+
+    @include e(name) {
+        @include transition(font-size 0.2s);
+        color: $md-clr-grey-50;
+        font-family: $ft-family-alt;
+        font-size: 24px;
+        font-weight: 100;
+        text-align: center;
+        text-transform: uppercase;
+        @include b(l) {
+            font-size: 30px;
+        }
+
+        @include e(sup) {
+            font-size: 55%;
+            position: relative;
+            top: 2px;
+            vertical-align: top;
+        }
+    }
+    @include e(subName) {
+        @include transition(font-size 0.2s);
+        color: $md-clr-grey-50;
+        font-family: $ft-family-alt;
+        font-size: 17px;
+        font-weight: 100;
+        text-align: center;
+        @include b(l) {
+            font-size: 18px;
+        }
+    }
+}
+
+.landingFeatures {
+    @include container;
+
+    @include e(column) {
+        @include span(1 of 1 last);
+        @include b(m) {
+            @include span(2 of 6);
+
+            &:last-child {
+                @include span(2 of 6 last);
+            }
+        }
+
+        @include e(name) {
+            @include transition(font-size 0.2s);
+            color: $md-clr-grey-50;
+            font-family: $ft-family-alt;
+            font-size: 24px;
+            font-weight: 100;
+            text-align: center;
+            text-transform: uppercase;
+            @include b(l) {
+                font-size: 30px;
+            }
+        }
+        @include e(subName) {
+            @include transition(font-size 0.2s);
+            color: $md-clr-grey-50;
+            font-family: $ft-family-alt;
+            font-size: 17px;
+            font-weight: 100;
+            text-align: center;
+            @include b(l) {
+                font-size: 18px;
+            }
+        }
+    }
+}

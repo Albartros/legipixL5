@@ -1,0 +1,43 @@
+// Susy Layout
+$sl-columns: 12;
+$sl-gutters: 1/4;
+$sl-math: fluid;
+$sl-output: float;
+$sl-width: 1150px;
+
+$susy: (
+    columns: $sl-columns,
+    container: $sl-width,
+    gutters: $sl-gutters,
+    math: $sl-math,
+    output: $sl-output
+);
+
+// Global
+$bg-color: $md-clr-grey-200;
+
+// Fonts
+$ft-color: $md-clr-grey-900;
+$ft-family: "Source Sans Pro", sans-serif;
+$ft-family-alt: "Roboto", sans-serif;
+$ft-line-height: 1;
+$ft-size: 16px;
+$ft-style: normal;
+$ft-weight: 400;
+
+// SVG
+$svg-display: inline-block;
+$svg-fill-color: $ft-color;
+
+// Buttons
+$button-background-color: $md-clr-red-400;
+$button-ft-color: $md-clr-grey-50;
+$button-height: 36px;
+$button-small-height: 1.9em;
+$button-padding: 0 8px;
+$button-radius: 3px;
+
+//Badges
+$badge-background-color: $md-clr-grey-300;
+$badge-height: $button-small-height;
+$badge-width: $badge-height;

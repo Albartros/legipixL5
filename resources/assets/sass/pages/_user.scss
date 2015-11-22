@@ -1,0 +1,183 @@
+.user {
+    @include container;
+    margin-top: 35px;
+
+    @include e(main) {
+        @include span(8 of 12);
+    }
+
+    @include e(title) {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        line-height: 2em;
+        margin-left: 10px;
+        padding-top: 0.25em;
+        text-transform: uppercase;
+
+        @include e(user) {
+            text-transform: none;
+        }
+    }
+
+    @include e(awards) {
+        @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
+        background: $md-clr-grey-50;
+        position: relative;
+
+
+        @include e(container) {
+            @include container;
+            @include transition(padding-bottom 0.2s);
+            margin-top: 8px;
+
+            &:hover {
+                padding-bottom: 15px;
+            }
+        }
+        @include e(award) {
+            @include span(1 of 12);
+            @include filter(grayscale(100%));
+            @include post(0);
+            @include pre(gutter() * 1.25);
+            margin-bottom: gutter();
+
+            &:hover {
+                & + .user__awards__award__description {
+                    @include opacity(1);
+                }
+            }
+
+            @include m(unlocked) {
+                @include filter(grayscale(0));
+            }
+            @include m(common) {
+                border-bottom: 3px solid $md-clr-grey-400;
+            }
+            @include m(uncommon) {
+                border-bottom: 3px solid $md-clr-green-300;
+            }
+            @include m(rare) {
+                border-bottom: 3px solid $md-clr-purple-400;
+            }
+            @include m(legendary) {
+                border-bottom: 3px solid $button-background-color;
+            }
+            @include m(unique) {
+                border-bottom: 3px solid $md-clr-blue-500;
+            }
+
+            @include e(description) {
+                @include opacity(0);
+                @include transition(opacity 0.2s);
+                bottom: 5px;
+                cursor: default;
+                left: 0;
+                position: absolute;
+                right: 0;
+                text-align: center;
+
+                @include e(title) {
+                    font-family: $ft-family-alt;
+                    //letter-spacing: 0.5px;
+                    margin-right: 0.3em;
+                    //text-transform: uppercase;
+                    &:after {
+                        bottom: 1px;
+                        content: "|";
+                        font-family: $ft-family;
+                        margin-left: 0.3em;
+                        position: relative;
+                    }
+                }
+            }
+        }
+    }
+
+    @include e(player) {
+        @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
+        @include span(4 of 12 last);
+        background: $md-clr-grey-50;
+        overflow: hidden;
+        position: relative;
+
+        @include e(spartan) {
+            height: 336px;
+            position: relative;
+            right: 18px;
+            top: 3px;
+        }
+
+        @include e(emblem) {
+            left: 120px;
+            position: absolute;
+            top: 40px;
+        }
+
+        @include e(stats) {
+            @include flexbox((
+                align-items: center,
+                display: flex,
+                flex-direction: column,
+                justify-content: flex-end,
+            ));
+            bottom: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 130px;
+
+            @include e(box) {
+                margin: 5px 0;
+                text-align: center;
+
+                &:last-of-type {
+                    margin-bottom: 80px;
+                }
+            }
+
+            @include e(title) {
+                color: $button-background-color;
+                font-family: $ft-family-alt;
+                font-size: 15px;
+                font-weight: 600;
+                letter-spacing: 0.4px;
+                margin-bottom: 1px;
+                //text-transform: uppercase;
+            }
+
+            @include e(description) {
+                font-size: 14px;
+                position: relative;
+
+                @include e(value) {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        @include e(more) {
+            @include translateX(-50%);
+            bottom: 10px;
+            box-shadow: 0 0 3px rgba(#000,0.5);
+            left: 50%;
+            position: absolute;
+        }
+    }
+
+    @include e(description) {
+        @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
+        background: $md-clr-grey-50;
+        margin-bottom: gutter();
+
+        @include e(text) {
+            padding: 0 10px 10px;
+        }
+    }
+}
+
+.profile {
+    height: 300px;
+    width: 100%;
+    background-color: $md-clr-deep-purple-400;
+}

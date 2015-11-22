@@ -1,0 +1,66 @@
+.footer {
+    @include container;
+    background-color: mix($md-clr-grey-800, #000, 75%);
+    color: $md-clr-grey-100;
+    margin: gutter() auto;
+    position: relative;
+
+    @include e(blocks) {
+        @include flexbox((
+            display: flex,
+            flex-direction: row,
+            justify-content: space-around,
+        ));
+        padding: 1.75em 1em;
+    }
+    @include e(block) {
+        border-right: 1px solid mix($md-clr-grey-400, $md-clr-grey-300);
+        padding: 0 1em;
+        text-align: center;
+        width: 33.333%;
+        &:last-of-type {
+            border-right: none;
+        }
+
+        @include e(name) {
+            font-family: $ft-family-alt;
+            letter-spacing: 0.5px;
+            margin-bottom: .5em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        @include e(text) {
+            color: mix($md-clr-grey-400, $md-clr-grey-300);
+            font-size: 0.95em;
+            line-height: 1.15em;
+
+            @include e(link) {
+                color: mix($md-clr-grey-300, $md-clr-grey-100);
+            }
+        }
+    }
+    @include e(copyright) {
+        background-color: mix($md-clr-grey-900, #000, 75%);
+        font-size: 0.903em;
+        letter-spacing: 0.5px;
+        line-height: 2.5em;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.cookie {
+    background-color: mix($md-clr-grey-900, #000, 75%);
+    bottom: 0;
+    color: $md-clr-grey-200;
+    display: none;
+    line-height: 2.25em;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+
+    @include e(text) {
+        @include container(950px);
+        position: relative;
+    }
+}

@@ -1,0 +1,64 @@
+.errorContainer {
+    background-attachment: fixed;
+    background-image: url(../addendum/desert.jpg);
+    background-position: center 75%;
+    background-repeat: no-repeat;
+    background-size: auto;
+    @include b(l) {
+        background-attachment: fixed;
+    }
+        
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 107px;
+    @include b(m) {
+        top: 127px;
+    }
+    @include b(l) {
+        top: 75px;
+    }
+}
+
+.error {
+    @include transition(padding 0.2s);
+    @include translate(-50%, -50%);
+    @include flexbox((
+        align-items: center,
+        display: flex,
+        flex-direction: column,
+    ));
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+
+    @include e(title) {
+        @include transition(font-size 0.2s);
+        font-size: 22px;
+        font-weight: 400;
+        @include b(m) {
+            font-size: 26px;
+        }
+        @include b(l) {
+            font-size: 32px;
+        }
+    }
+    @include e(subTitle) {
+        @include transition(font-size 0.2s, margin 0.2s);
+        font-size: 18px;
+        font-weight: 100;
+        margin: 0.5em 0;
+        @include b(m) {
+            font-size: 20px;
+            margin: 0.25em 0px 0.5em;
+        }
+        @include b(l) {
+            font-size: 24px;
+            margin: 10px 0 0;
+        }
+    }
+}

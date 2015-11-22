@@ -1,0 +1,77 @@
+.pagination {
+    @include box-shadow(0 0 7px rgba(#000, 0.05));
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 20px;
+    > li {
+        display: inline; // Remove list-style and block-level defaults
+        > a,
+        > span {
+            background-color: #FFF;
+            border: 1px solid $md-clr-grey-300;
+            color: lighten($ft-color, 15%);
+            float: left;
+            line-height: 32px;
+            margin-left: -1px;
+            padding: 0 12px;
+            position: relative;
+            text-decoration: none;
+        }
+        &:first-child {
+            > a,
+            > span {
+                @include border-left-radius(3px);
+                margin-left: 0;
+            }
+        }
+        &:last-child {
+            > a,
+            > span {
+                @include border-right-radius(3px);
+            }
+        }
+    }
+
+    > li > a,
+    > li > span {
+        &:hover,
+        &:focus {
+            background-color: $md-clr-grey-200;
+            border-color: mix($md-clr-grey-300, $md-clr-grey-400, 75%);
+            color: $ft-color;
+            z-index: 2;
+        }
+    }
+
+    > .active > a,
+    > .active > span {
+        &,
+        &:hover,
+        &:focus {
+            background-color: $button-background-color;
+            border-color: darken($button-background-color, 5%);
+            color: $md-clr-grey-50;
+            cursor: default;
+            z-index: 3;
+        }
+    }
+
+    > .disabled {
+        > span,
+        > span:hover,
+        > span:focus,
+        > a,
+        > a:hover,
+        > a:focus {
+            background-color: #FFF;
+            border-color: $md-clr-grey-300;
+            color: $md-clr-grey-500;
+            cursor: default;
+        }
+    }
+
+    @include e(container) {
+        @include span(10 of 13 last);
+        text-align: center;
+    }
+}

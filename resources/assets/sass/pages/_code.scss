@@ -1,0 +1,52 @@
+.code {
+    @include container(900px);
+
+    @include e(cipher) {
+        @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
+        @include container(500px);
+        background: $md-clr-grey-50;
+        display: block;
+        font-family: monospace;
+        line-height: 1.07em;
+        padding: gutter() / 1.25 gutter();
+
+        span {
+            @include span(1 of 7);
+            @include user-select(none);
+            display: block;
+            text-align: center;
+            &:nth-of-type(7n) {
+                @include span(1 of 7 last);
+            }
+        }
+    }
+
+    @include e(button) {
+        @include transition(margin-top 0.2s);
+        text-align: center;
+        margin-top: 15px;
+        @include b(l) {
+            margin-top: 0;
+        }
+    }
+
+    @include e(description) {
+        margin: 10px 0;
+
+        @include e(title) {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+
+            @include e(font) {
+                font-family: monospace;
+                margin: 0 0.25em;
+            }
+        }
+
+        @include e(text) {
+            text-align: justify;
+        }
+    }
+}
