@@ -106,7 +106,6 @@
         @yield('scripts')
         Cookie.init();
         @show
-
     })();
 </script>
 </body>
