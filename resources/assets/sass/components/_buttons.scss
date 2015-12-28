@@ -31,7 +31,6 @@
         height: $button-height * 1.1;
         letter-spacing: 1px;
         line-height: $button-height * 1.1;
-        margin-top: 0;
         text-transform: uppercase;
         width: 250px;
         @include b(m) {
@@ -43,7 +42,6 @@
         @include b(l) {
             height: $button-height * 1.4;
             line-height: $button-height * 1.4;
-            margin-top: 30px;
             width: 450px;
         }
     }

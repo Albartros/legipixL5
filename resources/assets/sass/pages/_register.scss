@@ -1,0 +1,104 @@
+.register {
+  @include flexbox((
+          align-items: center,
+          display: flex,
+          flex-direction: row,
+          justify-content: space-between,
+  ));
+  margin: 2.5em auto 0;
+  width: 1050px;
+
+  @include e(container) {
+    width: 42%;
+  }
+
+  @include e(separator) {
+    @include user-select(none);
+    background-color: $button-background-color;
+    border-radius: 50%;
+    color: $md-clr-grey-50;
+    cursor: default;
+    font-weight: 600;
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+    text-align: center;
+    width: 60px;
+
+    &:before {
+      @include translateY(-50%);
+      border-color: transparent $button-background-color transparent transparent;
+      border-style: solid;
+      border-width: 10px 15px 10px 0;
+      content: "";
+      height: 0;
+      left: -12px;
+      position: absolute;
+      top: 50%;
+      width: 0;
+    }
+    &:after {
+      @include translateY(-50%);
+      border-color: transparent transparent transparent $button-background-color;
+      border-style: solid;
+      border-width: 10px 0 10px 15px;
+      content: "";
+      height: 0;
+      right: -12px;
+      position: absolute;
+      top: 50%;
+      width: 0;
+    }
+  }
+
+  @include e(form) {
+    @include e(top) {
+      @include border-top-radius(4px);
+      @include clearfix();
+      background-color: $button-background-color;
+      padding: 18px 16px 14px;
+      position: relative;
+
+      @include e(title) {
+        color: $md-clr-grey-50;
+        float: left;
+        font-size: 1.5em;
+        font-weight: 600;
+        margin-bottom: 12px;
+        width: 90%;
+
+        small {
+          bottom: 1px;
+          font-size: 0.8em;
+          font-weight: 400;
+          position: relative;
+        }
+      }
+      @include e(description) {
+        color: $md-clr-grey-100;
+        float: left;
+        font-size: 1.05em;
+        font-weight: 100;
+        width: 90%;
+      }
+      @include e(icon) {
+        @include m(alt) {
+          width: 10%;
+        }
+        float: right;
+        width: 8.5%;
+
+        @include e(path) {
+          fill: $md-clr-grey-100;
+        }
+      }
+    }
+    @include e(bottom) {
+      @include border-bottom-radius(4px);
+      @include clearfix();
+      background-color: $bg-color;
+      padding: 28px 16px;
+      position: relative;
+    }
+  }
+}

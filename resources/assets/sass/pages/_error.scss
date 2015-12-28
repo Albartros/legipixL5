@@ -1,8 +1,6 @@
 .errorContainer {
-    background-attachment: fixed;
-    background-image: url(../addendum/desert.jpg);
-    background-position: center 75%;
-    background-repeat: no-repeat;
+    //noinspection CssUnknownTarget
+    background: url(../img/background/desert.jpg) no-repeat fixed center 75%;
     background-size: auto;
     @include b(l) {
         background-attachment: fixed;
@@ -54,7 +52,7 @@
         margin: 0.5em 0;
         @include b(m) {
             font-size: 20px;
-            margin: 0.25em 0px 0.5em;
+            margin: 0.25em 0 0.5em;
         }
         @include b(l) {
             font-size: 24px;

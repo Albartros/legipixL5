@@ -20,6 +20,7 @@ Route::get('/forum', ['as' => 'forum', function () {
 }]);
 
 Route::get('/forum/tag', ['as' => 'forum.tag', function () {
+    \Illuminate\Support\Facades\Session::flash('message', 'Bienvenue sur notre site, nous vous souhaitons une agréable visite');
     return view('forum.tag', ['cristal' => false]);
 }]);
 
@@ -27,4 +28,6 @@ Route::get('/forum/topic', ['as' => 'forum.topic', function () {
     return view('forum.topic', ['cristal' => false]);
 }]);
 
-
+Route::get('/register', ['as' => 'user.register', function () {
+    return view('user.register', ['cristal' => true]);
+}]);

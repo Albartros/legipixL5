@@ -1,0 +1,39 @@
+.form {
+  @include e(registerInput) {
+    margin-bottom: 21px;
+    padding: 10px;
+    width: 100%;
+  }
+  @include e(registerSubmit) {
+    background-color: $button-background-color !important;
+    border-radius: $button-radius !important;
+    color: $md-clr-grey-50 !important;
+    padding: 1px 0 2px !important;
+    text-align: center;
+    width: 100%;
+  }
+  @include e(registerLabel) {
+    bottom: 3px;
+    position: relative;
+    @include m(withSmall) {
+      bottom: 0;
+    }
+
+    small {
+      bottom: 3px;
+      color: $md-clr-grey-700;
+      font-size: 0.82em;
+      position: relative;
+    }
+  }
+}
+
+.formWithCaptcha {
+  .g-recaptcha {
+    @include translateX(-50%);
+    display: inline-block;
+    left: 50%;
+    margin-bottom: 21px;
+    position: relative;
+  }
+}

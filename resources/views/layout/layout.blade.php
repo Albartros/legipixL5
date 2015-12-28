@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LegiPix - @yield('title')</title>
+    <title>Legipix - @yield('title')</title>
     <meta charset="utf-8">
 
     <!-- Metas -->
@@ -28,14 +28,20 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{!! asset('img/favicon/favicon-96x96.png') !!}">
     <link rel="icon" type="image/png" sizes="16x16" href="{!! asset('img/favicon/favicon-16x16.png') !!}">
     <link rel="manifest" href="{!! asset('img/favicon/manifest.json') !!}">
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#d1c4e9">
     <meta name="msapplication-TileImage" content="{!! asset('img/favicon/ms-icon-144x144.png') !!}">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#d1c4e9">
 </head>
 
-<body class="body @if ($cristal) body--cristal @endif">
+<body class="body @if($cristal == true) body--cristal @endif">
 
-<nav class="nav__container @if ($cristal) nav__container--cristal @endif">
+@if(\Illuminate\Support\Facades\Session::has('message'))
+    <div class="flash">
+        <div class="flash__message">{{ \Illuminate\Support\Facades\Session::pull('message') }}</div>
+    </div>
+@endif
+
+<nav class="nav__container @if($cristal) nav__container--cristal @endif">
 
     <div class="nav">
         <a class="nav__logo" href="{!! route('index') !!}">
@@ -48,7 +54,7 @@
                 <a class="nav__menu__link disabled" href="#">{!! trans('menu.navHub') !!}</a>
             </li>-->
             <li class="nav__menu__item">
-                <a class="nav__menu__link" href="{!! route('forum') !!}">{!! trans('menu.navForum') !!}</a>
+                <a class="nav__menu__link" href="{!! route('forum') !!}">{!! trans('menu.menuForumLink') !!}</a>
             </li>
             <!--<li class="nav__menu__item">
                 <a class="nav__menu__link disabled" href="#">{!! trans('menu.navSocialPlay') !!}</a>
@@ -60,38 +66,52 @@
                 <a class="nav__menu__link disabled" href="#">{!! trans('menu.navChat') !!}</a>
             </li>-->
             <li class="nav__menu__item">
-                <a class="button" href="#">{!! trans('menu.navLogin') !!}</a>
+                <a class="button" href="{!! route('user.register') !!}">{!! trans('menu.menuLoginButton') !!}</a>
             </li>
         </menu>
     </div>
 </nav>
 
-@unless ($cristal)
+@if($cristal == false)
     <div class="nav__spacer"></div>
-@endunless
+@endif
 
-@section('content')
-    <footer class="footer">
-        <div class="footer__blocks">
-            <div class="footer__block">
-                <h2 class="footer__block__name">{!! trans('menu.footerWho') !!}</h2>
+<div class="mainWrapper">
+    @section('content')
+    @show
+</div>
 
-                <p class="footer__block__text">{!! trans('menu.footerWhoText') !!}</p>
-            </div>
-            <div class="footer__block">
-                <h2 class="footer__block__name">{!! trans('menu.footerContact') !!}</h2>
-
-                <p class="footer__block__text">{!! trans('menu.footerContactText') !!}</p>
-            </div>
-            <div class="footer__block">
-                <h2 class="footer__block__name">{!! trans('menu.footerDev') !!}</h2>
-
-                <p class="footer__block__text">{!! trans('menu.footerDevText') !!}</p>
-            </div>
+<footer class="footer">
+    @if($cristal == false)
+    <div class="footer__blocks">
+        <div class="footer__block">
+            <h2 class="footer__block__name">{!! trans('menu.footerAbout') !!}</h2>
+            <p class="footer__block__text">{!! trans('menu.footerAboutText') !!}</p>
         </div>
-        <div class="footer__copyright">{!! trans('menu.footerCopy') !!}</div>
-    </footer>
-@show
+        <div class="footer__block">
+            <h2 class="footer__block__name">{!! trans('menu.footerContact') !!}</h2>
+
+            <p class="footer__block__text">{!! trans('menu.footerContactText') !!}</p>
+        </div>
+        <div class="footer__block">
+            <h2 class="footer__block__name">{!! trans('menu.footerContribute') !!}</h2>
+
+            <p class="footer__block__text">{!! trans('menu.footerContributeText') !!}</p>
+        </div>
+    </div>
+    @endif
+    <div class="footer__copyright @if($cristal == true) footer__copyright--cristal @endif">
+        {!! trans('menu.footerCopyright') !!}
+        <div class="footer__lang">
+            <a href="#" class="footer__lang__flag footer__lang__flag--active" title="{{ trans('general.translatedToFrench') }}">
+                <img class="footer__lang__flag__icon" src="{{ asset('img/misc/FR.png') }}" alt="FR">
+            </a>
+            <a href="#" class="footer__lang__flag" title="{{ trans('general.translateToEnglish') }} (not ready)">
+                <img class="footer__lang__flag__icon" src="{{ asset('img/misc/GB.png') }}" alt="EN">
+            </a>
+        </div>
+    </div>
+</footer>
 
 <div id="cookieBox" class="cookie">
     <div class="cookie__text">

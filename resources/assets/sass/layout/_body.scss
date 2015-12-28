@@ -1,14 +1,65 @@
 .body {
-    background-color: $bg-color;
-    position: relative;
-    @include m(cristal) {
-        background-attachment: fixed;
-        background-image: url(../img/background/mountains.jpg);
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: auto;
-        @include b(l) {
-            background-attachment: fixed;
-        }
+  background-color: $bg-color;
+
+  // Fixing the Footer position
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  @include m(cristal) {
+    background: url("../img/background/mountains.jpg") no-repeat fixed center top;
+    background-size: auto;
+    @include b(l) {
+      background-attachment: fixed;
     }
+  }
+  @include m(konami) {
+    position: relative;
+    &:after {
+      @include animation(unicornFade 10s ease 1);
+      @include opacity(0);
+      background: rgb(188, 223, 230) url("../img/misc/unicorn.gif") no-repeat center;
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 999;
+    }
+    &:before {
+      @include animation(unicornFade 10s ease 1);
+      @include opacity(0);
+      @include transform(translate(50%, -50%) rotate(-90deg));
+      color: $md-clr-grey-50;
+      content: "Rainbow Tootin' Unicorn by Eddie Song \A https://dribbble.com/shots/2181500-Rainbow-Tootin-Unicorn";
+      cursor: default;
+      position: fixed;
+      right: 30px;
+      text-align: center;
+      top: 50%;
+      white-space: pre;
+      z-index: 1000;
+    }
+  }
+}
+
+@include keyframes(unicornFade) {
+  0% {
+    @include opacity(0);
+  }
+  15% {
+    @include opacity(1);
+  }
+  85% {
+    @include opacity(1);
+  }
+  100% {
+    @include opacity(0);
+  }
+}
+
+// Fixing the Footer position
+.mainWrapper {
+  flex: 1;
 }

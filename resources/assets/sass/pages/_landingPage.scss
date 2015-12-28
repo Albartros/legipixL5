@@ -1,120 +1,257 @@
 .splash {
-    @include transition(padding 0.2s);
-    @include flexbox((
-        align-items: center,
-        display: flex,
-        flex-direction: column,
-    ));
-    color: $md-clr-grey-50;
-    font-family: $ft-family-alt;
-    padding: 1.5em 0;
-    text-align: center;
+  @include transition(padding 0.2s);
+  @include flexbox((
+          align-items: center,
+          display: flex,
+          flex-direction: column,
+  ));
+  color: $md-clr-grey-50;
+  font-family: $ft-family-alt;
+  padding: 1.5em 0;
+  text-align: center;
+  @include b(m) {
+    padding: 4em 0 0;
+  }
+  @include b(l) {
+    &:not(.alt) {
+      padding: 7em 0 0;
+    }
+  }
+  @include b(xl) {
+    &:not(.alt) {
+      padding: 7em 0 8em;
+    }
+  }
+
+  @include e(title) {
+    @include transition(font-size 0.2s);
+    font-size: 22px;
+    font-weight: 400;
     @include b(m) {
-        padding: 4em 0;
+      font-size: 26px;
     }
     @include b(l) {
-        &:not(.alt) {
-            padding: 7em 0 8em;
-        }
+      font-size: 32px;
     }
+  }
+  @include e(subTitle) {
+    @include transition(font-size 0.2s, margin 0.2s);
+    font-size: 18px;
+    font-weight: 100;
+    margin: 0.5em 0;
+    @include b(m) {
+      font-size: 20px;
+      margin: 0.25em 0px 0.5em;
+    }
+    @include b(l) {
+      font-size: 24px;
+      margin: 10px 0 0;
+    }
+  }
+  @include e(controller) {
+    @include animation(heartbeat 0.5s ease 1);
+    @include animation-delay(2s);
+    margin: 40px auto;
+  }
+}
 
-    @include e(title) {
-        @include transition(font-size 0.2s);
-        font-size: 22px;
-        font-weight: 400;
-        @include b(m) {
-            font-size: 26px;
-        }
-        @include b(l) {
-            font-size: 32px;
-        }
-    }
-    @include e(subTitle) {
-        @include transition(font-size 0.2s, margin 0.2s);
-        font-size: 18px;
-        font-weight: 100;
-        margin: 0.5em 0;
-        @include b(m) {
-            font-size: 20px;
-            margin: 0.25em 0px 0.5em;
-        }
-        @include b(l) {
-            font-size: 24px;
-            margin: 10px 0 0;
-        }
-    }
+@include keyframes(heartbeat) {
+  0% {
+    @include scale(1);
+  }
+  25% {
+    @include scale(0.975);
+  }
+  50% {
+    @include scale(1);
+  }
+  75% {
+    @include scale(0.975);
+  }
+  100% {
+    @include scale(1);
+  }
 }
 
 .landingFeature {
-    @include container;
+  @include container();
+  padding: 5em 0 4em;
+  position: relative;
 
-    @include e(name) {
-        @include transition(font-size 0.2s);
-        color: $md-clr-grey-50;
-        font-family: $ft-family-alt;
-        font-size: 24px;
-        font-weight: 100;
-        text-align: center;
-        text-transform: uppercase;
-        @include b(l) {
-            font-size: 30px;
-        }
+  @include e(name) {
+    @include transition(font-size 0.2s);
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    font-size: 24px;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    @include b(l) {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
 
-        @include e(sup) {
-            font-size: 55%;
-            position: relative;
-            top: 2px;
-            vertical-align: top;
-        }
+    @include e(sup) {
+      font-size: 55%;
+      position: relative;
+      top: 2px;
+      vertical-align: top;
     }
-    @include e(subName) {
-        @include transition(font-size 0.2s);
-        color: $md-clr-grey-50;
-        font-family: $ft-family-alt;
-        font-size: 17px;
-        font-weight: 100;
-        text-align: center;
-        @include b(l) {
-            font-size: 18px;
-        }
+  }
+  @include e(subName) {
+    @include transition(font-size 0.2s);
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    font-size: 17px;
+    font-weight: 100;
+    text-align: center;
+    @include b(l) {
+      font-size: 18px;
     }
+    br {
+      display: none;
+      @include b(m) {
+        display: block;
+      }
+    }
+    strong {
+      font-weight: 400;
+    }
+  }
 }
 
 .landingFeatures {
-    @include container;
+  @include container();
+  padding: 2em 0;
+  @include b(m) {
+    padding: 0 0 7em;
+  }
 
-    @include e(column) {
-        @include span(1 of 1 last);
-        @include b(m) {
-            @include span(2 of 6);
-
-            &:last-child {
-                @include span(2 of 6 last);
-            }
-        }
-
-        @include e(name) {
-            @include transition(font-size 0.2s);
-            color: $md-clr-grey-50;
-            font-family: $ft-family-alt;
-            font-size: 24px;
-            font-weight: 100;
-            text-align: center;
-            text-transform: uppercase;
-            @include b(l) {
-                font-size: 30px;
-            }
-        }
-        @include e(subName) {
-            @include transition(font-size 0.2s);
-            color: $md-clr-grey-50;
-            font-family: $ft-family-alt;
-            font-size: 17px;
-            font-weight: 100;
-            text-align: center;
-            @include b(l) {
-                font-size: 18px;
-            }
-        }
+  @include e(column) {
+    @include span(1 of 1 last);
+    margin-bottom: 1em;
+    @include b(m) {
+      @include span(2 of 6);
+      margin-bottom: 0;
+      &:last-child {
+        @include span(2 of 6 last);
+      }
     }
+
+    @include e(name) {
+      @include transition(font-size 0.2s);
+      color: $md-clr-grey-50;
+      font-family: $ft-family-alt;
+      font-size: 24px;
+      text-align: center;
+      @include b(l) {
+        font-size: 29px;
+        margin-bottom: 8px;
+      }
+    }
+    @include e(subName) {
+      @include transition(font-size 0.2s);
+      color: $md-clr-grey-50;
+      font-family: $ft-family-alt;
+      font-size: 18px;
+      font-weight: 100;
+      text-align: center;
+      @include b(l) {
+        font-size: 19px;
+      }
+      br {
+        display: none;
+        @include b(m) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.featuredUsers {
+  @include container();
+
+  @include e(title) {
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    font-size: 24px;
+    text-align: center;
+    @include b(l) {
+      font-size: 29px;
+    }
+  }
+
+  @include e(info) {
+    color: $md-clr-grey-50;
+    font-size: 15px;
+    font-family: $ft-family-alt;
+    font-weight: 100;
+  }
+
+  @include e(more) {
+    color: $md-clr-grey-50;
+    font-size: 17px;
+    margin-top: 5px;
+    text-align: center;
+    font-family: $ft-family-alt;
+    font-weight: 100;
+    @include b(l) {
+      font-size: 21px;
+    }
+  }
+
+  @include e(blocks) {
+    @include container();
+    margin-top: 1em;
+  }
+
+  @include e(block) {
+    @include span(1 of 2 0);
+    @include b(m) {
+      @include span(1 of 5 0);
+    }
+    position: relative;
+    display: block;
+    &:nth-of-type(n+6) {
+      bottom: 3px;
+    }
+    &:hover {
+      .featuredUsers__block__mask {
+        background-color: rgba($button-background-color, 0.75);
+      }
+      .featuredUsers__block__title {
+        @include opacity(1);
+        @include transition-delay(0.3s);
+      }
+    }
+
+    @include e(mask) {
+      @include transition(background-color 0.3s linear);
+      background-color: transparent;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    @include e(title) {
+      @include opacity(0);
+      @include transition(opacity 0.2s linear);
+      @include transition-delay(0s);
+      @include translate(-50%, -50%);
+      color: $md-clr-grey-50;
+      font-size: 1.4em;
+      font-weight: 600;
+      left: 50%;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+    }
+
+    @include e(avatar) {
+      width: 100%;
+    }
+  }
 }

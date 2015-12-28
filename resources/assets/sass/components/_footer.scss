@@ -1,66 +1,119 @@
 .footer {
-    @include container;
-    background-color: mix($md-clr-grey-800, #000, 75%);
-    color: $md-clr-grey-100;
-    margin: gutter() auto;
-    position: relative;
+  @include container;
+  color: $md-clr-grey-100;
+  margin: 0 auto;
+  padding : 20px 0 0;
 
-    @include e(blocks) {
-        @include flexbox((
+  @include b(l) {
+    width: 1150px;
+    padding : 20px 0;
+  }
+
+  @include e(blocks) {
+    @include flexbox((
             display: flex,
-            flex-direction: row,
-            justify-content: space-around,
-        ));
-        padding: 1.75em 1em;
-    }
-    @include e(block) {
-        border-right: 1px solid mix($md-clr-grey-400, $md-clr-grey-300);
-        padding: 0 1em;
-        text-align: center;
-        width: 33.333%;
-        &:last-of-type {
-            border-right: none;
-        }
+            flex-direction: column,
+    ));
+    background-color: mix($md-clr-grey-800, #000, 75%);
+    padding: 1.75em 1em;
 
-        @include e(name) {
-            font-family: $ft-family-alt;
-            letter-spacing: 0.5px;
-            margin-bottom: .5em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-        @include e(text) {
-            color: mix($md-clr-grey-400, $md-clr-grey-300);
-            font-size: 0.95em;
-            line-height: 1.15em;
+    @include b(l) {
+      @include flexbox((
+              flex-direction: row,
+              justify-content: space-around,
+      ));
+    }
+  }
+  @include e(block) {
+    padding: 0 0.5em;
+    text-align: center;
 
-            @include e(link) {
-                color: mix($md-clr-grey-300, $md-clr-grey-100);
-            }
-        }
+    @include b(m) {
+      border-right: 1px solid mix($md-clr-grey-400, $md-clr-grey-300);
+      padding: 0 1em;
+      width: 33.333%;
+
+      &:last-of-type {
+        border-right: none;
+      }
     }
-    @include e(copyright) {
-        background-color: mix($md-clr-grey-900, #000, 75%);
-        font-size: 0.903em;
-        letter-spacing: 0.5px;
-        line-height: 2.5em;
-        text-align: center;
-        width: 100%;
+
+    @include e(name) {
+      font-family: $ft-family-alt;
+      letter-spacing: 0.5px;
+      margin: .5em 0;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      @include b(m) {
+        margin: .5em 0 0;
+      }
     }
+    @include e(text) {
+      color: mix($md-clr-grey-400, $md-clr-grey-300);
+      font-size: 0.95em;
+      line-height: 1.15em;
+
+      @include e(link) {
+        color: mix($md-clr-grey-300, $md-clr-grey-100);
+      }
+    }
+  }
+  @include e(copyright) {
+    background-color: mix($md-clr-grey-900, #000, 75%);
+    font-size: 0.903em;
+    letter-spacing: 0.5px;
+    line-height: 1.5em;
+    position: relative;
+    text-align: center;
+    width: 100%;
+
+    @include b(m) {
+      line-height: 2.5em;
+    }
+
+    @include m(cristal) {
+      background-color: transparent;
+      font-size: 1em;
+    }
+  }
+
+  @include e(lang) {
+    @include b(l) {
+      @include translateY(-50%);
+      height: 24px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+    }
+
+    @include e(flag) {
+      @include filter(grayscale(100%));
+      @include transition(filter 0.2s ease);
+      margin-left: 5px;
+
+      @include m(active) {
+        @include filter(grayscale(0));
+      }
+      &:hover {
+        @include filter(grayscale(0));
+      }
+    }
+  }
 }
 
 .cookie {
-    background-color: mix($md-clr-grey-900, #000, 75%);
-    bottom: 0;
-    color: $md-clr-grey-200;
-    display: none;
-    line-height: 2.25em;
-    position: fixed;
-    width: 100%;
-    z-index: 3;
+  background-color: mix($md-clr-grey-900, #000, 75%);
+  bottom: 0;
+  color: $md-clr-grey-200;
+  display: none;
+  line-height: 2.25em;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
 
-    @include e(text) {
-        @include container(950px);
-        position: relative;
-    }
+  @include e(text) {
+    @include container(950px);
+    position: relative;
+  }
 }

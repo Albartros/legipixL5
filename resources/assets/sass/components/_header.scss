@@ -1,50 +1,50 @@
 .header {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  @include m(profile) {
+    height: 350px;
+  }
+
+  @include e(background) {
+    @include translateX(-50%);
     height: 200px;
-    overflow: hidden;
-    position: relative;
-    @include m(profile) {
-        height: 350px;
+    left: 50%;
+    min-width: 100%;
+    position: absolute;
+  }
+  @include e(tag) {
+    @include translate(-50%, -50%);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    color: $md-clr-grey-50;
+    font-family: $ft-family-alt;
+    font-size: 50px;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    @include m(unofficial) {
+      &:before {
+        content: "#";
+        margin-right: 10px;
+      }
     }
-    
-    @include e(background) {
-        @include translateX(-50%);
-        height: 200px;
-        left: 50%;
-        min-width: 100%;
-        position: absolute;
-    }
-    @include e(tag) {
-        @include translate(-50%, -50%);
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        color: $md-clr-grey-50;
-        font-family: $ft-family-alt;
-        font-size: 50px;
-        font-weight: 100;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        @include m(unofficial) {
-            &:before {
-                content: "#";
-                margin-right: 10px;
-            }
-        }
-    }
+  }
 }
 
 .breadcrumb {
-    background-color: rgba(#000, 0.5);
-    left: 0;
-    padding: 11px;
-    position: absolute;
-    top: 0;
-    color: $md-clr-grey-500;
-    @include e(link) {
-        color: $md-clr-grey-100;
-    }
-    @include e(spacer) {
-        cursor: default;
-        margin: 0 5px;
-    }
+  background-color: rgba(#000, 0.5);
+  left: 0;
+  padding: 11px;
+  position: absolute;
+  top: 0;
+  color: $md-clr-grey-500;
+  @include e(link) {
+    color: $md-clr-grey-100;
+  }
+  @include e(spacer) {
+    cursor: default;
+    margin: 0 5px;
+  }
 }

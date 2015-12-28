@@ -17,8 +17,8 @@
             <a class="button forumBar__actions__link" href="#">
                 <svg class="button__icon" version="1.1" viewBox="0 0 1024 1024"
                      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <path class="button__icon__path"
-                          d="M810 554h-256v256h-84v-256h-256v-84h256v-256h84v256h256v84z"></path>
+                    <path class="button__icon__path" d="M810
+                    554h-256v256h-84v-256h-256v-84h256v-256h84v256h256v84z"></path>
                 </svg>
                 {!! trans('general.new') !!}
             </a>
@@ -26,19 +26,17 @@
                 <button id="followTag" data-tag="Tag" class="button button--grey forumBar__actions__link">
                     <svg class="button__icon" version="1.1" viewBox="0 0 1024 1024"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <path class="button__icon__path"
-                              d="M512 658l160 96-42-182 142-124-188-16-72-172-72 172-188 16 142 124-42 182zM938 394l-232 202 70 300-264-160-264 160 70-300-232-202 306-26 120-282 120 282z"></path>
-                        <path id="followedPath" style="display: none;" class="button__icon__path"
-                              d="M512 736l-264 160 70-300-232-202 306-26 120-282 120 282 306 26-232 202 70 300z"></path>
+                        <path class="button__icon__path" d="M512 658l160 96-42-182 142-124-188-16-72-172-72 172-188 16 142 124-42 182zM938 394l-232 202 70 300-264-160-264 160 70-300-232-202 306-26 120-282 120 282z"></path>
+                        <path id="followedPath" style="display: none;" class="button__icon__path" d="M512 736l-264 160 70-300-232-202 306-26 120-282 120 282 306 26-232 202 70 300z"></path>
                     </svg>
-                    <span id="followTagText">{!! trans('forum.followTag') !!}</span><span style="display: none" id="followedTagText">{!! trans('forum.followedTag') !!}</span> #TAG
+                    <span id="followTagText">{!! trans('forum.followTag') !!}</span><span style="display: none" id="followedTagText">{!! trans('forum.followedTag') !!}</span>
+                    #TAG
                 </button>
             @else
                 <a class="button button--grey forumBar__actions__link" href="#">
                     <svg class="button__icon" version="1.1" viewBox="0 0 1024 1024"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <path class="button__icon__path"
-                              d="M512 658l160 96-42-182 142-124-188-16-72-172-72 172-188 16 142 124-42 182zM938 394l-232 202 70 300-264-160-264 160 70-300-232-202 306-26 120-282 120 282z"></path>
+                        <path class="button__icon__path" d="M512 658l160 96-42-182 142-124-188-16-72-172-72 172-188 16 142 124-42 182zM938 394l-232 202 70 300-264-160-264 160 70-300-232-202 306-26 120-282 120 282z"></path>
                     </svg>
                     {!! trans('forum.followTag') !!} #TAG
                 </a>
@@ -46,8 +44,8 @@
             <button class="button button--grey forumBar__actions__link" onClick="window.location.reload()">
                 <svg class="button__icon" version="1.1" viewBox="0 0 1024 1024"
                      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <path class="button__icon__path"
-                          d="M754 270l100-100v300h-300l138-138q-76-76-180-76-106 0-181 75t-75 181 75 181 181 75q84 0 150-47t92-123h88q-28 112-120 184t-210 72q-140 0-240-100t-100-242 100-242 240-100q142 0 242 100z"></path>
+                    <path class="button__icon__path" d="M754 270l100-100v300h-300l138-138q-76-76-180-76-106 0-181
+                    75t-75 181 75 181 181 75q84 0 150-47t92-123h88q-28 112-120 184t-210 72q-140 0-240-100t-100-242 100-242 240-100q142 0 242 100z"></path>
                 </svg>
                 {!! trans('general.reload') !!}
             </button>
@@ -66,48 +64,22 @@
     </div>
 
     <div class="forumContainer">
-        <aside class="followedTags">
-            <h2 class="followedTags__name">{!! trans('forum.followedTags') !!}</h2>
-            <ul class="followedTags__list">
-                <li class="followedTags__item @if(Auth::check()) followedTags__item--lastOfficial @endif">
-                    <a class="followedTags__item__link" href="{!! route('forum.tag') !!}">TAG_imposé</a>
-                </li>
-                @if(Auth::check())
-                    <li class="followedTags__item">
-                        <a class="followedTags__item__link" href="{!! route('forum.tag') !!}">
-                            #TAG_suivi
-                            <button class="followedTags__item__delete" title="{!! trans('general.delete') !!}">
-                                <svg class="followedTags__item__delete__icon" version="1.1" viewBox="0 0 1024 1024"
-                                     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                                    <path class="followedTags__item__delete__icon__path"
-                                          d="M726 554v-84h-428v84h428zM810 128q34 0 60 26t26 60v596q0 34-26 60t-60 26h-596q-34 0-60-26t-26-60v-596q0-34 26-60t60-26h596z"></path>
-                                </svg>
-                            </button>
-                        </a>
-                    </li>
-                @endif
-            </ul>
-            @unless(Auth::check())
-                <div class="followedTags__button">
-                    <a href="#" class="button">{!! trans('forum.followedTagsLoginButton') !!}</a>
-                </div>
-            @endunless
-        </aside>
+        @include('forum.followedTags')
         <article class="forumContainer__topic">
             <div class="forumContainer__topic__likes">
                 <button class="forumContainer__topic__likes__like">
                     <svg class="forumContainer__topic__likes__icon" version="1.1" viewBox="0 0 1024 1024"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <path class="forumContainer__topic__likes__like__path"
-                              d="M316 658l-60-60 256-256 256 256-60 60-196-196z"></path>
+                        <path class="forumContainer__topic__likes__like__path" d="M316 658l-60-60 256-256 256 256-60
+                        60-196-196z"></path>
                     </svg>
                 </button>
                 <span class="forumContainer__topic__likes__counter">{{ rand(0, 20) }}</span>
                 <button class="forumContainer__topic__likes__dislike">
                     <svg class="forumContainer__topic__likes__icon" version="1.1" viewBox="0 0 1024 1024"
                          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <path class="forumContainer__topic__likes__dislike__path"
-                              d="M316 334l196 196 196-196 60 60-256 256-256-256z"></path>
+                        <path class="forumContainer__topic__likes__dislike__path" d="M316 334l196 196 196-196 60
+                        60-256 256-256-256z"></path>
                     </svg>
                 </button>
             </div>
@@ -122,8 +94,7 @@
                     <svg title="Verrouillé" class="forumContainer__topic__info__name__icon" version="1.1"
                          viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
                          xmlns="http://www.w3.org/2000/svg">
-                        <path class="path1"
-                              d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
+                        <path class="path1" d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
                     </svg>
                     <a href="{!! route('forum.topic') !!}">Ce sujet est une annonce</a>
                 </h2>
@@ -510,7 +481,6 @@
             </ul>
         </div>
     </div>
-    @parent
 @endsection
 
 @section('scripts')

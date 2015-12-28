@@ -12,7 +12,9 @@
 @import "layout/body";
 
 @import "components/buttons";
+@import "components/flash";
 @import "components/footer";
+@import "components/forms";
 @import "components/header";
 @import "components/nav";
 @import "components/pagination";
@@ -22,4 +24,5 @@
 @import "pages/error";
 @import "pages/forum";
 @import "pages/landingPage";
+@import "pages/register";
 @import "pages/user";

@@ -432,12 +432,12 @@
             display: inline-block;
 
             @include e(icon) {
+                bottom: 1px;
                 height: 1em;
+                margin-right: 3px;
+                position: relative;
                 vertical-align: middle;
                 width: 1em;
-                position: relative;
-                bottom: 1px;
-                margin-right: 3px;
             }
         }
         @include e(value) {
@@ -747,8 +747,7 @@
         @include e(icon) {
             display: table-cell;
             margin: 0 !important;
-            padding: 8px;
-            padding-right: 4px;
+            padding: 8px 4px 8px 8px;
             vertical-align: middle;
 
             @include e(icon) {
@@ -765,8 +764,7 @@
             color: $md-clr-grey-50;
             display: table-cell;
             margin: 0 !important;
-            padding: 8px;
-            padding-left: 4px;
+            padding: 8px 8px 8px 4px;
             vertical-align: middle;
         }
     }
@@ -805,7 +803,7 @@
     @include e(meta) {
         color: $md-clr-grey-700;
         font-size: 15px;
-        margin: 0px 5px 5px;
+        margin: 0 5px 5px;
         text-align: right;
     }
 }

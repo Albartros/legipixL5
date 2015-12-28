@@ -1,23 +1,23 @@
 *, *::before, *::after {
-    @include box-sizing(inherit);
+  @include box-sizing(inherit);
 }
 
 html {
-    @include box-sizing(border-box);
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+  @include box-sizing(border-box);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
-    height: 100%;
+  height: 100%;
+  position: relative;
 }
 
-
 svg {
-    display: $svg-display;
+  display: $svg-display;
 }
 
 path {
-    fill: $svg-fill-color;
+  fill: $svg-fill-color;
 }

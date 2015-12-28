@@ -12,32 +12,38 @@ return [
     |
     */
 
-    'pageTitleBase' => 'Forum',
+    'pageTitle' => 'Forum',
+
     'forum' => 'Forum',
-    'followTag' => 'Suivre',
-    'followedTag' => 'Ne plus suivre',
-    'followTopic' => 'Suivre le sujet',
-    'followedTags' => 'Mots-clés suivis',
-    'followedTagsLoginButton' => 'Suivre des tags',
-    'filter' => 'Trier par',
+
+    'tagFollow' => 'Suivre',
+    'tagFollowed' => 'Mots-clés suivis',
+    'tagFollowTopic' => 'Suivre le sujet',
+    'tagLoginButton' => 'Suivre des tags',
+    'tagUnfollow' => 'Ne plus suivre',
+
+    'filterBy' => 'Trier par',
+    'filterChronology' => 'Chronologie',
     'filterClassic' => 'Classique',
     'filterPopular' => 'Popularité',
-    'filterChronology' => 'Chronologie',
     'filterPopularity' => 'Popularité',
     'filterTop' => 'Top',
-    'show' => 'Afficher',
+
     'showAll' => 'Tous',
-    'showOfficial' => 'Officiels',
-    'showUnofficial' => 'Non Officiels',
-    'showFollowed' => 'Suivis',
-    'showMine' => 'Mes sujets',
-    'showFriends' => 'Amis',
-    'showPositives' => 'Notes positives',
+    'showBy' => 'Afficher',
     'showControversial' => 'Controversé',
+    'showFollowed' => 'Suivis',
+    'showFriends' => 'Amis',
+    'showMine' => 'Mes sujets',
+    'showOfficial' => 'Officiels',
+    'showPositives' => 'Notes positives',
+    'showUnofficial' => 'Non Officiels',
+
     'markAsRead' => 'Marquer comme lu',
-    'markAsUnRead' => 'Marquer comme non lu',
+    'markAsUnread' => 'Marquer comme non lu',
     'followTopic' => 'Suivre le sujet',
     'unfollowTopic' => 'Ne plus suivre le sujet',
+
     'moderation' => 'Modération',
 
 ];
