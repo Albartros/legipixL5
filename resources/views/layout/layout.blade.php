@@ -50,21 +50,15 @@
             <span class="nav__logo__dot">.net // dev</span>
         </a>
         <menu class="nav__menu">
-            <!--<li class="nav__menu__item">
-                <a class="nav__menu__link disabled" href="#">{!! trans('menu.navHub') !!}</a>
-            </li>-->
+            <li class="nav__menu__item">
+                <a class="nav__menu__link" href="{!! route('redactor') !!}">Redactor.dev</a>
+            </li>
+            <li class="nav__menu__item">
+                <a class="nav__menu__link" href="{!! route('user.profile') !!}">User.dev</a>
+            </li>
             <li class="nav__menu__item">
                 <a class="nav__menu__link" href="{!! route('forum') !!}">{!! trans('menu.menuForumLink') !!}</a>
             </li>
-            <!--<li class="nav__menu__item">
-                <a class="nav__menu__link disabled" href="#">{!! trans('menu.navSocialPlay') !!}</a>
-            </li>
-            <li class="nav__menu__item">
-                <a class="nav__menu__link disabled" href="#">{!! trans('menu.navBlog') !!}</a>
-            </li>
-            <li class="nav__menu__item">
-                <a class="nav__menu__link disabled" href="#">{!! trans('menu.navChat') !!}</a>
-            </li>-->
             <li class="nav__menu__item">
                 <a class="button" href="{!! route('user.register') !!}">{!! trans('menu.menuLoginButton') !!}</a>
             </li>
@@ -101,7 +95,7 @@
     </div>
     @endif
     <div class="footer__copyright @if($cristal == true) footer__copyright--cristal @endif">
-        {!! trans('menu.footerCopyright') !!}
+        {!! trans('menu.footerCopyright') !!} - 2014 - {!! date('Y') !!} - {!! trans('menu.footerCopyrightOwner') !!}
         <div class="footer__lang">
             <a href="#" class="footer__lang__flag footer__lang__flag--active" title="{{ trans('general.translatedToFrench') }}">
                 <img class="footer__lang__flag__icon" src="{{ asset('img/misc/FR.png') }}" alt="FR">

@@ -102,3 +102,155 @@
     }
   }
 }
+
+
+.editor {
+  @include container(850px);
+  margin-top: 2.5em;
+
+  @include e(header) {
+    @include border-top-radius(4px);
+    @include clearfix();
+    background-color: $button-background-color;
+    padding: 18px 16px 14px;
+    position: relative;
+
+    @include e(title) {
+      color: $md-clr-grey-50;
+      float: left;
+      font-size: 1.5em;
+      font-weight: 600;
+      margin-bottom: 12px;
+      width: 90%;
+
+      small {
+        bottom: 1px;
+        font-size: 0.8em;
+        font-weight: 400;
+        position: relative;
+      }
+    }
+    @include e(description) {
+      color: $md-clr-grey-100;
+      float: left;
+      font-size: 1.05em;
+      font-weight: 100;
+      width: 90%;
+    }
+    @include e(icon) {
+      @include m(alt) {
+        width: 10%;
+      }
+      float: right;
+      width: 5%;
+
+      @include e(path) {
+        fill: $md-clr-grey-100;
+      }
+    }
+
+    @include e(select) {
+      width: 100%;
+      padding: 1px 0 1px 10px;
+      margin-bottom: 21px;
+      height: 41px;
+      option {
+        padding: 10px;
+      }
+    }
+    @include e(info) {
+      //margin-top: 18px;
+    }
+  }
+
+  @include e(body) {
+    @include clearfix();
+    background-color: $bg-color;
+    padding: 15px;
+    @include border-bottom-radius(4px);
+
+    @include e(buttons) {
+      text-align: center;
+    }
+  }
+
+  @include e(main) {
+    @include clearfix();
+    background-color: $bg-color;
+    padding: 15px;
+
+    @include e(block) {
+      width: 50%;
+      float: left;
+      &:first-of-type {
+        padding-right: 7.5px;
+      }
+      &:last-of-type {
+        padding-left: 7.5px;
+      }
+    }
+  }
+
+  @include e(controls) {
+    background-color: $button-background-color;
+    position: relative;
+    text-align: center;
+    @include transition(padding-bottom 0.2s ease);
+    &:hover {
+      padding-bottom: 15px;
+    }
+
+    @include e(separator) {
+      background-color: $bg-color;
+      display: inline-block;
+      height: 30px;
+      position: relative;
+      top: 2px;
+      width: 1px;
+    }
+
+    @include e(item) {
+      display: inline-block;
+      height: 45px;
+      padding: 10px;
+      width: 45px;
+      cursor: pointer;
+      position: relative;
+      @include transition(background-color 0.2s ease);
+      &:hover {
+        background-color: darken($button-background-color, 4%);
+        .editor__controls__item__name {
+          @include opacity(1);
+          @include transition-delay(0.35s);
+        }
+      }
+
+      @include e(name) {
+        @include opacity(0);
+        @include transition(opacity 0.2s ease);
+        @include transition-delay(0s);
+        @include translateX(-50%);
+        bottom: -13px;
+        color: $md-clr-grey-50;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        left: 50%;
+        position: absolute;
+      }
+    }
+    @include e(icon) {
+      height: 25px;
+      width: 25px;
+
+      @include m(small) {
+        @include scale(0.85);
+      }
+
+      @include e(path) {
+        fill: $md-clr-grey-50;
+      }
+    }
+
+  }
+}

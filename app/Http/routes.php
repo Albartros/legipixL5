@@ -31,3 +31,11 @@ Route::get('/forum/topic', ['as' => 'forum.topic', function () {
 Route::get('/register', ['as' => 'user.register', function () {
     return view('user.register', ['cristal' => true]);
 }]);
+
+Route::get('/profile', ['as' => 'user.profile', function () {
+    return view('user.view', ['cristal' => false]);
+}]);
+
+Route::get('/redactor', ['as' => 'redactor', function () {
+    return view('redactor', ['cristal' => true]);
+}]);

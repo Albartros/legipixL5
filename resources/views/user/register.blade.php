@@ -19,11 +19,11 @@
                 </div>
                 <div class="register__form__bottom">
                     {!! Form::open(array('route' => 'user.register')) !!}
-                    {!! Form::label('login-email', trans('register.loginFormEmailLabel'), array('class' => 'form__registerLabel')) !!}
-                    {!! Form::email('login-email', null, array('class' => 'form__registerInput', 'required', 'placeholder' => 'ex: john.doe@example.com')) !!}
-                    {!! Form::label('login-pass', trans('register.loginFormPassLabel'), array('class' => 'form__registerLabel')) !!}
-                    {!! Form::password('login-pass', array('class' => 'form__registerInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
-                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__registerSubmit')) !!}
+                    {!! Form::label('login-email', trans('register.loginFormEmailLabel'), array('class' => 'form__largeLabel')) !!}
+                    {!! Form::email('login-email', null, array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: john.doe@example.com')) !!}
+                    {!! Form::label('login-pass', trans('register.loginFormPassLabel'), array('class' => 'form__largeLabel')) !!}
+                    {!! Form::password('login-pass', array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
+                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__largeSubmit')) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -45,25 +45,25 @@
                 </div>
                 <div class="register__form__bottom formWithCaptcha">
                     {!! Form::open(array('route' => 'user.register')) !!}
-                    <label class="form__registerLabel form__registerLabel--withSmall" for="register-email">{{ trans
+                    <label class="form__largeLabel form__largeLabel--withSmall" for="register-email">{{ trans
                     ('register.registerFormEmailLabel') }}<br>
                         <small>{{ trans('register.registerFormEmailLabelSub') }}</small>
                     </label>
-                    {!! Form::email('register-email', null, array('id' => 'register-email', 'class' => 'form__registerInput', 'required', 'placeholder' => 'ex: john.doe@example.com')) !!}
-                    <label class="form__registerLabel form__registerLabel--withSmall" for="register-name">{{ trans
+                    {!! Form::email('register-email', null, array('id' => 'register-email', 'class' => 'form__largeInput', 'required', 'placeholder' => 'ex: john.doe@example.com')) !!}
+                    <label class="form__largeLabel form__largeLabel--withSmall" for="register-name">{{ trans
                     ('register.registerFormNameLabel') }}<br>
                         <small>{{ trans('register.registerFormNameLabelSub') }}</small>
                     </label>
-                    {!! Form::text('register-name', null, array('id' => 'register-name', 'class' => 'form__registerInput', 'required', 'placeholder' => 'ex: johnDoe007')) !!}
-                    <label class="form__registerLabel form__registerLabel--withSmall"
+                    {!! Form::text('register-name', null, array('id' => 'register-name', 'class' => 'form__largeInput', 'required', 'placeholder' => 'ex: johnDoe007')) !!}
+                    <label class="form__largeLabel form__largeLabel--withSmall"
                            for="register-pass">{{ trans('register.registerFormPassLabel') }}<br>
                         <small>{{ trans('register.registerFormPassLabelSub') }}</small>
                     </label>
-                    {!! Form::password('register-pass', array('id' => 'register-pass', 'class' => 'form__registerInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
-                    {!! Form::label('register-confirm', trans('register.registerFormConfirmLabel'), array('class' => 'form__registerLabel')) !!}
-                    {!! Form::password('register-confirm', array('class' => 'form__registerInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
+                    {!! Form::password('register-pass', array('id' => 'register-pass', 'class' => 'form__largeInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
+                    {!! Form::label('register-confirm', trans('register.registerFormConfirmLabel'), array('class' => 'form__largeLabel')) !!}
+                    {!! Form::password('register-confirm', array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
                     {!! Recaptcha::render() !!}
-                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__registerSubmit')) !!}
+                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__largeSubmit')) !!}
                     {!! Form::close() !!}
                 </div>
             </div>

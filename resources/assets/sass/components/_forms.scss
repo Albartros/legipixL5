@@ -1,10 +1,23 @@
 .form {
-  @include e(registerInput) {
+  @include e(largeInput) {
     margin-bottom: 21px;
     padding: 10px;
     width: 100%;
+    resize: vertical;
+    font-family: $ft-family;
+    font-size: 14px;
+    @include m(noMargin) {
+      margin-bottom: 0;
+    }
   }
-  @include e(registerSubmit) {
+  @include e(normalSubmit) {
+    background-color: $button-background-color !important;
+    border-radius: $button-radius !important;
+    color: $md-clr-grey-50 !important;
+    padding: 1px 10px 2px !important;
+    margin: 0 5px;
+  }
+  @include e(largeSubmit) {
     background-color: $button-background-color !important;
     border-radius: $button-radius !important;
     color: $md-clr-grey-50 !important;
@@ -12,7 +25,7 @@
     text-align: center;
     width: 100%;
   }
-  @include e(registerLabel) {
+  @include e(largeLabel) {
     bottom: 3px;
     position: relative;
     @include m(withSmall) {
