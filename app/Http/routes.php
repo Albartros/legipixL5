@@ -39,3 +39,5 @@ Route::get('/profile', ['as' => 'user.profile', function () {
 Route::get('/redactor', ['as' => 'redactor', function () {
     return view('redactor', ['cristal' => true]);
 }]);
+
+Route::get('/debug', 'DebugController@debug');

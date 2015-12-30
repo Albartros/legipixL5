@@ -3,7 +3,9 @@
 @section('title', 'Affichage profil')
 
 @section('content')
+    <header class="user__header">
 
+    </header>
 @endsection
 
 @section('scripts')

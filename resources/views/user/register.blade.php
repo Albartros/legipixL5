@@ -23,7 +23,7 @@
                     {!! Form::email('login-email', null, array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: john.doe@example.com')) !!}
                     {!! Form::label('login-pass', trans('register.loginFormPassLabel'), array('class' => 'form__largeLabel')) !!}
                     {!! Form::password('login-pass', array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
-                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__largeSubmit')) !!}
+                    {!! Form::submit(trans('register.loginSubmit'), array('class' => 'button form__largeSubmit')) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     {!! Form::label('register-confirm', trans('register.registerFormConfirmLabel'), array('class' => 'form__largeLabel')) !!}
                     {!! Form::password('register-confirm', array('class' => 'form__largeInput', 'required', 'placeholder' => 'ex: &#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;')) !!}
                     {!! Recaptcha::render() !!}
-                    {!! Form::submit(trans('register.formSubmit'), array('class' => 'button form__largeSubmit')) !!}
+                    {!! Form::submit(trans('register.registerSubmit'), array('class' => 'button form__largeSubmit')) !!}
                     {!! Form::close() !!}
                 </div>
             </div>

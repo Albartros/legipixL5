@@ -12,7 +12,8 @@
         "barryvdh/laravel-debugbar": "~2.0",
         "graham-campbell/markdown": "^5.3",
         "laravelcollective/html": "~5.0",
-        "greggilbert/recaptcha": "dev-master"
+        "greggilbert/recaptcha": "dev-master",
+        "kriswallsmith/buzz": "^0.15.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

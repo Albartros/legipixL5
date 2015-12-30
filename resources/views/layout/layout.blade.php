@@ -95,7 +95,7 @@
     </div>
     @endif
     <div class="footer__copyright @if($cristal == true) footer__copyright--cristal @endif">
-        {!! trans('menu.footerCopyright') !!} - 2014 - {!! date('Y') !!} - {!! trans('menu.footerCopyrightOwner') !!}
+        {!! trans('menu.footerCopyright') !!} - 2014 - {!! date('Y') !!}
         <div class="footer__lang">
             <a href="#" class="footer__lang__flag footer__lang__flag--active" title="{{ trans('general.translatedToFrench') }}">
                 <img class="footer__lang__flag__icon" src="{{ asset('img/misc/FR.png') }}" alt="FR">

@@ -11,13 +11,13 @@ return array(
     'pageTitle' => 'Connexion',
 
     'orSeparator' => 'OU',
-    'formSubmit' => 'Envoyer',
 
     'loginFormEmailLabel' => 'Saisissez votre e-mail',
     'loginFormPassLabel' => 'Saisissez votre mot de passe',
     'loginTitle' => 'Connexion',
     'loginTitleSmall' => 'à votre compte',
     'loginTitleSub' => 'Renseignez vos identifiants',
+    'loginSubmit' => 'Connexion au compte',
 
     'registerFormConfirmLabel' => 'Confirmez le mot de passe',
     'registerFormEmailLabel' => 'Saisissez une adresse e-mail valide',
@@ -29,5 +29,6 @@ return array(
     'registerTitle' => 'Inscription',
     'registerTitleSmall' => 'd\'un nouveau membre',
     'registerTitleSub' => 'Remplissez un simple formulaire',
+    'registerSubmit' => 'Créer mon compte',
 
 );

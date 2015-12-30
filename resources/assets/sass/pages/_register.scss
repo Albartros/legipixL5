@@ -55,7 +55,7 @@
     @include e(top) {
       @include border-top-radius(4px);
       @include clearfix();
-      background-color: $button-background-color;
+      background-color: $md-clr-grey-800;
       padding: 18px 16px 14px;
       position: relative;
 
@@ -103,15 +103,27 @@
   }
 }
 
-
 .editor {
-  @include container(850px);
+  @include container;
   margin-top: 2.5em;
+
+  @include e(info) {
+    @include span(4 of 12);
+    height: 397px;
+    overflow: hidden;
+    @include border-bottom-radius(4px);
+  }
+  @include e(content) {
+    @include span(8 of 12 last);
+    height: 397px;
+    overflow: hidden;
+    @include border-bottom-radius(4px);
+  }
 
   @include e(header) {
     @include border-top-radius(4px);
     @include clearfix();
-    background-color: $button-background-color;
+    background-color: $md-clr-grey-800;
     padding: 18px 16px 14px;
     position: relative;
 
@@ -121,7 +133,7 @@
       font-size: 1.5em;
       font-weight: 600;
       margin-bottom: 12px;
-      width: 90%;
+      width: 80%;
 
       small {
         bottom: 1px;
@@ -135,14 +147,15 @@
       float: left;
       font-size: 1.05em;
       font-weight: 100;
-      width: 90%;
+      width: 80%;
     }
     @include e(icon) {
       @include m(alt) {
         width: 10%;
       }
+      max-width: 40.9px;
       float: right;
-      width: 5%;
+      width: 11.696%;
 
       @include e(path) {
         fill: $md-clr-grey-100;
@@ -157,6 +170,9 @@
       option {
         padding: 10px;
       }
+      @include m(smallAfter) {
+        margin-bottom: 16px;
+      }
     }
     @include e(info) {
       //margin-top: 18px;
@@ -167,7 +183,6 @@
     @include clearfix();
     background-color: $bg-color;
     padding: 15px;
-    @include border-bottom-radius(4px);
 
     @include e(buttons) {
       text-align: center;
@@ -175,29 +190,23 @@
   }
 
   @include e(main) {
-    @include clearfix();
     background-color: $bg-color;
     padding: 15px;
-
-    @include e(block) {
-      width: 50%;
-      float: left;
-      &:first-of-type {
-        padding-right: 7.5px;
-      }
-      &:last-of-type {
-        padding-left: 7.5px;
-      }
-    }
   }
 
   @include e(controls) {
-    background-color: $button-background-color;
+    @include border-top-radius(4px);
+    background-color: $md-clr-grey-800;
     position: relative;
     text-align: center;
     @include transition(padding-bottom 0.2s ease);
     &:hover {
       padding-bottom: 15px;
+      & + .editor__body .form__largeInput--textArea {
+        height: 229px - 15px;
+        max-height: 229px - 15px;
+        min-height: 229px - 15px;
+      }
     }
 
     @include e(separator) {
@@ -218,7 +227,7 @@
       position: relative;
       @include transition(background-color 0.2s ease);
       &:hover {
-        background-color: darken($button-background-color, 4%);
+        background-color: darken($md-clr-grey-800, 5%);
         .editor__controls__item__name {
           @include opacity(1);
           @include transition-delay(0.35s);

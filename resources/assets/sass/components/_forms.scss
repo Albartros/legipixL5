@@ -3,11 +3,20 @@
     margin-bottom: 21px;
     padding: 10px;
     width: 100%;
-    resize: vertical;
     font-family: $ft-family;
     font-size: 14px;
     @include m(noMargin) {
       margin-bottom: 0;
+    }
+    @include m(smallAfter) {
+      margin-bottom: 16px;
+    }
+    @include m(textArea) {
+      @include transition(max-height 0.2s ease, min-height 0.2s ease);
+      height: 229px;
+      max-height: 229px;
+      min-height: 229px;
+      resize: none;
     }
   }
   @include e(normalSubmit) {
@@ -21,9 +30,10 @@
     background-color: $button-background-color !important;
     border-radius: $button-radius !important;
     color: $md-clr-grey-50 !important;
-    padding: 1px 0 2px !important;
+    display: block;
+    margin: 0 auto;
+    padding: 1px 11px 2px !important;
     text-align: center;
-    width: 100%;
   }
   @include e(largeLabel) {
     bottom: 3px;

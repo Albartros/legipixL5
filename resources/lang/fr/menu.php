@@ -18,6 +18,5 @@ return [
     'footerContribute' => 'Développement',
     'footerContributeText' => 'Vous souhaitez participer au développement du site et vous maîtrisez les langages du web ? Le code source est disponible sur <a href="https://github.com/Albartros/legipixL5" target="_blank" class="footer__block__text__link">Github</a>.',
     'footerCopyright' => 'Tous droits réservés',
-    'footerCopyrightOwner' => 'Legipix.net est un site créé et maintenu par Albartros98',
 
 ];

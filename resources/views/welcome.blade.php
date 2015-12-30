@@ -3,6 +3,7 @@
 @section('title', trans('landingPage.pageTitle'))
 
 @section('content')
+        <!--suppress ALL -->
     <div class="splash">
         <h1 class="splash__title">{!! trans('landingPage.catchPhrase') !!}</h1>
         <h2 class="splash__subTitle">{!! trans('landingPage.catchPhraseMore') !!}</h2>
@@ -18,8 +19,7 @@
         <a class="button button--splash" href="{!! route('user.register') !!}">{!! trans('landingPage.splashButton') !!}</a>
     </div>
     <div class="landingFeature">
-        <h2 class="landingFeature__name">{!! trans('landingPage.promoHalo') !!}<sup
-                    class="landingFeature__name__sup">&reg;</sup></h2>
+        <h2 class="landingFeature__name">{!! trans('landingPage.promoHalo') !!}</h2>
         <div class="landingFeature__subName">{!! Markdown::convertToHtml(trans('landingPage.promoHaloText')) !!}</div>
     </div>
     <div class="landingFeatures">
@@ -38,24 +38,24 @@
     </div>
     <div class="featuredUsers">
         <h1 class="featuredUsers__title">{!! trans('landingPage.featuredUsers') !!}&#42;</h1>
-        <h2 class="featuredUsers__more">1254 {!! trans('landingPage.featuredUsersText') !!}</h2>
+        <h2 class="featuredUsers__more">{!! trans('landingPage.featuredUsersText') !!}</h2>
         <div class="featuredUsers__blocks">
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JYs2u1RFCJCNAO.uOKjzbKIuccfoUCeh3M2i8uGXe3_F&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JYs2u1RFCJCNAO.uOKjzbKIuccfoUCeh3M2i8uGXe3_F&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
                 <div class="featuredUsers__block__mask">
                     <h5 class="featuredUsers__block__title">Albartros98</h5>
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9JlD1k.UfUzddEoS7yMLhGXCGNoSGMT22HhEnFNIpxJQ&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9JlD1k.UfUzddEoS7yMLhGXCGNoSGMT22HhEnFNIpxJQ&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
                 <div class="featuredUsers__block__mask">
                     <h5 class="featuredUsers__block__title">Molant</h5>
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JYAz_gVXlqDA5qG2rJ1GSMgkSwRq3mqS_IGa5UdgZ4E0&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JYAz_gVXlqDA5qG2rJ1GSMgkSwRq3mqS_IGa5UdgZ4E0&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -63,7 +63,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JehA8dSapBHnH1CYJpGcvrqx3u3aQ5NMCKRX1WaLAVwB&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JehA8dSapBHnH1CYJpGcvrqx3u3aQ5NMCKRX1WaLAVwB&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -71,7 +71,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9HQtw3uIry.B8DMfot7DZjYtGa47znlLH.bOWPjlzjr8&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9HQtw3uIry.B8DMfot7DZjYtGa47znlLH.bOWPjlzjr8&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -79,7 +79,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JT.9X3JxQanGPSVZUnDOoIFsFStL3qiTTRpSNmYdezVy&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JT.9X3JxQanGPSVZUnDOoIFsFStL3qiTTRpSNmYdezVy&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -87,7 +87,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JXOjBD9G2Ei4YyB95G.AFXhX1EfzUEAJ7o8zwnjYKrUp&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIFXxmxGDtE9Vkd62rOpb7JXOjBD9G2Ei4YyB95G.AFXhX1EfzUEAJ7o8zwnjYKrUp&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -95,7 +95,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIm2RQQtfSX9jMSatOYowOzFGrmXRC0uhY67.hdTPTY6qmHE5qXdhV4CSdn79W3yys&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIm2RQQtfSX9jMSatOYowOzFGrmXRC0uhY67.hdTPTY6qmHE5qXdhV4CSdn79W3yys&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -103,7 +103,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9PsE4xEhRWlaP0IP_EwihswMrKL3hcrLUZUW7l57ob98&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIbgsfD63mXFU_1J9M4K4P9PsE4xEhRWlaP0IP_EwihswMrKL3hcrLUZUW7l57ob98&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
@@ -111,7 +111,7 @@
                 </div>
             </a>
             <a href="#" class="featuredUsers__block">
-                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIm2RQQtfSX9jMSatOYowOzK3uXntZA0pA8N7M4ys4.GjIjIPNEM6RiNprgPP7_5DQ&format=png&h=640&w=640"
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=z951ykn43p4FqWbbFvR2Ec.8vbDhj8G2Xe7JngaTToBrrCmIEEXHC9UNrdJ6P7KIm2RQQtfSX9jMSatOYowOzK3uXntZA0pA8N7M4ys4.GjIjIPNEM6RiNprgPP7_5DQ&format=png&h=300&w=300"
                      alt="avatar" class="featuredUsers__block__avatar">
 
                 <div class="featuredUsers__block__mask">
