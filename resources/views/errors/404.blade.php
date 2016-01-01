@@ -1,4 +1,4 @@
-<?php $cristal = false ?>
+<?php $errorPage = true; ?>
 @extends('layout.layout')
 
 @section('title', trans('general.errorPageNotFound'))

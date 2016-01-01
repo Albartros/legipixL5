@@ -13,9 +13,9 @@
     }
     @include m(textArea) {
       @include transition(max-height 0.2s ease, min-height 0.2s ease);
-      height: 229px;
-      max-height: 229px;
-      min-height: 229px;
+      height: 289px;
+      max-height: 289px;
+      min-height: 289px;
       resize: none;
     }
   }

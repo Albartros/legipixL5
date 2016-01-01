@@ -6,12 +6,6 @@
     <div class="editor">
         <div class="editor__info">
             <div class="editor__header">
-                <svg class="editor__header__icon" version="1.1"
-                     viewBox="0 0 877.7142857142858 1024"
-                     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                    <path class="register__form__top__icon__path"
-                          d="M207.429 877.714l52-52-134.286-134.286-52 52v61.143h73.143v73.143h61.143zM506.286 347.429q0-12.571-12.571-12.571-5.714 0-9.714 4l-309.714 309.714q-4 4-4 9.714 0 12.571 12.571 12.571 5.714 0 9.714-4l309.714-309.714q4-4 4-9.714zM475.429 237.714l237.714 237.714-475.429 475.429h-237.714v-237.714zM865.714 292.571q0 30.286-21.143 51.429l-94.857 94.857-237.714-237.714 94.857-94.286q20.571-21.714 51.429-21.714 30.286 0 52 21.714l134.286 133.714q21.143 22.286 21.143 52z"></path>
-                </svg>
                 <h3 class="editor__header__title">Nouveau sujet
                     <small>sur le forum</small>
                 </h3>
@@ -30,13 +24,18 @@
                 <br>
                 <label for="title" class="form__largeLabel form__largeLabel--withSmall">Tags secondaires
                     :<br>
-                    <small>Séparés par des
-                        #
-                    </small>
+                    <small>Séparés par des #</small>
                 </label>
                 <input placeholder="ex : #Tag1#Tag2" id="title" name="title" type="text"
                        class="form__largeInput">
-                <input type="submit" class="button form__largeSubmit" value="Créer le nouveau sujet">
+                <button type="submit" class="button form__largeSubmit" value="submit">
+                    <svg class="button__icon" version="1.1" viewBox="0 0 1024 1024"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                        <path class="button__icon__path"
+                              d="M86 896v-298l640-86-640-86v-298l896 384z"></path>
+                    </svg>
+                    Créer le nouveau sujet
+                </button>
             </div>
         </div>
         <div class="editor__content">
@@ -159,8 +158,8 @@
                     <small>Rappelez vous que vous pouvez prévisualiser votre message avant de poster</small>
                 </label>
                 <textarea placeholder="Faîtes attention à l'orthographe" class="form__largeInput
-                form__largeInput--textArea" name="lol" id="lol"></textarea>
-                <button class="button form__largeSubmit">Prévisualiser le message</button>
+                form__largeInput--noMargin form__largeInput--textArea" name="lol" id="lol"></textarea>
+
             </div>
         </div>
     </div>

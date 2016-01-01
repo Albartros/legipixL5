@@ -178,6 +178,14 @@ a:visited {
   text-decoration: none;
 }
 
+/* line 26, ../../resources/assets/sass/base/_typography.scss */
+.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
 /* line 1, ../../resources/assets/sass/layout/_body.scss */
 .body {
   background-color: #eeeeee;
@@ -285,7 +293,6 @@ a:visited {
     opacity: 0;
   }
 }
-
 /* line 67, ../../resources/assets/sass/layout/_body.scss */
 .mainWrapper {
   flex: 1;
@@ -663,21 +670,19 @@ a:visited {
 .form__largeInput--noMargin {
   margin-bottom: 0;
 }
-
 /* line 33, ../../resources/assets/sass/helpers/_mixins.scss */
 .form__largeInput--smallAfter {
   margin-bottom: 16px;
 }
-
 /* line 33, ../../resources/assets/sass/helpers/_mixins.scss */
 .form__largeInput--textArea {
   -moz-transition: max-height 0.2s ease, min-height 0.2s ease;
   -o-transition: max-height 0.2s ease, min-height 0.2s ease;
   -webkit-transition: max-height 0.2s ease, min-height 0.2s ease;
   transition: max-height 0.2s ease, min-height 0.2s ease;
-  height: 229px;
-  max-height: 229px;
-  min-height: 229px;
+  height: 289px;
+  max-height: 289px;
+  min-height: 289px;
   resize: none;
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
@@ -707,7 +712,6 @@ a:visited {
 .form__largeLabel--withSmall {
   bottom: 0;
 }
-
 /* line 45, ../../resources/assets/sass/components/_forms.scss */
 .form__largeLabel small {
   bottom: 3px;
@@ -2881,7 +2885,7 @@ a:visited {
   position: relative;
 }
 
-/* line 114, ../../resources/assets/sass/pages/_register.scss */
+/* line 106, ../../resources/assets/sass/pages/_register.scss */
 .editor {
   max-width: 1150px;
   margin-left: auto;
@@ -2896,42 +2900,30 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__info {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   width: 32.20339%;
   float: left;
   margin-right: 1.69492%;
+  background-color: #eeeeee;
   height: 397px;
   overflow: hidden;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
 }
-
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__content {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   width: 66.10169%;
   float: right;
   margin-right: 0;
+  background-color: #eeeeee;
   height: 397px;
   overflow: hidden;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
 }
-
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__header {
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
   overflow: hidden;
   *zoom: 1;
   background-color: #424242;
@@ -2947,8 +2939,7 @@ a:visited {
   margin-bottom: 12px;
   width: 80%;
 }
-
-/* line 146, ../../resources/assets/sass/pages/_register.scss */
+/* line 139, ../../resources/assets/sass/pages/_register.scss */
 .editor__header__title small {
   bottom: 1px;
   font-size: 0.8em;
@@ -2965,8 +2956,8 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__header__icon {
-  max-width: 40.9px;
   float: right;
+  max-width: 40.9px;
   width: 11.696%;
 }
 /* line 33, ../../resources/assets/sass/helpers/_mixins.scss */
@@ -2979,17 +2970,15 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__header__select {
-  width: 100%;
-  padding: 1px 0 1px 10px;
-  margin-bottom: 21px;
   height: 41px;
+  margin-bottom: 21px;
+  padding: 1px 0 1px 10px;
+  width: 100%;
 }
-
-/* line 178, ../../resources/assets/sass/pages/_register.scss */
+/* line 171, ../../resources/assets/sass/pages/_register.scss */
 .editor__header__select option {
   padding: 10px;
 }
-
 /* line 33, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__header__select--smallAfter {
   margin-bottom: 16px;
@@ -2998,7 +2987,6 @@ a:visited {
 .editor__body {
   overflow: hidden;
   *zoom: 1;
-  background-color: #eeeeee;
   padding: 15px;
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
@@ -3007,36 +2995,27 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__main {
-  background-color: #eeeeee;
   padding: 15px;
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__controls {
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  background-color: #424242;
-  position: relative;
-  text-align: center;
   -moz-transition: padding-bottom 0.2s ease;
   -o-transition: padding-bottom 0.2s ease;
   -webkit-transition: padding-bottom 0.2s ease;
   transition: padding-bottom 0.2s ease;
+  background-color: #424242;
+  position: relative;
+  text-align: center;
 }
-
-/* line 211, ../../resources/assets/sass/pages/_register.scss */
+/* line 198, ../../resources/assets/sass/pages/_register.scss */
 .editor__controls:hover {
   padding-bottom: 15px;
 }
-
-/* line 213, ../../resources/assets/sass/pages/_register.scss */
+/* line 200, ../../resources/assets/sass/pages/_register.scss */
 .editor__controls:hover + .editor__body .form__largeInput--textArea {
-  height: 214px;
-  max-height: 214px;
-  min-height: 214px;
+  height: 274px;
+  max-height: 274px;
+  min-height: 274px;
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__controls__separator {
@@ -3049,24 +3028,22 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__controls__item {
+  cursor: pointer;
   display: inline-block;
   height: 45px;
   padding: 10px;
-  width: 45px;
-  cursor: pointer;
   position: relative;
+  width: 45px;
   -moz-transition: background-color 0.2s ease;
   -o-transition: background-color 0.2s ease;
   -webkit-transition: background-color 0.2s ease;
   transition: background-color 0.2s ease;
 }
-
-/* line 237, ../../resources/assets/sass/pages/_register.scss */
+/* line 224, ../../resources/assets/sass/pages/_register.scss */
 .editor__controls__item:hover {
   background-color: #353535;
 }
-
-/* line 239, ../../resources/assets/sass/pages/_register.scss */
+/* line 226, ../../resources/assets/sass/pages/_register.scss */
 .editor__controls__item:hover .editor__controls__item__name {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
@@ -3095,9 +3072,9 @@ a:visited {
   color: #fafafa;
   font-size: 14px;
   font-weight: 600;
-  white-space: nowrap;
   left: 50%;
   position: absolute;
+  white-space: nowrap;
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .editor__controls__icon {

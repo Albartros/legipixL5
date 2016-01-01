@@ -126,12 +126,13 @@
                 <div class="poll__meta">1250 participants</div>
             </div>
 
-            <div class="post__content">
+            <div class="post__content withEmoji">
                 <img src="{!! asset('img/temporary/banner_halo.jpg') !!}" alt="banner-halo">
 
                 <h1>Lorem ipsum dolor sit amet, consectetur !</h1>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia <strong>quibusdam numquam</strong>,
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :smile:. Mollitia <strong>quibusdam
+                        numquam</strong>,
                     magni impedit soluta vel asperiores veniam debitis magnam minima.</p>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
@@ -144,7 +145,7 @@
 
                 <h2>Lorem ipsum dolor sit amet, consectetur !</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione atque expedita officiis corrupti
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :poop:. Ratione atque expedita officiis corrupti
                     vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
@@ -154,7 +155,7 @@
                 </ul>
                 <h3>Lorem ipsum dolor sit amet, consectetur !</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione atque expedita officiis corrupti
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :atom:. Ratione atque expedita officiis corrupti
                     vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
@@ -164,7 +165,7 @@
                 </ul>
                 <h4>Lorem ipsum dolor sit amet, consectetur !</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione atque expedita officiis corrupti
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :doughnut:. Ratione atque expedita officiis corrupti
                     vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
@@ -174,7 +175,7 @@
                 </ul>
                 <h5>Lorem ipsum dolor sit amet, consectetur !</h5>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione atque expedita officiis corrupti
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :cop_tone5:. Ratione atque expedita officiis corrupti
                     vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
@@ -481,9 +482,12 @@
             </ul>
         </div>
     </div>
+    <script src="//cdn.jsdelivr.net/emojione/2.0.0/lib/js/emojione.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.0.0/assets/css/emojione.min.css"/>
 @endsection
 
 @section('scripts')
     @parent
+    Emoji.init();
     Poll.init();
 @endsection

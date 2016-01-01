@@ -108,20 +108,21 @@
   margin-top: 2.5em;
 
   @include e(info) {
+    @include border-radius(4px);
     @include span(4 of 12);
+    background-color: $bg-color;
     height: 397px;
     overflow: hidden;
-    @include border-bottom-radius(4px);
   }
   @include e(content) {
+    @include border-radius(4px);
     @include span(8 of 12 last);
+    background-color: $bg-color;
     height: 397px;
     overflow: hidden;
-    @include border-bottom-radius(4px);
   }
 
   @include e(header) {
-    @include border-top-radius(4px);
     @include clearfix();
     background-color: $md-clr-grey-800;
     padding: 18px 16px 14px;
@@ -153,8 +154,8 @@
       @include m(alt) {
         width: 10%;
       }
-      max-width: 40.9px;
       float: right;
+      max-width: 40.9px;
       width: 11.696%;
 
       @include e(path) {
@@ -163,10 +164,10 @@
     }
 
     @include e(select) {
-      width: 100%;
-      padding: 1px 0 1px 10px;
-      margin-bottom: 21px;
       height: 41px;
+      margin-bottom: 21px;
+      padding: 1px 0 1px 10px;
+      width: 100%;
       option {
         padding: 10px;
       }
@@ -174,14 +175,10 @@
         margin-bottom: 16px;
       }
     }
-    @include e(info) {
-      //margin-top: 18px;
-    }
   }
 
   @include e(body) {
     @include clearfix();
-    background-color: $bg-color;
     padding: 15px;
 
     @include e(buttons) {
@@ -190,22 +187,20 @@
   }
 
   @include e(main) {
-    background-color: $bg-color;
     padding: 15px;
   }
 
   @include e(controls) {
-    @include border-top-radius(4px);
+    @include transition(padding-bottom 0.2s ease);
     background-color: $md-clr-grey-800;
     position: relative;
     text-align: center;
-    @include transition(padding-bottom 0.2s ease);
     &:hover {
       padding-bottom: 15px;
       & + .editor__body .form__largeInput--textArea {
-        height: 229px - 15px;
-        max-height: 229px - 15px;
-        min-height: 229px - 15px;
+        height: 289px - 15px;
+        max-height: 289px - 15px;
+        min-height: 289px - 15px;
       }
     }
 
@@ -219,12 +214,12 @@
     }
 
     @include e(item) {
+      cursor: pointer;
       display: inline-block;
       height: 45px;
       padding: 10px;
-      width: 45px;
-      cursor: pointer;
       position: relative;
+      width: 45px;
       @include transition(background-color 0.2s ease);
       &:hover {
         background-color: darken($md-clr-grey-800, 5%);
@@ -243,9 +238,9 @@
         color: $md-clr-grey-50;
         font-size: 14px;
         font-weight: 600;
-        white-space: nowrap;
         left: 50%;
         position: absolute;
+        white-space: nowrap;
       }
     }
     @include e(icon) {

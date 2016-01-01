@@ -146,6 +146,23 @@ var FollowTags = {
     },
 };
 
+var Emoji = {
+    settings: {
+        posts: document.getElementsByClassName("withEmoji")
+    },
+    init: function () {
+       this.parseEmojis();
+    },
+    parseEmojis: function () {
+        var s = this.settings;
+        for (var i = s.posts.length - 1; i >= 0; i--) {
+            var post = s.posts[i],
+                content = post.innerHTML;
+            post.innerHTML = emojione.toImage(content);
+        }
+    },
+};
+
 var SimpleEditor = {
     settings: {
         editor: document.getElementById("content"),

@@ -33,7 +33,7 @@
     <meta name="theme-color" content="#d1c4e9">
 </head>
 
-<body class="body @if($cristal == true) body--cristal @endif">
+<body class="body @if(isset($cristalPage) && $cristalPage == true) body--cristal @endif">
 
 @if(\Illuminate\Support\Facades\Session::has('message'))
     <div class="flash">
@@ -41,11 +41,11 @@
     </div>
 @endif
 
-<nav class="nav__container @if($cristal) nav__container--cristal @endif">
+<nav class="nav__container @if(isset($cristalPage) && $cristalPage == true) nav__container--cristal @endif">
 
     <div class="nav">
         <a class="nav__logo" href="{!! route('index') !!}">
-            <img alt="logo" class="nav__logo__image" src="{!! asset('img/logo/logo.svg') !!}">
+            <img draggable="false" alt="logo" class="nav__logo__image" src="{!! asset('img/logo/logo.svg') !!}">
             <span class="nav__logo__name">LegiPix</span>
             <span class="nav__logo__dot">.net // dev</span>
         </a>
@@ -66,7 +66,7 @@
     </div>
 </nav>
 
-@if($cristal == false)
+@if(!isset($cristalPage))
     <div class="nav__spacer"></div>
 @endif
 
@@ -76,7 +76,7 @@
 </div>
 
 <footer class="footer">
-    @if($cristal == false)
+    @if(!isset($cristalPage))
     <div class="footer__blocks">
         <div class="footer__block">
             <h2 class="footer__block__name">{!! trans('menu.footerAbout') !!}</h2>
@@ -94,7 +94,8 @@
         </div>
     </div>
     @endif
-    <div class="footer__copyright @if($cristal == true) footer__copyright--cristal @endif">
+    <div class="footer__copyright @if((isset($cristalPage) && $cristalPage == true) || (isset($errorPage) && $errorPage == true))
+    footer__copyright--cristal @endif">
         {!! trans('menu.footerCopyright') !!} - 2014 - {!! date('Y') !!}
         <div class="footer__lang">
             <a href="#" class="footer__lang__flag footer__lang__flag--active" title="{{ trans('general.translatedToFrench') }}">
