@@ -18,7 +18,6 @@ class UpdateUsersTable extends Migration
             $table->enum('background', ['default', 'media'])->default('default');
             // Gamertag
             $table->unsignedInteger('gamertag_id');
-            $table->foreign('gamertag_id')->references('id')->on('gamertags');
             // Status
             $table->boolean('active')->default(false);
             // Stats

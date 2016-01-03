@@ -15,6 +15,13 @@ class CreatePollsTable extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            // Content
+            $table->string('question');
+            // Metadata
+            $table->integer('votes');
+            // Topic
+            $table->unsignedInteger('topic_id');
+            $table->foreign('topic_id')->references('id')->on('topics');
         });
     }
 

@@ -16,6 +16,9 @@ class CreateGamertagsTable extends Migration
             // Application
             $table->increments('id');
             $table->timestamps();
+            // User
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             // Status
             $table->boolean('active')->default(false);
             // Informations

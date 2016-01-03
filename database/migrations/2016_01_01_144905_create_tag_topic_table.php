@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGamertagVerificationTable extends Migration
+class CreateTagTopicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateGamertagVerificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('gamertag_verifications', function (Blueprint $table) {
-            $table->string('xuid')->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at');
+        Schema::create('tag_topic', function (Blueprint $table) {
+            $table->unsignedInteger('tag_id');
+            $table->unsignedInteger('topic_id');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ class CreateGamertagVerificationTable extends Migration
      */
     public function down()
     {
-        Schema::drop('gamertag_verifications');
+        Schema::drop('tag_topic');
     }
 }

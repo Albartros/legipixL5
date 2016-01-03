@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>Legipix - @yield('title')</title>
     <meta charset="utf-8">
@@ -44,23 +44,23 @@
 <nav class="nav__container @if(isset($cristalPage) && $cristalPage == true) nav__container--cristal @endif">
 
     <div class="nav">
-        <a class="nav__logo" href="{!! route('index') !!}">
+        <a class="nav__logo" href="{!! route('getHome') !!}">
             <img draggable="false" alt="logo" class="nav__logo__image" src="{!! asset('img/logo/logo.svg') !!}">
             <span class="nav__logo__name">LegiPix</span>
             <span class="nav__logo__dot">.net // dev</span>
         </a>
         <menu class="nav__menu">
             <li class="nav__menu__item">
-                <a class="nav__menu__link" href="{!! route('redactor') !!}">Redactor.dev</a>
+                <a class="nav__menu__link" href="{!! route('getHome') !!}">Redactor.dev</a>
             </li>
             <li class="nav__menu__item">
-                <a class="nav__menu__link" href="{!! route('user.profile') !!}">User.dev</a>
+                <a class="nav__menu__link" href="{!! route('getHome') !!}">User.dev</a>
             </li>
             <li class="nav__menu__item">
-                <a class="nav__menu__link" href="{!! route('forum') !!}">{!! trans('menu.menuForumLink') !!}</a>
+                <a class="nav__menu__link" href="{!! route('user.getLogout') !!}">{!! trans('menu.menuForumLink') !!}</a>
             </li>
             <li class="nav__menu__item">
-                <a class="button" href="{!! route('user.register') !!}">{!! trans('menu.menuLoginButton') !!}</a>
+                <a class="button" href="{!! route('user.getRegister') !!}">{!! trans('menu.menuLoginButton') !!}</a>
             </li>
         </menu>
     </div>
