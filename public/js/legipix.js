@@ -15,6 +15,23 @@ function debounce(func, wait, immediate) {
     };
 }
 
+var Global = {
+    settings: {
+        disabledElements: document.getElementsByClassName("disabled"),
+    },
+    init: function () {
+        this.disableLinks();
+    },
+    disableLinks: function () {
+        var s = this.settings;
+        for (var i = s.disabledElements.length - 1; i >= 0; i--) {
+            s.disabledElements[i].addEventListener("click", function (e) {
+                e.preventDefault();
+            })
+        }
+    }
+}
+
 var Cookie = {
     settings: {
         cookieBox: document.getElementById("cookieBox"),

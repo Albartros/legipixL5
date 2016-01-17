@@ -50,7 +50,7 @@ Route::group(['middleware' => ['web']], function () {
     // Carrière Halo 5
     Route::group(['prefix' => 'halo5'], function () {
         Route::get('/', 'HaloController@index')->name('halo.getHome');
-        Route::post('/', 'HaloController@postGamertag')->name('halo.postGamertag');
+        /*Route::post('/', 'HaloController@postGamertag')->name('halo.postGamertag');
         // Comparaison de joueurs
         Route::group(['prefix' => 'compare/{gamertag1}-{gamertag2}'], function () {
             Route::get('/', 'HaloController@getCareer')->name('halo.getCompareCareer');
@@ -73,7 +73,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/history', 'HaloController@getGames')->name('halo.getGames');
 
             Route::get('/history/{matchId}', 'HaloController@getMatch')->name('halo.getMatch');
-        });
+        });*/
     });
 
     // Forum
@@ -83,13 +83,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/post', 'ForumController@getForumRedactor')->name('forum.getForumRedactor');
         Route::post('/', 'ForumController@postForum')->name('forum.postForum');
         // Tags
-        Route::group(['prefix' => '/tag/{slug}'], function () {
+        Route::group(['prefix' => '/tag/{tag?}'], function () {
             Route::get('/', 'ForumController@getTag')->name('forum.getTag');
             Route::get('/post', 'ForumController@getTagRedactor')->name('forum.getTagRedactor');
             Route::post('/', 'ForumController@postTag')->name('forum.postTag');
         });
         // Sujets
-        Route::group(['prefix' => '/sujet/{id}-{slug}'], function () {
+        Route::group(['prefix' => '/sujet/{id?}-{slug?}'], function () {
             Route::get('/', 'ForumController@getTopic')->name('forum.getTopic');
             Route::get('/post', 'ForumController@getTopicRedactor')->name('forum.getTopicRedactor');
             Route::post('/', 'ForumController@postTopic')->name('forum.postTopic');

@@ -14,8 +14,25 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'email' => 'test@test.io',
+        'password' => bcrypt('test'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'order' => $faker->randomDigitNotNull,
+    ];
+});
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'order' => $faker->randomDigitNotNull,
+        'is_locked' => array_rand([1,0,0,0,0,0]),
+        'is_official' => array_rand([1,0,0,0]),
+        'topics' => $faker->randomNumber(2),
     ];
 });

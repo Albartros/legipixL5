@@ -29,6 +29,7 @@ return [
     'filterPopularity' => 'Popularité',
     'filterTop' => 'Top',
 
+    'showActives' => 'Actifs récemment',
     'showAll' => 'Tous',
     'showBy' => 'Afficher',
     'showControversial' => 'Controversé',

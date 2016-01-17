@@ -22,11 +22,10 @@ class CreateTopicsTable extends Migration
             $table->boolean('is_locked')->default(false);
             $table->boolean('is_pinned')->default(false);
             $table->boolean('is_poll')->default(false);
-            $table->integer('posts');
             $table->integer('views');
-            // Tag
-            $table->unsignedInteger('tag_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            // Author
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -19,6 +19,9 @@
       resize: none;
     }
   }
+  @include e(largeCheckbox) {
+    margin-bottom: 21px;
+  }
   @include e(normalSubmit) {
     background-color: $button-background-color !important;
     border-radius: $button-radius !important;
@@ -51,12 +54,76 @@
   }
 }
 
+.switch {
+  &:not(:checked),
+  &:checked {
+    position: absolute;
+    left: -9999px;
+
+    + label {
+      position: relative;
+      padding-left: 75px;
+      cursor: pointer;
+
+      &:before,
+      &:after{
+        content: '';
+        position: absolute;
+      }
+
+      &:before {
+        @include transition(background-color 0.2s);
+        @include translateY(-50%);
+        background: $md-clr-grey-400;
+        border-radius: 15px;
+        height: 1.5em;
+        left: 0;
+        top: 50%;
+        width: 3.5em;
+      }
+
+      &:after {
+        @include transition(all 0.2s);
+        @include translateY(-50%);
+        background: $md-clr-grey-700;
+        border-radius: 50%;
+        height: 1em;
+        left: 5px;
+        top: 50%;
+        width: 1em;
+      }
+    }
+  }
+
+  &:checked {
+    + label {
+      &:before {
+        background: $button-background-color;
+      }
+      &:after {
+        background: $button-ft-color;
+        left: calc(2.5em - 5px);
+      }
+    }
+  }
+}
+
+.help-block {
+  bottom: 18px;
+  color: $md-clr-red-A700;
+  display: block;
+  font-size: 0.85em;
+  position: relative;
+}
+
 .formWithCaptcha {
   .g-recaptcha {
     @include translateX(-50%);
     display: inline-block;
+    height: 78px;
     left: 50%;
     margin-bottom: 21px;
     position: relative;
+    width: 304px;
   }
 }

@@ -19,11 +19,12 @@ class CreatePostsTable extends Migration
             // Content
             $table->text('content');
             $table->text('moderation')->nullable()->default(null);
-            // Metadata
-            $table->integer('likes');
             // Author
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            // Topic
+            $table->unsignedInteger('topic_id');
+            $table->foreign('topic_id')->references('id')->on('topics');
         });
     }
 

@@ -9,7 +9,29 @@
   width: 1050px;
 
   @include e(container) {
+    display: block;
     width: 42%;
+
+    @include m(link) {
+      position: relative;
+      &:hover {
+        &:before {
+          background-color: rgba(#000, 0);
+        }
+      }
+      &:before {
+        @include border-radius(4px);
+        @include transition(background-color 0.3s ease);
+        background-color: rgba(#000, 0.5);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 10;
+      }
+    }
   }
 
   @include e(separator) {

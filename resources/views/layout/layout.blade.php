@@ -57,10 +57,10 @@
                 <a class="nav__menu__link" href="{!! route('getHome') !!}">User.dev</a>
             </li>
             <li class="nav__menu__item">
-                <a class="nav__menu__link" href="{!! route('user.getLogout') !!}">{!! trans('menu.menuForumLink') !!}</a>
+                <a class="nav__menu__link" href="{!! route('forum.getForum') !!}">{!! trans('menu.menuForumLink') !!}</a>
             </li>
             <li class="nav__menu__item">
-                <a class="button" href="{!! route('user.getRegister') !!}">{!! trans('menu.menuLoginButton') !!}</a>
+                <a class="button" href="{!! route('user.getLogin') !!}">{!! trans('menu.menuLoginButton') !!}</a>
             </li>
         </menu>
     </div>
@@ -97,14 +97,6 @@
     <div class="footer__copyright @if((isset($cristalPage) && $cristalPage == true) || (isset($errorPage) && $errorPage == true))
     footer__copyright--cristal @endif">
         {!! trans('menu.footerCopyright') !!} - 2014 - {!! date('Y') !!}
-        <div class="footer__lang">
-            <a href="#" class="footer__lang__flag footer__lang__flag--active" title="{{ trans('general.translatedToFrench') }}">
-                <img class="footer__lang__flag__icon" src="{{ asset('img/misc/FR.png') }}" alt="FR">
-            </a>
-            <a href="#" class="footer__lang__flag" title="{{ trans('general.translateToEnglish') }} (not ready)">
-                <img class="footer__lang__flag__icon" src="{{ asset('img/misc/GB.png') }}" alt="EN">
-            </a>
-        </div>
     </div>
 </footer>
 
@@ -118,6 +110,7 @@
 <script src="{!! asset('js/legipix.js') !!}"></script>
 <script type="text/javascript">
     (function () {
+        Global.init();
         @yield('scripts')
         Cookie.init();
         @show

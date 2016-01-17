@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Devfactory\Media\MediaTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -15,6 +16,7 @@ class User extends Model implements AuthenticatableContract,
                                     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
+    use MediaTrait;
 
     /**
      * The database table used by the model.
@@ -36,4 +38,62 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Boot the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->token = str_random(16);
+        });
+    }
+
+    /**
+     * Confirm the user.
+     *
+     * @return void
+     */
+    public function confirm()
+    {
+        $this->is_verified = true;
+        $this->token = null;
+        $this->save();
+    }
+
+    /**
+     * Get the gamertag that belongs to the user.
+     */
+    public function gamertag()
+    {
+        return $this->hasOne('App\Gamertag');
+    }
+
+    /**
+     * Get user's avatar.
+     */
+    public function getAvatar()
+    {
+        $avatarType = $this->avatar;
+
+        switch($avatarType) {
+            case 'media';
+                return $this->getMedia('avatar');
+                break;
+            case 'xbox';
+                return $this->gamertag()->avatar;
+                break;
+            default;
+                return null;
+                break;
+        }
+    }
+
+    public function votes() {
+        return $this->hasMany('App\Vote');
+    }
 }

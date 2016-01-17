@@ -20,7 +20,8 @@ class CreateGamertagsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             // Status
-            $table->boolean('active')->default(false);
+            $table->boolean('is_verified')->default(false);
+            $table->string('token')->nullable()->default(null);
             // Informations
             $table->boolean('gold');
             $table->string('avatar');

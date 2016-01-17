@@ -154,6 +154,8 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Devfactory\Media\MediaServiceProvider::class,
+        That0n3guy\Transliteration\TransliterationServiceProvider::class,
 
     ],
 
@@ -213,3 +215,10 @@ return [
     ],
 
 ];
+
+/**
+ * TODO: Email verification
+ * TODO : Gamertag Integration
+ * TODO : User Views
+ * TODO : Integrate the forum
+ */

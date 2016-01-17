@@ -19,7 +19,8 @@ class UpdateUsersTable extends Migration
             // Gamertag
             $table->unsignedInteger('gamertag_id');
             // Status
-            $table->boolean('active')->default(false);
+            $table->boolean('is_verified')->default(false);
+            $table->string('token')->nullable()->default(null);
             // Stats
             $table->integer('posts')->default(0);
             $table->integer('topics')->default(0);
@@ -49,9 +50,9 @@ class UpdateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
             $table->dropColumn('background');
-            $table->dropColumn('gamertag');
-            $table->dropForeign('gamertags_gamertag_id_foreign');
-            $table->dropColumn('active');
+            $table->dropColumn('gamertag_id');
+            $table->dropColumn('is_verified');
+            $table->dropColumn('token');
             $table->dropColumn('posts');
             $table->dropColumn('topics');
             $table->dropColumn('banned_until');
