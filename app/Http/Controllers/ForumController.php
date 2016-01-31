@@ -15,18 +15,73 @@ use SebastianBergmann\Environment\Console;
 
 class ForumController extends Controller
 {
+    private $activityOfTagsLimitInDays = 10;
+
     /**
      * Show the forum dashboard.
      *
+     * @param Request $request
      * @return Response
      */
-    public function getForum()
+    public function getForum(Request $request)
     {
-        // Manually assigning the filters for now.
-        // Temporary
-        $filteringTagsType = 'popular';
-        $showTagsByType = 'all';
-        $showOnlyActiveTags = false;
+        /**
+         * Filtering method.
+         */
+        $filteringTagsType = \Cookie::get('filteringTagsType', 'classic');
+
+        $filteringMethods = array('classic', 'popular');
+        if(\Input::has('filteringTagsType')) {
+            if(in_array(\Input::get('filteringTagsType'), $filteringMethods)) {
+                \Cookie::queue(\Cookie::forever('filteringTagsType', \Input::get('filteringTagsType')));
+            }
+            return redirect(route('forum.getForum'));
+        }
+        if( ! \Cookie::has('filteringTagsType')) {
+            \Cookie::queue(\Cookie::forever('filteringTagsType', 'classic'));
+        }
+
+        /**
+         * ShowBy method.
+         */
+        $showTagsByType = \Cookie::get('showTagsByType', 'all');
+
+        $showMethods = array('all', 'official', 'unofficial');
+        if(\Input::has('showTagsByType')) {
+            if(in_array(\Input::get('showTagsByType'), $showMethods)) {
+                \Cookie::queue(\Cookie::forever('showTagsByType', \Input::get('showTagsByType')));
+            }
+            return redirect(route('forum.getForum'));
+        }
+        if( ! \Cookie::has('showTagsByType')) {
+            \Cookie::queue(\Cookie::forever('showTagsByType', 'all'));
+        }
+
+
+        /**
+         * ShowActive method.
+         */
+        $showActiveTags = \Cookie::get('showActiveTags', 0);
+
+        $activeMethods = array(1, 0);
+        if(\Input::has('showActiveTags')) {
+            if(in_array(\Input::get('showActiveTags'), $activeMethods)) {
+                \Cookie::queue(\Cookie::forever('showActiveTags', \Input::get('showActiveTags')));
+            }
+            return redirect(route('forum.getForum'));
+        }
+        if( ! \Cookie::has('showActiveTags')) {
+            \Cookie::queue(\Cookie::forever('showActiveTags', 0));
+        }
+
+        /**
+         * Creating a global variable for displaying in the view.
+         */
+        $userFilters = array(
+            'filteringTagsType' => $filteringTagsType,
+            'showTagsByType' => $showTagsByType,
+            'showActiveTags' => $showActiveTags,
+        );
 
         switch ($filteringTagsType) {
 
@@ -36,78 +91,68 @@ class ForumController extends Controller
              * We show the tags ordering them by categories.
              */
             case 'classic':
+
+                /**
+                 * Selecting the Categories following the filters applied by the user.
+                 */
                 switch ($showTagsByType) {
-
-                    /**
-                     * Displaying all Tags.
-                     *
-                     * Including the empty ones.
-                     */
                     case 'all':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $categories = Category::with(['tags.topics' => function($query) {
-                                $query->where('updated_at', '>', Carbon::now()->subDays(10));
-                            }])->orderBy('order')->get();
-                        } else {
-                            $categories = Category::with('tags.topics')->orderBy('order')->get();
-                        }
-
-                        $filtered = $categories->reject(function($category) {
-                            return $category->tags->isEmpty();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => true, 'categories' => $filtered]);
+                        $categories = Category::with(['tags' => function($query) use ($showActiveTags) {
+                            if ($showActiveTags == 1) {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                            }
+                        }, 'tags.topics'
+                        ])->get();
                         break;
 
-                    /**
-                     * Diplaying the official Tags.
-                     *
-                     * Including all the tags, even the empty ones, as these are the official ones.
-                     */
                     case 'official':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $categories = Category::with(['tags' => function($query) {
-                                $query->where('is_official', true)->where('updated_at', '>', Carbon::now()->subDays(10));
-                            }])->orderBy('order')->get();
-                        } else {
-                            $categories = Category::with(['tags' => function($query) {
-                                $query->where('is_official', true);
-                            }])->orderBy('order')->get();
-                        }
-
-                        $filtered = $categories->reject(function($category) {
-                            return $category->tags->isEmpty();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => true, 'categories' => $filtered]);
+                        $categories = Category::with(['tags' => function($query) use ($showActiveTags) {
+                            $query->where('is_official', true);
+                            if ($showActiveTags == 1) {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                            }
+                        }])->get();
                         break;
 
-                    /**
-                     * Displaying the unofficial Tags.
-                     *
-                     * Not including the empty ones.
-                     */
                     case 'unofficial':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $categories = Category::with(['tags.topics' => function($query) {
-                                $query->where('is_official', false)->where('updated_at', '>', Carbon::now()->subDays(10));
-                            }])->orderBy('order')->get();
-                        } else {
-                            $categories = Category::with(['tags.topics' => function($query) {
-                                $query->where('is_official', false);
-                            }])->orderBy('order')->get();
-                        }
-
-                        $filtered = $categories->reject(function($category) {
-                            return $category->tags->isEmpty();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => true, 'categories' => $filtered]);
+                        $categories = Category::with(['tags' => function($query) use ($showActiveTags) {
+                            $query->where('is_official', false);
+                            if ($showActiveTags == 1) {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                            }
+                        }, 'tags.topics'
+                        ])->get();
                         break;
                 }
+
+                /**
+                 * Filtering the Categories to exclude all the empty ones.
+                 */
+                $filteredCategories = $categories->reject(function($category) {
+                    return $category->tags->isEmpty();
+                })->all();
+
+                /**
+                 * Clearing each Category to exclude empty Tags.
+                 */
+                foreach($filteredCategories as $category) {
+                    $category->clearedTags = $category->tags->reject(function($tag) {
+                        return $tag->topics->isEmpty();
+                    })->all();
+                }
+
+                /**
+                 * Returning the view with the parameters.
+                 */
+                return view('forum.index')->with([
+                    'categories' => $filteredCategories,
+                    'isClassicDisplay' => true,
+                    'userFilters' => $userFilters,
+                ]);
+
+                /**
+                 * Get to the other Case.
+                 */
                 break;
 
             /**
@@ -116,62 +161,59 @@ class ForumController extends Controller
              * We show the tags ordering them by the amount of posts they contain.
              */
             case 'popular':
+
+                /**
+                 * Selecting the Tags following the filters applied by the user.
+                 */
                 switch ($showTagsByType) {
 
-                    /**
-                     * Diplaying all Tags.
-                     */
                     case 'all':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $tags = Tag::with('topics')->where('updated_at', '>', Carbon::now()->subDays(10))->get();
-                        } else {
-                            $tags = Tag::with('topics')->get();
+                        $tags = Tag::with('topics');
+                        if ($showActiveTags == 1) {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
                         }
-
-                        $filtered = $tags->sortByDesc(function($tag) {
-                            return $tag->topics->count();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => false, 'tags' => $filtered]);
+                        $tags = $tags->get();
                         break;
 
-                    /**
-                     * Diplaying the official Tags.
-                     */
                     case 'official':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $tags = Tag::with('topics')->where('is_official', true)->where('updated_at', '>', Carbon::now()->subDays(10))->get();
-                        } else {
-                            $tags = Tag::with('topics')->where('is_official', true)->get();
+                        $tags = Tag::with('topics')->where('is_official', true);
+                        if ($showActiveTags == 1) {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
                         }
-
-                        $filtered = $tags->sortByDesc(function($tag) {
-                            return $tag->topics->count();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => false, 'tags' => $filtered]);
+                        $tags = $tags->get();
                         break;
 
-                    /**
-                     * Diplaying the unofficial Tags.
-                     */
                     case 'unofficial':
-                        // Applying the "recently active" filter here.
-                        if ($showOnlyActiveTags == true) {
-                            $tags = Tag::with('topics')->where('is_official', false)->where('updated_at', '>', Carbon::now()->subDays(10))->get();
-                        } else {
-                            $tags = Tag::with('topics')->where('is_official', false)->get();
+                        $tags = Tag::with('topics')->where('is_official', false);
+                        if ($showActiveTags == 1) {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
                         }
-
-                        $filtered = $tags->sortByDesc(function($tag) {
-                            return $tag->topics->count();
-                        })->all();
-
-                        return view('forum.index')->with(['isClassicDisplay' => false, 'tags' => $filtered]);
+                        $tags = $tags->get();
                         break;
+
                 }
+
+                /**
+                 * Filtering the Tags to exclude all the empty ones and ordering them by activity.
+                 */
+                $filteredTags = $tags->reject(function($tag) {
+                    return $tag->topics->isEmpty();
+                })->sortByDesc(function($tag) {
+                    return $tag->topics->count();
+                })->all();
+
+                /**
+                 * Returning the view with the parameters.
+                 */
+                return view('forum.index')->with([
+                    'isClassicDisplay' => false,
+                    'tags' => $filteredTags,
+                    'userFilters' => $userFilters,
+                ]);
+
+                /**
+                 * The end.
+                 */
                 break;
         }
     }
@@ -184,12 +226,15 @@ class ForumController extends Controller
     public function getTag($slug)
     {
         $tag = Tag::where(['slug' => $slug])->firstOrFail();
-        $topics = $tag->topics()->with('posts.user')->paginate(2);
 
-        foreach ($topics as $topic) {
-            if (\Auth::check()) {
+        $topics = $tag->topics()->with('posts.user', 'posts.votes')->paginate(20);
 
+        foreach($topics as $topic) {
+            $score = 0;
+            foreach($topic->posts()->first()->votes as $vote) {
+                $score += (int) $vote->value;
             }
+            $topic->score = $score;
         }
 
         return view('forum.tag')->with(['tag' => $tag, 'topics' => $topics]);

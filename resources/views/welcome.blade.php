@@ -7,7 +7,8 @@
 <div class="splash">
     <h1 class="splash__title">{!! trans('landingPage.catchPhrase') !!}</h1>
     <h2 class="splash__subTitle">{!! trans('landingPage.catchPhraseMore') !!}</h2>
-    <img class="splash__controller" src="{{ asset('img/misc/pad.png') }}" alt="controller" usemap="#konami">
+    <img id="controller" class="splash__controller" src="{{ asset('img/misc/pad.png') }}" alt="controller"
+         usemap="#konami">
     <map name="konami">
         <area class="konami-button" coords="230,80,11" data-button="a" shape="circ"></area>
         <area class="konami-button" coords="250,60,11" data-button="b" shape="circ"></area>
@@ -124,7 +125,7 @@
 @endsection
 
 @section('scripts')
-    Konami.init();
+    Controller.init();
     Background.init();
     @parent
 @endsection

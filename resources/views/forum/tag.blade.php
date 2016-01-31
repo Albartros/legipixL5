@@ -74,7 +74,7 @@
                         60-196-196z"></path>
                         </svg>
                     </button>
-                    <span class="forumContainer__topic__likes__counter">{{ rand(0, 20) }}</span>
+                    <span class="forumContainer__topic__likes__counter">{{ $topic->score }}</span>
                     <button class="forumContainer__topic__likes__dislike">
                         <svg class="forumContainer__topic__likes__icon" version="1.1" viewBox="0 0 1024 1024"
                              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">

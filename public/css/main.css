@@ -147,6 +147,31 @@ path {
   fill: #212121;
 }
 
+/* line 25, ../../resources/assets/sass/base/_base.scss */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* line 34, ../../resources/assets/sass/base/_base.scss */
+.pace-inactive {
+  display: none;
+}
+
+/* line 38, ../../resources/assets/sass/base/_base.scss */
+.pace .pace-progress {
+  background: #ef5350;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+
 /* line 1, ../../resources/assets/sass/base/_typography.scss */
 body {
   color: #212121;
@@ -2445,13 +2470,16 @@ a:visited {
 }
 /* line 24, ../../resources/assets/sass/helpers/_mixins.scss */
 .splash__controller {
+  margin: 40px auto;
+}
+/* line 33, ../../resources/assets/sass/helpers/_mixins.scss */
+.splash__controller--ready {
   -moz-animation: heartbeat 0.5s ease 1;
   -webkit-animation: heartbeat 0.5s ease 1;
   animation: heartbeat 0.5s ease 1;
   -moz-animation-delay: 2s;
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
-  margin: 40px auto;
 }
 
 @-moz-keyframes heartbeat {
@@ -2530,7 +2558,7 @@ a:visited {
     transform: scale(1, 1);
   }
 }
-/* line 76, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 79, ../../resources/assets/sass/pages/_landingPage.scss */
 .landingFeature {
   max-width: 1150px;
   margin-left: auto;
@@ -2589,22 +2617,22 @@ a:visited {
     font-size: 18px;
   }
 }
-/* line 111, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 114, ../../resources/assets/sass/pages/_landingPage.scss */
 .landingFeature__subName br {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 111, ../../resources/assets/sass/pages/_landingPage.scss */
+  /* line 114, ../../resources/assets/sass/pages/_landingPage.scss */
   .landingFeature__subName br {
     display: block;
   }
 }
-/* line 117, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 120, ../../resources/assets/sass/pages/_landingPage.scss */
 .landingFeature__subName strong {
   font-weight: 400;
 }
 
-/* line 123, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 126, ../../resources/assets/sass/pages/_landingPage.scss */
 .landingFeatures {
   max-width: 1150px;
   margin-left: auto;
@@ -2618,7 +2646,7 @@ a:visited {
   clear: both;
 }
 @media (min-width: 768px) {
-  /* line 123, ../../resources/assets/sass/pages/_landingPage.scss */
+  /* line 126, ../../resources/assets/sass/pages/_landingPage.scss */
   .landingFeatures {
     padding: 0 0 7em;
   }
@@ -2638,7 +2666,7 @@ a:visited {
     margin-right: 3.44828%;
     margin-bottom: 0;
   }
-  /* line 136, ../../resources/assets/sass/pages/_landingPage.scss */
+  /* line 139, ../../resources/assets/sass/pages/_landingPage.scss */
   .landingFeatures__column:last-child {
     width: 31.03448%;
     float: right;
@@ -2681,18 +2709,18 @@ a:visited {
     font-size: 19px;
   }
 }
-/* line 162, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 165, ../../resources/assets/sass/pages/_landingPage.scss */
 .landingFeatures__column__subName br {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 162, ../../resources/assets/sass/pages/_landingPage.scss */
+  /* line 165, ../../resources/assets/sass/pages/_landingPage.scss */
   .landingFeatures__column__subName br {
     display: block;
   }
 }
 
-/* line 172, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 175, ../../resources/assets/sass/pages/_landingPage.scss */
 .featuredUsers {
   max-width: 1150px;
   margin-left: auto;
@@ -2766,15 +2794,15 @@ a:visited {
     float: left;
   }
 }
-/* line 216, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 219, ../../resources/assets/sass/pages/_landingPage.scss */
 .featuredUsers__block:nth-of-type(n+6) {
   bottom: 3px;
 }
-/* line 220, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 223, ../../resources/assets/sass/pages/_landingPage.scss */
 .featuredUsers__block:hover .featuredUsers__block__mask {
   background-color: rgba(239, 83, 80, 0.75);
 }
-/* line 223, ../../resources/assets/sass/pages/_landingPage.scss */
+/* line 226, ../../resources/assets/sass/pages/_landingPage.scss */
 .featuredUsers__block:hover .featuredUsers__block__title {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;

@@ -72,14 +72,22 @@ var Poll = {
     }
 };
 
-var Konami = {
+var Controller = {
     settings: {
         bodyClass: document.body.className,
+        controller: document.getElementById("controller"),
         konamiButtons: document.getElementsByClassName("konami-button"),
         konamiSequence: ["up", "up", "down", "down", "left", "right", "left", "right", "b", "a"],
     },
     init: function () {
+        this.initiateController();
         this.listenKonamiSequence();
+    },
+    initiateController: function () {
+        var s = this.settings;
+        document.addEventListener('DOMContentLoaded', function() {
+            s.controller.className = s.controller.className + " splash__controller--ready";
+        }, false);
     },
     listenKonamiSequence: function () {
         var s = this.settings;

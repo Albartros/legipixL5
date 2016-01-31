@@ -49,9 +49,12 @@
     }
   }
   @include e(controller) {
-    @include animation(heartbeat 0.5s ease 1);
-    @include animation-delay(2s);
     margin: 40px auto;
+
+    @include m(ready) {
+      @include animation(heartbeat 0.5s ease 1);
+      @include animation-delay(2s);
+    }
   }
 }
 

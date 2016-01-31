@@ -8,10 +8,13 @@
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <!-- Pace -->
+    <script src="{!! asset('js/pace.min.js') !!}"></script>
+
     <!-- Styles -->
     <link href="{!! asset('css/main.css') !!}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100|Source+Sans+Pro:400,600" rel="stylesheet"
-          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="{!! asset('img/favicon/apple-icon-57x57.png') !!}">

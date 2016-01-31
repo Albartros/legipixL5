@@ -28,24 +28,52 @@
         </div>
         <div class="forumBar__filters">
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
-            <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterClassic') !!}</a>
-            <a href="#" class="forumBar__filter disabled">{!! trans('forum.filterPopular') !!}</a>
+            <a href="?filteringTagsType=classic" class="forumBar__filter @if($userFilters['filteringTagsType'] == 'classic') forumBar__filter--active @endif">{!! trans('forum.filterClassic')
+            !!}</a>
+            <a href="?filteringTagsType=popular" class="forumBar__filter @if($userFilters['filteringTagsType'] == 'popular') forumBar__filter--active @endif">{!! trans('forum.filterPopular') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
-            <a href="#" class="forumBar__filter disabled">{!! trans('forum.showAll') !!}</a>
-            <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.showOfficial') !!}</a>
-            <a href="#" class="forumBar__filter disabled">{!! trans('forum.showUnofficial') !!}</a>
+            <a href="?showTagsByType=all" class="forumBar__filter @if($userFilters['showTagsByType'] == 'all') forumBar__filter--active @endif">{!! trans('forum.showAll') !!}</a>
+            <a href="?showTagsByType=official" class="forumBar__filter @if($userFilters['showTagsByType'] == 'official') forumBar__filter--active @endif">{!! trans('forum.showOfficial') !!}</a>
+            <a href="?showTagsByType=unofficial" class="forumBar__filter @if($userFilters['showTagsByType'] == 'unofficial') forumBar__filter--active @endif">{!! trans('forum.showUnofficial') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showActives') !!} :</strong>
-            <input class="switch" type="checkbox" id="showActive">
+            <input class="switch" @if($userFilters['showActiveTags'] == 1) onclick="window.location.href='?showActiveTags=0'" @else onclick="window.location.href='?showActiveTags=1'" @endif type="checkbox" id="showActive" @if($userFilters['showActiveTags'] == 1) checked @endif>
             <label for="showActive"></label>
         </div>
     </div>
     <div class="forumContainer">
         @include('forum.followedTags')
-        @if($isClassicDisplay == true)
-            @foreach($categories as $category)
+        @if( (isset($categories) && empty($categories)) || (isset($tags) && empty($tags)) )
+            <h1>Aucun Tag ne correspond à vos critères de recherche.</h1>
+        @else
+            @if($isClassicDisplay == true)
+                @foreach($categories as $category)
+                    <div class="forum__container">
+                        <h2 class="forum__category">{{ $category->name }}</h2>
+                        @foreach ($category->clearedTags as $tag)
+                            @if($tag->is_official)
+                                <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
+                                    <h2 class="forum__title">{{ $tag->name }}</h2>
+                                    <p class="forum__description">{{ $tag->content }}</p>
+                                </a>
+                            @else
+                                <a class="forum forum--unofficial" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
+                                    <h2 class="forum__title">{{ $tag->name }}</h2>
+                                    <dl class="forum__counter">
+                                        <dd class="forum__counter__icon">
+                                            <svg class="forum__counter__icon__icon" version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
+                                            </svg>
+                                        </dd>
+                                        <dt class="forum__counter__value">{{ $tag->topics->count() }}</dt>
+                                    </dl>
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                @endforeach
+            @else
                 <div class="forum__container">
-                    <h2 class="forum__category">{{ $category->name }}</h2>
-                    @foreach ($category->tags as $tag)
+                    @foreach ($tags as $tag)
                         @if($tag->is_official)
                             <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
                                 <h2 class="forum__title">{{ $tag->name }}</h2>
@@ -66,30 +94,7 @@
                         @endif
                     @endforeach
                 </div>
-            @endforeach
-        @else
-            <div class="forum__container">
-                @foreach ($tags as $tag)
-                    @if($tag->is_official)
-                        <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
-                            <h2 class="forum__title">{{ $tag->name }}</h2>
-                            <p class="forum__description">{{ $tag->content }}</p>
-                        </a>
-                    @else
-                        <a class="forum forum--unofficial" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
-                            <h2 class="forum__title">{{ $tag->name }}</h2>
-                            <dl class="forum__counter">
-                                <dd class="forum__counter__icon">
-                                    <svg class="forum__counter__icon__icon" version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
-                                    </svg>
-                                </dd>
-                                <dt class="forum__counter__value">{{ $tag->topics->count() }}</dt>
-                            </dl>
-                        </a>
-                    @endif
-                @endforeach
-            </div>
+            @endif
         @endif
     </div>
 @endsection

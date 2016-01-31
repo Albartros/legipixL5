@@ -53,6 +53,9 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * Get the votes of the post.
+     */
     public function votes() {
         return $this->hasMany('App\Vote');
     }
