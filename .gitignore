@@ -5,6 +5,7 @@ Homestead.json
 .env
 
 /.idea
+/.idea/workspace.xml
 _ide_helper.php
 .phpstorm.meta.php
 storage
