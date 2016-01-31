@@ -28,15 +28,23 @@
         </div>
         <div class="forumBar__filters">
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
-            <a href="?filteringTagsType=classic" class="forumBar__filter @if($userFilters['filteringTagsType'] == 'classic') forumBar__filter--active @endif">{!! trans('forum.filterClassic')
+            <a href="?filteringTagsType=classic"
+               class="forumBar__filter @if($userFilters->filteringTagsType == 'classic') forumBar__filter--active @endif">{!! trans('forum.filterClassic')
             !!}</a>
-            <a href="?filteringTagsType=popular" class="forumBar__filter @if($userFilters['filteringTagsType'] == 'popular') forumBar__filter--active @endif">{!! trans('forum.filterPopular') !!}</a>
+            <a href="?filteringTagsType=popular"
+               class="forumBar__filter @if($userFilters->filteringTagsType == 'popular') forumBar__filter--active @endif">{!! trans('forum.filterPopular') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
-            <a href="?showTagsByType=all" class="forumBar__filter @if($userFilters['showTagsByType'] == 'all') forumBar__filter--active @endif">{!! trans('forum.showAll') !!}</a>
-            <a href="?showTagsByType=official" class="forumBar__filter @if($userFilters['showTagsByType'] == 'official') forumBar__filter--active @endif">{!! trans('forum.showOfficial') !!}</a>
-            <a href="?showTagsByType=unofficial" class="forumBar__filter @if($userFilters['showTagsByType'] == 'unofficial') forumBar__filter--active @endif">{!! trans('forum.showUnofficial') !!}</a>
+            <a href="?showTagsByType=all"
+               class="forumBar__filter @if($userFilters->showTagsByType == 'all') forumBar__filter--active @endif">{!! trans('forum.showAll') !!}</a>
+            <a href="?showTagsByType=official"
+               class="forumBar__filter @if($userFilters->showTagsByType == 'official') forumBar__filter--active @endif">{!! trans('forum.showOfficial') !!}</a>
+            <a href="?showTagsByType=unofficial"
+               class="forumBar__filter @if($userFilters->showTagsByType == 'unofficial') forumBar__filter--active @endif">{!! trans('forum.showUnofficial') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showActives') !!} :</strong>
-            <input class="switch" @if($userFilters['showActiveTags'] == 1) onclick="window.location.href='?showActiveTags=0'" @else onclick="window.location.href='?showActiveTags=1'" @endif type="checkbox" id="showActive" @if($userFilters['showActiveTags'] == 1) checked @endif>
+            <input class="switch"
+                   @if($userFilters->showActiveTags == 1) onclick="window.location.href='?showActiveTags=0'"
+                   @else onclick="window.location.href='?showActiveTags=1'" @endif type="checkbox" id="showActive"
+                   @if($userFilters->showActiveTags == 1) checked @endif>
             <label for="showActive"></label>
         </div>
     </div>
