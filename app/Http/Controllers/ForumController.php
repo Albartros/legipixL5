@@ -20,10 +20,9 @@ class ForumController extends Controller
     /**
      * Show the forum dashboard.
      *
-     * @param Request $request
      * @return Response
      */
-    public function getForum(Request $request)
+    public function getForum()
     {
         /**
          * Filtering method.
