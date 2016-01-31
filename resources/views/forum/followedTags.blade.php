@@ -7,7 +7,7 @@
         @if(Auth::check())
             @foreach(Auth::user()->tags as $tag)
                 <li class="followedTags__item">
-                    <a class="followedTags__item__link" href="{!! route('forum.getForum') !!}">
+                    <a class="followedTags__item__link" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
                         @if($tag->is_official){{ $tag->name }}@else#{{ $tag->name }}@endif
                         <button data-tag-id="{{ $tag->id }}" class="followedTags__item__delete" title="{!! trans
                         ('general.delete') !!}">
