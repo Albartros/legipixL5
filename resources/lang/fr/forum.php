@@ -23,7 +23,6 @@ return [
     'tagUnfollow' => 'Ne plus suivre',
 
     'filterBy' => 'Trier par',
-    'filterChronology' => 'Chronologie',
     'filterClassic' => 'Classique',
     'filterPopular' => 'Popularité',
     'filterPopularity' => 'Popularité',

@@ -51,7 +51,7 @@
         </div>
         <div class="forumBar__filters">
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
-            <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterChronology') !!}</a>
+            <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterClassic') !!}</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.filterPopular') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
             <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.showAll') !!}</a>
