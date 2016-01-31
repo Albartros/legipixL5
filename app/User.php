@@ -66,21 +66,13 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Get the gamertag that belongs to the user.
-     */
-    public function gamertag()
-    {
-        return $this->hasOne('App\Gamertag');
-    }
-
-    /**
      * Get user's avatar.
      */
     public function getAvatar()
     {
         $avatarType = $this->avatar;
 
-        switch($avatarType) {
+        switch ($avatarType) {
             case 'media';
                 return $this->getMedia('avatar');
                 break;
@@ -93,7 +85,20 @@ class User extends Model implements AuthenticatableContract,
         }
     }
 
+    /**
+     * Get the gamertag that belongs to the user.
+     */
+    public function gamertag()
+    {
+        return $this->hasOne('App\Gamertag');
+    }
+
     public function votes() {
         return $this->hasMany('App\Vote');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
     }
 }

@@ -22,6 +22,8 @@ class ForumController extends Controller
      */
     public function getForum()
     {
+        //\Auth::loginUsingId(1);
+
         $tagFilters = config('forum.tag_filters');
 
         if ($this->checkFilters($tagFilters) === true) {

@@ -13,11 +13,10 @@ class CreateTagTopicTable extends Migration
     public function up()
     {
         Schema::create('tag_topic', function (Blueprint $table) {
-            $table->increments('id');
-            // User
+            // Tag
             $table->unsignedInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags')->onDeletes('cascade');
-            // Poll
+            // Topic
             $table->unsignedInteger('topic_id');
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
         });
