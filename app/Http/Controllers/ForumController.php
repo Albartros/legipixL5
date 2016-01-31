@@ -16,22 +16,25 @@ use SebastianBergmann\Environment\Console;
 class ForumController extends Controller
 {
     /**
-     * Number of days to stop considering a tag as active.
-     *
-     * @var int activityOfTagsLimitInDays
-     */
-    private $activityOfTagsLimitInDays = 10;
-
-    /**
      * Show the forum dashboard.
      *
      * @return Response
      */
     public function getForum()
     {
-        $userFilters = self::getUserFilters();
+        $tagFilters = config('forum.tag_filters');
 
-        switch ($userFilters->filteringTagsType) {
+        if ($this->checkFilters($tagFilters) === true) {
+            return redirect(route('forum.getForum'));
+        }
+
+        $userFilters = $this->getUserFilters($tagFilters);
+
+        \Debugbar::log($userFilters);
+
+        $activityOfTagsLimitInDays = config('forum.days_before_unactive_tag', 10);
+
+        switch ($userFilters->tags_filter_by) {
 
             /**
              * Displaying the classic way.
@@ -43,30 +46,30 @@ class ForumController extends Controller
                 /**
                  * Selecting the Categories following the filters applied by the user.
                  */
-                switch ($userFilters->showTagsByType) {
+                switch ($userFilters->tags_show_by) {
                     case 'all':
-                        $categories = Category::with(['tags' => function ($query) use ($userFilters) {
-                            if ($userFilters->showActiveTags == 1) {
-                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                        $categories = Category::with(['tags' => function ($query) use ($userFilters, $activityOfTagsLimitInDays) {
+                            if ($userFilters->tags_unactives == 'exclude') {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                             }
                         }, 'tags.topics'
                         ])->get();
                         break;
 
                     case 'official':
-                        $categories = Category::with(['tags' => function ($query) use ($userFilters) {
+                        $categories = Category::with(['tags' => function ($query) use ($userFilters, $activityOfTagsLimitInDays) {
                             $query->where('is_official', true);
-                            if ($userFilters->showActiveTags == 1) {
-                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                            if ($userFilters->tags_unactives == 'exclude') {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                             }
                         }])->get();
                         break;
 
                     case 'unofficial':
-                        $categories = Category::with(['tags' => function ($query) use ($userFilters) {
+                        $categories = Category::with(['tags' => function ($query) use ($userFilters, $activityOfTagsLimitInDays) {
                             $query->where('is_official', false);
-                            if ($userFilters->showActiveTags == 1) {
-                                $query->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                            if ($userFilters->tags_unactives == 'exclude') {
+                                $query->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                             }
                         }, 'tags.topics'
                         ])->get();
@@ -95,7 +98,7 @@ class ForumController extends Controller
                 return view('forum.index')->with([
                     'categories' => $filteredCategories,
                     'isClassicDisplay' => true,
-                    'userFilters' => $userFilters,
+                    'userFilters' => $userFilters, $activityOfTagsLimitInDays,
                 ]);
 
                 /**
@@ -113,28 +116,28 @@ class ForumController extends Controller
                 /**
                  * Selecting the Tags following the filters applied by the user.
                  */
-                switch ($userFilters->showTagsByType) {
+                switch ($userFilters->tags_show_by) {
 
                     case 'all':
                         $tags = Tag::with('topics');
-                        if ($userFilters->showActiveTags == 1) {
-                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                        if ($userFilters->tags_unactives == 'exclude') {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                         }
                         $tags = $tags->get();
                         break;
 
                     case 'official':
                         $tags = Tag::with('topics')->where('is_official', true);
-                        if ($userFilters->showActiveTags == 1) {
-                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                        if ($userFilters->tags_unactives == 'exclude') {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                         }
                         $tags = $tags->get();
                         break;
 
                     case 'unofficial':
                         $tags = Tag::with('topics')->where('is_official', false);
-                        if ($userFilters->showActiveTags == 1) {
-                            $tags->where('updated_at', '>', Carbon::now()->subDays($this->activityOfTagsLimitInDays));
+                        if ($userFilters->tags_unactives == 'exclude') {
+                            $tags->where('updated_at', '>', Carbon::now()->subDays($activityOfTagsLimitInDays));
                         }
                         $tags = $tags->get();
                         break;
@@ -156,7 +159,7 @@ class ForumController extends Controller
                 return view('forum.index')->with([
                     'isClassicDisplay' => false,
                     'tags' => $filteredTags,
-                    'userFilters' => $userFilters,
+                    'userFilters' => $userFilters, $activityOfTagsLimitInDays,
                 ]);
 
                 /**
@@ -166,67 +169,51 @@ class ForumController extends Controller
         }
     }
 
-    private function getUserFilters()
+    /**
+     * Check if the User has not set a new filter, or if his Cookies are empty.
+     * Update/Create a new Cookie and then redirect if needed (in a bool return).
+     *
+     * @param $filters
+     * @return bool
+     */
+    private function checkFilters($filters)
     {
-        /**
-         * Filtering method.
-         */
-        $filteringTagsType = \Cookie::get('filteringTagsType', 'classic');
+        $forceReload = false;
+        foreach ($filters as $filter => $values) {
 
-        $filteringMethods = array('classic', 'popular');
-        if (\Input::has('filteringTagsType')) {
-            if (in_array(\Input::get('filteringTagsType'), $filteringMethods)) {
-                \Cookie::queue(\Cookie::forever('filteringTagsType', \Input::get('filteringTagsType')));
+            /**
+             * First we check the filters given in the Input.
+             */
+            if (\Input::has($filter)) {
+                if (in_array(\Input::get($filter), $values)) {
+                    \Cookie::queue(\Cookie::forever($filter, \Input::get($filter)));
+                }
+                $forceReload = true; // We will force the reload here to clean the URL.
             }
-            return redirect(route('forum.getForum'));
-        }
-        if (!\Cookie::has('filteringTagsType')) {
-            \Cookie::queue(\Cookie::forever('filteringTagsType', 'classic'));
-        }
 
-        /**
-         * ShowBy method.
-         */
-        $showTagsByType = \Cookie::get('showTagsByType', 'all');
-
-        $showMethods = array('all', 'official', 'unofficial');
-        if (\Input::has('showTagsByType')) {
-            if (in_array(\Input::get('showTagsByType'), $showMethods)) {
-                \Cookie::queue(\Cookie::forever('showTagsByType', \Input::get('showTagsByType')));
+            /**
+             * The we check the filters in the Cookies.
+             */
+            if (!\Cookie::has($filter)) {
+                \Cookie::queue(\Cookie::forever($filter, $values[0])); // The default value is the first one.
             }
-            return redirect(route('forum.getForum'));
         }
-        if (!\Cookie::has('showTagsByType')) {
-            \Cookie::queue(\Cookie::forever('showTagsByType', 'all'));
+        return $forceReload;
+    }
+
+    /**
+     * Retrieve the filters used by the User basing on the Cookies.
+     *
+     * @param $filters
+     * @return \stdClass
+     */
+    private function getUserFilters($filters)
+    {
+        $return = new \stdClass();
+        foreach ($filters as $filter => $values) {
+            $return->$filter = \Cookie::get($filter, $values[0]);
         }
-
-
-        /**
-         * ShowActive method.
-         */
-        $showActiveTags = \Cookie::get('showActiveTags', 0);
-
-        $activeMethods = array(1, 0);
-        if (\Input::has('showActiveTags')) {
-            if (in_array(\Input::get('showActiveTags'), $activeMethods)) {
-                \Cookie::queue(\Cookie::forever('showActiveTags', \Input::get('showActiveTags')));
-            }
-            return redirect(route('forum.getForum'));
-        }
-        if (!\Cookie::has('showActiveTags')) {
-            \Cookie::queue(\Cookie::forever('showActiveTags', 0));
-        }
-
-        /**
-         * Creating a global variable for displaying in the view.
-         */
-        $userFilters = new \stdClass();
-
-        $userFilters->filteringTagsType = $filteringTagsType;
-        $userFilters->showTagsByType = $showTagsByType;
-        $userFilters->showActiveTags = $showActiveTags;
-
-        return $userFilters;
+        return $return;
     }
 
     /**
@@ -240,10 +227,10 @@ class ForumController extends Controller
 
         $topics = $tag->topics()->with('posts.user', 'posts.votes')->paginate(20);
 
-        foreach($topics as $topic) {
+        foreach ($topics as $topic) {
             $score = 0;
-            foreach($topic->posts()->first()->votes as $vote) {
-                $score += (int) $vote->value;
+            foreach ($topic->posts()->first()->votes as $vote) {
+                $score += (int)$vote->value;
             }
             $topic->score = $score;
         }
