@@ -29,9 +29,6 @@ class ForumController extends Controller
         }
 
         $userFilters = $this->getUserFilters($tagFilters);
-
-        \Debugbar::log($userFilters);
-
         $activityOfTagsLimitInDays = config('forum.days_before_unactive_tag', 10);
 
         switch ($userFilters->tags_filter_by) {
@@ -98,7 +95,8 @@ class ForumController extends Controller
                 return view('forum.index')->with([
                     'categories' => $filteredCategories,
                     'isClassicDisplay' => true,
-                    'userFilters' => $userFilters, $activityOfTagsLimitInDays,
+                    'tagFilters' => $tagFilters,
+                    'userFilters' => $userFilters,
                 ]);
 
                 /**
@@ -157,9 +155,10 @@ class ForumController extends Controller
                  * Returning the view with the parameters.
                  */
                 return view('forum.index')->with([
+                    'filteredTags' => $filteredTags,
                     'isClassicDisplay' => false,
-                    'tags' => $filteredTags,
-                    'userFilters' => $userFilters, $activityOfTagsLimitInDays,
+                    'tagFilters' => $tagFilters,
+                    'userFilters' => $userFilters,
                 ]);
 
                 /**

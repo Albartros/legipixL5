@@ -27,25 +27,30 @@
             </button>
         </div>
         <div class="forumBar__filters">
+
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
-            <a href="?tags_filter_by=classic"
-               class="forumBar__filter @if($userFilters->tags_filter_by == 'classic') forumBar__filter--active @endif">{!! trans('forum.filterClassic')
+            @foreach($tagFilters['tags_filter_by'] as $filter)
+                <a href="?tags_filter_by={!! $filter !!}"
+                   class="forumBar__filter @if($userFilters->tags_filter_by == $filter) forumBar__filter--active @endif">{!! trans('forum.tags_filter_by_'.$filter)
             !!}</a>
-            <a href="?tags_filter_by=popular"
-               class="forumBar__filter @if($userFilters->tags_filter_by == 'popular') forumBar__filter--active @endif">{!! trans('forum.filterPopular') !!}</a>
+            @endforeach
+
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
-            <a href="?tags_show_by=all"
-               class="forumBar__filter @if($userFilters->tags_show_by == 'all') forumBar__filter--active @endif">{!! trans('forum.showAll') !!}</a>
-            <a href="?tags_show_by=official"
-               class="forumBar__filter @if($userFilters->tags_show_by == 'official') forumBar__filter--active @endif">{!! trans('forum.showOfficial') !!}</a>
-            <a href="?tags_show_by=unofficial"
-               class="forumBar__filter @if($userFilters->tags_show_by == 'unofficial') forumBar__filter--active @endif">{!! trans('forum.showUnofficial') !!}</a>
+            @foreach($tagFilters['tags_show_by'] as $filter)
+                <a href="?tags_show_by={!! $filter !!}"
+                   class="forumBar__filter @if($userFilters->tags_show_by == $filter) forumBar__filter--active @endif">{!! trans('forum.tags_show_by_'.$filter)
+            !!}</a>
+            @endforeach
+
             <strong class="forumBar__filters__name">{!! trans('forum.showActives') !!} :</strong>
-            <input class="switch"
-                   @if($userFilters->tags_unactives == 'exclude') onclick="window.location
-                   .href='?tags_unactives=include'"
-                   @else onclick="window.location.href='?tags_unactives=exclude'" @endif type="checkbox" id="showActive"
-                   @if($userFilters->tags_unactives == 'exclude') checked @endif>
+            <input
+                    class="switch"
+                    @if($userFilters->tags_unactives == 'exclude') onclick="window.location.href='?tags_unactives=include'"
+                    @else onclick="window.location.href='?tags_unactives=exclude'" @endif
+                    type="checkbox"
+                    id="showActive"
+                    @if($userFilters->tags_unactives == 'exclude') checked @endif
+            >
             <label for="showActive"></label>
         </div>
     </div>
@@ -82,7 +87,7 @@
                 @endforeach
             @else
                 <div class="forum__container">
-                    @foreach ($tags as $tag)
+                    @foreach ($filteredTags as $tag)
                         @if($tag->is_official)
                             <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
                                 <h2 class="forum__title">{{ $tag->name }}</h2>
