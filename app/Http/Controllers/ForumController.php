@@ -22,16 +22,11 @@ class ForumController extends Controller
      */
     public function getForum()
     {
-        //\Auth::loginUsingId(1);
-
         $tagFilters = config('forum.tag_filters');
-
-        if ($this->checkFilters($tagFilters) === true) {
-            return redirect(route('forum.getForum'));
-        }
-
         $userFilters = $this->getUserFilters($tagFilters);
         $activityOfTagsLimitInDays = config('forum.days_before_unactive_tag', 10);
+
+        self::checkFilters($tagFilters);
 
         switch ($userFilters->tags_filter_by) {
 
@@ -171,38 +166,6 @@ class ForumController extends Controller
     }
 
     /**
-     * Check if the User has not set a new filter, or if his Cookies are empty.
-     * Update/Create a new Cookie and then redirect if needed (in a bool return).
-     *
-     * @param $filters
-     * @return bool
-     */
-    private function checkFilters($filters)
-    {
-        $forceReload = false;
-        foreach ($filters as $filter => $values) {
-
-            /**
-             * First we check the filters given in the Input.
-             */
-            if (\Input::has($filter)) {
-                if (in_array(\Input::get($filter), $values)) {
-                    \Cookie::queue(\Cookie::forever($filter, \Input::get($filter)));
-                }
-                $forceReload = true; // We will force the reload here to clean the URL.
-            }
-
-            /**
-             * The we check the filters in the Cookies.
-             */
-            if (!\Cookie::has($filter)) {
-                \Cookie::queue(\Cookie::forever($filter, $values[0])); // The default value is the first one.
-            }
-        }
-        return $forceReload;
-    }
-
-    /**
      * Retrieve the filters used by the User basing on the Cookies.
      *
      * @param $filters
@@ -215,6 +178,44 @@ class ForumController extends Controller
             $return->$filter = \Cookie::get($filter, $values[0]);
         }
         return $return;
+    }
+
+    /**
+     * Check if the User has not set a new filter, or if his Cookies are empty.
+     * Update/Create a new Cookie and then redirect if needed (in a bool return).
+     *
+     * @param $filters
+     * @return void
+     */
+    private function checkFilters($filters)
+    {
+        foreach ($filters as $filter => $values) {
+
+            /**
+             * We check the filters in the Cookies.
+             */
+            if (!\Cookie::has($filter)) {
+                \Cookie::queue(\Cookie::forever($filter, $values[0])); // The default value is the first one.
+            }
+        }
+    }
+
+    /**
+     * Validating the new filters selection by user.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateTags()
+    {
+        $filters = config('forum.tag_filters');
+        foreach ($filters as $filter => $values) {
+            if (\Request::has($filter)) {
+                if (in_array(\Request::input($filter), $values)) {
+                    \Cookie::queue(\Cookie::forever($filter, \Request::get($filter)));
+                }
+            }
+        }
+        return redirect(route('forum.getForum'));
     }
 
     /**

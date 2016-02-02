@@ -17,6 +17,7 @@
     @include transition(background-color 0.3s);
     display: block;
     float: left;
+    line-height: 35px;
     padding: 0 8px;
     &:hover {
       background-color: rgba(#000, 0.04);

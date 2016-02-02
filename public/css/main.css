@@ -147,7 +147,12 @@ path {
   fill: #212121;
 }
 
-/* line 25, ../../resources/assets/sass/base/_base.scss */
+/* line 24, ../../resources/assets/sass/base/_base.scss */
+.hidden {
+  display: none;
+}
+
+/* line 29, ../../resources/assets/sass/base/_base.scss */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -156,12 +161,12 @@ path {
   user-select: none;
 }
 
-/* line 34, ../../resources/assets/sass/base/_base.scss */
+/* line 38, ../../resources/assets/sass/base/_base.scss */
 .pace-inactive {
   display: none;
 }
 
-/* line 38, ../../resources/assets/sass/base/_base.scss */
+/* line 42, ../../resources/assets/sass/base/_base.scss */
 .pace .pace-progress {
   background: #ef5350;
   position: fixed;
@@ -1405,9 +1410,11 @@ a:visited {
   transition: background-color 0.3s;
   display: block;
   float: left;
+  line-height: 35px;
   padding: 0 8px;
 }
-/* line 21, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 22, ../../resources/assets/sass/pages/_forum.scss */
 .forumBar__filter:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
@@ -1416,7 +1423,8 @@ a:visited {
   background-color: #ef5350;
   color: #fafafa;
 }
-/* line 27, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 28, ../../resources/assets/sass/pages/_forum.scss */
 .forumBar__filter--active:hover {
   background-color: #ef5350;
 }
@@ -1443,12 +1451,13 @@ a:visited {
   margin-left: 25px;
   margin-right: 15px;
 }
-/* line 49, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 50, ../../resources/assets/sass/pages/_forum.scss */
 .forumBar__filters__name:first-of-type {
   margin-left: 5px !important;
 }
 
-/* line 56, ../../resources/assets/sass/pages/_forum.scss */
+/* line 57, ../../resources/assets/sass/pages/_forum.scss */
 .followedTags {
   -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
@@ -1477,7 +1486,8 @@ a:visited {
   *zoom: 1;
   line-height: 1.1em;
 }
-/* line 77, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 78, ../../resources/assets/sass/pages/_forum.scss */
 .followedTags__item:hover .followedTags__item__delete {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
@@ -1498,7 +1508,8 @@ a:visited {
   transition: color 0.1s;
   display: block;
 }
-/* line 89, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 90, ../../resources/assets/sass/pages/_forum.scss */
 .followedTags__item__link:hover {
   color: #f44336;
 }
@@ -1530,7 +1541,7 @@ a:visited {
   padding: 0px 0px 10px;
 }
 
-/* line 118, ../../resources/assets/sass/pages/_forum.scss */
+/* line 119, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer {
   max-width: 1150px;
   margin-left: auto;
@@ -1561,11 +1572,13 @@ a:visited {
   margin: 7px 0;
   position: relative;
 }
-/* line 131, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 132, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic:first-of-type {
   margin-top: 25px;
 }
-/* line 134, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 135, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic:hover {
   -moz-transition: box-shadow 0.2s;
   -o-transition: box-shadow 0.2s;
@@ -1575,7 +1588,8 @@ a:visited {
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, -3px 0 0 #f44336 inset;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, -3px 0 0 #f44336 inset;
 }
-/* line 141, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 142, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic:hover .forumContainer__topic__actions {
   -moz-transition-delay: 1.7s;
   -o-transition-delay: 1.7s;
@@ -1590,7 +1604,8 @@ a:visited {
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, 3px 0 0 #f44336 inset;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, 3px 0 0 #f44336 inset;
 }
-/* line 154, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 155, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic--new:hover {
   -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, 3px 0 0 #f44336 inset, -3px 0 0 #f44336 inset;
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, 3px 0 0 #f44336 inset, -3px 0 0 #f44336 inset;
@@ -1636,7 +1651,8 @@ a:visited {
   top: 6px;
   width: 100%;
 }
-/* line 196, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 197, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic__likes__like:hover .forumContainer__topic__likes__like__path {
   fill: #388e3c;
 }
@@ -1656,7 +1672,8 @@ a:visited {
   position: absolute;
   width: 100%;
 }
-/* line 213, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 214, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic__likes__dislike:hover .forumContainer__topic__likes__dislike__path {
   fill: #d32f2f;
 }
@@ -1740,7 +1757,8 @@ a:visited {
   display: inline-block;
   margin-left: 0.5em;
 }
-/* line 282, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 283, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic__info__tag:hover {
   color: #f44336;
 }
@@ -1774,7 +1792,8 @@ a:visited {
   color: inherit;
   font-weight: 600;
 }
-/* line 306, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 307, ../../resources/assets/sass/pages/_forum.scss */
 .forumContainer__topic__meta__author:hover {
   color: #f44336;
 }
@@ -1835,7 +1854,7 @@ a:visited {
   white-space: nowrap;
 }
 
-/* line 358, ../../resources/assets/sass/pages/_forum.scss */
+/* line 359, ../../resources/assets/sass/pages/_forum.scss */
 .forum {
   -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
@@ -1871,15 +1890,18 @@ a:visited {
   display: block;
   clear: both;
 }
-/* line 364, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 365, ../../resources/assets/sass/pages/_forum.scss */
 .forum__container--alternateOrder .forum:nth-of-type(-n+3) {
   margin-top: 25px;
 }
-/* line 367, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 368, ../../resources/assets/sass/pages/_forum.scss */
 .forum__container--alternateOrder .forum__category {
   display: none;
 }
-/* line 383, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 384, ../../resources/assets/sass/pages/_forum.scss */
 .forum:hover {
   -moz-transition: box-shadow 0.2s;
   -o-transition: box-shadow 0.2s;
@@ -1889,13 +1911,15 @@ a:visited {
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, -3px 0 0 #f44336 inset;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6, -3px 0 0 #f44336 inset;
 }
-/* line 391, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 392, ../../resources/assets/sass/pages/_forum.scss */
 .forum:nth-of-type(3n) {
   width: 32.20339%;
   float: right;
   margin-right: 0;
 }
-/* line 397, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 398, ../../resources/assets/sass/pages/_forum.scss */
 .forum--unofficial .forum__title:before {
   content: "#";
 }
@@ -1947,7 +1971,7 @@ a:visited {
   display: inline-block;
 }
 
-/* line 447, ../../resources/assets/sass/pages/_forum.scss */
+/* line 448, ../../resources/assets/sass/pages/_forum.scss */
 .topic {
   border-bottom: 2px solid #eeeeee;
   height: 65px;
@@ -1984,7 +2008,8 @@ a:visited {
   display: inline-block;
   margin-left: 0.5em;
 }
-/* line 474, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 475, ../../resources/assets/sass/pages/_forum.scss */
 .topic__info__tag:hover {
   color: #f44336;
 }
@@ -2032,7 +2057,7 @@ a:visited {
   display: inline-block;
 }
 
-/* line 517, ../../resources/assets/sass/pages/_forum.scss */
+/* line 518, ../../resources/assets/sass/pages/_forum.scss */
 .post {
   -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.05), 0 3px 0 #d6d6d6;
@@ -2046,11 +2071,13 @@ a:visited {
   margin: 7px 0;
   position: relative;
 }
-/* line 525, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 526, ../../resources/assets/sass/pages/_forum.scss */
 .post:first-of-type {
   margin-top: 25px;
 }
-/* line 528, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 529, ../../resources/assets/sass/pages/_forum.scss */
 .post:nth-of-type(2) {
   margin-top: 1.69492%;
 }
@@ -2104,7 +2131,8 @@ a:visited {
   top: 6px;
   width: 100%;
 }
-/* line 573, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 574, ../../resources/assets/sass/pages/_forum.scss */
 .post__likes__like:hover .forumContainer__topic__likes__like__path {
   fill: #388e3c;
 }
@@ -2124,7 +2152,8 @@ a:visited {
   position: absolute;
   width: 100%;
 }
-/* line 590, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 591, ../../resources/assets/sass/pages/_forum.scss */
 .post__likes__dislike:hover .forumContainer__topic__likes__dislike__path {
   fill: #d32f2f;
 }
@@ -2148,7 +2177,8 @@ a:visited {
   position: relative;
   width: 53px;
 }
-/* line 611, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 612, ../../resources/assets/sass/pages/_forum.scss */
 .post__author--banned .post__author__avatar {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
@@ -2212,11 +2242,13 @@ a:visited {
   font-size: 14px;
   margin-left: 0.2em;
 }
-/* line 663, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 664, ../../resources/assets/sass/pages/_forum.scss */
 .post__meta__link:hover {
   color: #f44336;
 }
-/* line 666, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 667, ../../resources/assets/sass/pages/_forum.scss */
 .post__meta__link:hover .post__meta__link__icon__path {
   fill: #f44336;
 }
@@ -2240,27 +2272,33 @@ a:visited {
   line-height: 1.1em;
   padding: 8px;
 }
-/* line 688, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 689, ../../resources/assets/sass/pages/_forum.scss */
 .post__content *:first-child {
   margin-top: 0;
 }
-/* line 691, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 692, ../../resources/assets/sass/pages/_forum.scss */
 .post__content *:last-child {
   margin-bottom: 0;
 }
-/* line 694, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 695, ../../resources/assets/sass/pages/_forum.scss */
 .post__content * {
   max-width: 100%;
 }
-/* line 697, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 698, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h1, .post__content h2, .post__content h3, .post__content h4, .post__content h5, .post__content p, .post__content ul, .post__content div {
   margin: 5px 0;
 }
-/* line 700, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 701, ../../resources/assets/sass/pages/_forum.scss */
 .post__content a {
   color: #f44336;
 }
-/* line 703, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 704, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h1 {
   border-bottom: 1px solid #eeeeee;
   font-size: 20px;
@@ -2269,13 +2307,15 @@ a:visited {
   margin-bottom: 0;
   padding-bottom: 5px;
 }
-/* line 711, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 712, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h2 {
   font-size: 20px;
   font-weight: 600;
   line-height: 20px;
 }
-/* line 716, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 717, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h3 {
   border-bottom: 1px solid #eeeeee;
   font-size: 18px;
@@ -2284,17 +2324,20 @@ a:visited {
   margin-bottom: 0;
   padding-bottom: 5px;
 }
-/* line 724, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 725, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h4 {
   font-size: 18px;
   font-weight: 600;
   line-height: 18px;
 }
-/* line 729, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 730, ../../resources/assets/sass/pages/_forum.scss */
 .post__content h5 {
   font-weight: 600;
 }
-/* line 732, ../../resources/assets/sass/pages/_forum.scss */
+
+/* line 733, ../../resources/assets/sass/pages/_forum.scss */
 .post__content ul {
   list-style-type: square;
   margin-left: 1em;
@@ -2338,7 +2381,7 @@ a:visited {
   vertical-align: middle;
 }
 
-/* line 771, ../../resources/assets/sass/pages/_forum.scss */
+/* line 772, ../../resources/assets/sass/pages/_forum.scss */
 .poll {
   border-bottom: 1px solid #eeeeee;
 }

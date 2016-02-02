@@ -30,29 +30,47 @@
 
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
             @foreach($tagFilters['tags_filter_by'] as $filter)
-                <a href="?tags_filter_by={!! $filter !!}"
-                   class="forumBar__filter @if($userFilters->tags_filter_by == $filter) forumBar__filter--active @endif">{!! trans('forum.tags_filter_by_'.$filter)
-            !!}</a>
+                <button
+                        data-type="tags_filter_by"
+                        data-value="{!! $filter !!}"
+                        class="forumButtonUpdater forumBar__filter @if($userFilters->tags_filter_by == $filter)
+                                forumBar__filter--active @endif">
+                    {!! trans('forum.tags_filter_by_'.$filter)!!}
+                </button>
             @endforeach
 
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
             @foreach($tagFilters['tags_show_by'] as $filter)
-                <a href="?tags_show_by={!! $filter !!}"
-                   class="forumBar__filter @if($userFilters->tags_show_by == $filter) forumBar__filter--active @endif">{!! trans('forum.tags_show_by_'.$filter)
-            !!}</a>
+                <button
+                        data-type="tags_show_by"
+                        data-value="{!! $filter !!}"
+                        class="forumButtonUpdater forumBar__filter @if($userFilters->tags_show_by == $filter)
+                                forumBar__filter--active @endif">
+                    {!! trans('forum.tags_show_by_'.$filter)!!}
+                </button>
             @endforeach
 
             <strong class="forumBar__filters__name">{!! trans('forum.showActives') !!} :</strong>
-            <input
-                    class="switch"
-                    @if($userFilters->tags_unactives == 'exclude') onclick="window.location.href='?tags_unactives=include'"
-                    @else onclick="window.location.href='?tags_unactives=exclude'" @endif
-                    type="checkbox"
-                    id="showActive"
-                    @if($userFilters->tags_unactives == 'exclude') checked @endif
-            >
+            {!! Form::checkbox(null, null, ($userFilters->tags_unactives == $tagFilters['tags_unactives'][0]) ? false : true, array('data-type' => 'tags_unactives', 'data-value' => ($userFilters->tags_unactives == $tagFilters['tags_unactives'][0]) ? 'exclude' : 'include', 'class' => 'forumButtonUpdater switch', 'id' => 'showActive')) !!}
+
             <label for="showActive"></label>
         </div>
+    </div>
+    <div class="hidden">
+        {!! Form::open(array('route' => 'forum.updateTags')) !!}
+
+        @foreach($tagFilters['tags_filter_by'] as $filter)
+            {!! Form::radio('tags_filter_by', e($filter), ($userFilters->tags_filter_by == $filter) ? true : false) !!}
+        @endforeach
+        @foreach($tagFilters['tags_show_by'] as $filter)
+            {!! Form::radio('tags_show_by', e($filter), ($userFilters->tags_show_by == $filter) ? true : false) !!}
+        @endforeach
+        @foreach($tagFilters['tags_unactives'] as $filter)
+            {!! Form::radio('tags_unactives', e($filter), ($userFilters->tags_unactives == $filter) ? true : false) !!}
+        @endforeach
+
+        {!! Form::submit() !!}
+        {!! Form::close() !!}
     </div>
     <div class="forumContainer">
         @include('forum.followedTags')
@@ -114,5 +132,6 @@
 @endsection
 
 @section('scripts')
+    ForumTagFilters.init();
     @parent
 @endsection

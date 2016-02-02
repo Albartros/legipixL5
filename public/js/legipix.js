@@ -30,7 +30,7 @@ var Global = {
             })
         }
     }
-}
+};
 
 var Cookie = {
     settings: {
@@ -109,7 +109,6 @@ var Controller = {
                 }
             }, false)
         }
-        ;
     }
 };
 
@@ -123,7 +122,6 @@ var Background = {
 
     },
     parallaxBackground: function () {
-        var s = this.settings;
         var self = this;
         window.addEventListener("load", function () {
             document.body.style.backgroundPosition = "center " + self.positionBackground() + "%";
@@ -152,9 +150,8 @@ var FollowTags = {
         this.listenFollowTagButton();
     },
     listenFollowTagButton: function () {
-        var s = this.settings;
-        var self = this;
-        var a = false;
+        var s = this.settings,
+            a = false;
         s.followButton.addEventListener("click", function () {
             if (a === false) {
                 a = true;
@@ -168,6 +165,44 @@ var FollowTags = {
                 s.followedTagText.style.display = "none";
             }
         });
+    },
+};
+
+var ForumTagFilters = {
+    settings: {
+        buttons: document.getElementsByClassName("forumButtonUpdater"),
+        form: document.forms[0],
+        //switch: document.getElementById("showActive"),
+    },
+    init: function () {
+        this.listenTagFilterButtons();
+    },
+    listenTagFilterButtons: function () {
+        var s = this.settings;
+        for (var i = s.buttons.length - 1; i >= 0; i--) {
+            s.buttons[i].addEventListener("click", function () {
+                var type = this.dataset.type,
+                    value = this.dataset.value,
+                    radios = document.getElementsByName(type);
+                for (var i = radios.length - 1; i >= 0; i--) {
+                    if (radios[i].value == value) {
+                        radios[i].checked = true;
+                        s.form.submit();
+                    }
+                }
+            });
+        }
+        /*s.switch.addEventListener("click", function () {
+         var type = this.dataset.type,
+         value = this.dataset.value,
+         radios = document.getElementsByName(type);
+         for (var i = radios.length - 1; i >= 0; i--) {
+         if (radios[i].value == value) {
+         radios[i].checked = true;
+         s.form.submit();
+         }
+         }
+         });*/
     },
 };
 

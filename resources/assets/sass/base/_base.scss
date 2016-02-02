@@ -21,6 +21,10 @@ path {
   fill: $svg-fill-color;
 }
 
+.hidden {
+  display: none;
+}
+
 
 .pace {
   -webkit-pointer-events: none;

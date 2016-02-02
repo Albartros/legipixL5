@@ -82,6 +82,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', 'ForumController@getForum')->name('forum.getForum');
         Route::get('/post', 'ForumController@getForumRedactor')->name('forum.getForumRedactor');
         Route::post('/', 'ForumController@postForum')->name('forum.postForum');
+        Route::post('/update', 'ForumController@updateTags')->name('forum.updateTags');
         // Tags
         Route::group(['prefix' => '/tag/{tag?}'], function () {
             Route::get('/', 'ForumController@getTag')->name('forum.getTag');
