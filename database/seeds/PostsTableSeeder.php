@@ -16,6 +16,7 @@ class PostsTableSeeder extends Seeder
                 'content' => str_random(120),
                 'user_id' => 1,
                 'topic_id' => 1,
+                'created_at' => \Carbon\Carbon::now(),
             ]);
         }
     }

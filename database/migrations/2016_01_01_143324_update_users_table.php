@@ -16,6 +16,8 @@ class UpdateUsersTable extends Migration
             // Avatar & Background
             $table->enum('avatar', ['default', 'media', 'xbox'])->default('default');
             $table->enum('background', ['default', 'media'])->default('default');
+            // Slug
+            $table->string('slug')->unique();
             // Gamertag
             $table->unsignedInteger('gamertag_id');
             // Status

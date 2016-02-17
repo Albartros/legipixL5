@@ -16,16 +16,17 @@ class TopicsTableSeeder extends Seeder
                 'name' => 'Topic_'.$i,
                 'views' => 0,
                 'user_id' => 1,
+                'created_at' => \Carbon\Carbon::now(),
             ]);
 
             DB::table('tag_topic')->insert([
-                'tag_id' => 3,
+                'tag_id' => rand(1, 3),
                 'topic_id' => $i,
             ]);
 
             if($i >= 3) {
                 DB::table('tag_topic')->insert([
-                    'tag_id' => 2,
+                    'tag_id' => 4,
                     'topic_id' => $i,
                 ]);
             }
@@ -34,6 +35,7 @@ class TopicsTableSeeder extends Seeder
                 'content' => str_random(120),
                 'user_id' => 1,
                 'topic_id' => $i,
+                'created_at' => \Carbon\Carbon::now(),
             ]);
         }
     }

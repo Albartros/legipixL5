@@ -66,7 +66,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -156,6 +156,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Devfactory\Media\MediaServiceProvider::class,
         That0n3guy\Transliteration\TransliterationServiceProvider::class,
+        Conner\Likeable\LikeableServiceProvider::class,
 
     ],
 

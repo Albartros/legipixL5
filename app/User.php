@@ -51,6 +51,10 @@ class User extends Model implements AuthenticatableContract,
         static::creating(function ($user) {
             $user->token = str_random(16);
         });
+
+        static::updating(function ($user) {
+            $user->slug = str_slug($user->name);
+        });
     }
 
     /**
@@ -91,10 +95,6 @@ class User extends Model implements AuthenticatableContract,
     public function gamertag()
     {
         return $this->hasOne('App\Gamertag');
-    }
-
-    public function votes() {
-        return $this->hasMany('App\Vote');
     }
 
     public function tags()

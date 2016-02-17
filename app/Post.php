@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Conner\Likeable\LikeableTrait;
 
 class Post extends Model
 {
     use SoftDeletes;
+    use LikeableTrait;
 
     /**
      * The table associated with the model.
@@ -51,12 +53,5 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    /**
-     * Get the votes of the post.
-     */
-    public function votes() {
-        return $this->hasMany('App\Vote');
     }
 }

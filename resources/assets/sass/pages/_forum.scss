@@ -2,12 +2,15 @@
   @include container;
   @include e(actions) {
     @include box-sizing(content-box);
-    @include span(10 of 13 last);
+    @include span(1 of 1 last);
     border-bottom: 1px solid darken($md-clr-grey-300, 4%);
     line-height: 53px;
     left: 100%;
     padding-right: 100%;
     position: relative;
+    @include b(m) {
+      @include span(10 of 13 last);
+    }
 
     @include e(link) {
       margin: 0 5px;
@@ -19,6 +22,7 @@
     float: left;
     line-height: 35px;
     padding: 0 8px;
+    cursor: pointer;
     &:hover {
       background-color: rgba(#000, 0.04);
     }
@@ -32,14 +36,18 @@
   }
   @include e(filters) {
     @include box-sizing(content-box);
-    @include span(10 of 13 last);
     border-bottom: 1px solid darken($md-clr-grey-300, 4%);
+    display: none;
     left: 100%;
     line-height: 35px;
     margin-left: 5px;
     overflow: hidden;
     padding-right: 100%;
     position: relative;
+    @include b(m) {
+      @include span(10 of 13 last);
+      display: block;
+    }
 
     @include e(name) {
       display: block;
@@ -56,10 +64,14 @@
 
 .followedTags {
   @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
-  @include span(3 of 13);
   background-color: $md-clr-grey-50;
+  display: none;
   position: relative;
   top: -82px;
+  @include b(m) {
+    @include span(3 of 13);
+    display: block;
+  }
 
   @include e(name) {
     font-size: 20px;
@@ -119,19 +131,60 @@
 .forumContainer {
   @include container;
 
-  @include e(topic) {
+  @include e(like) {
+    @include span(1 of 18);
+
+    @include e(holder) {
+      @include box-shadow(0 0 7px rgba(#000, 0.05));
+      background-color: $md-clr-grey-50;
+      border-radius: 50%;
+      cursor: pointer;
+      display: block;
+      height: 2.5em;
+      position: relative;
+      top: 11px;
+      width: 2.5em;
+
+      &:hover {
+        .forumContainer__like__icon path {
+          fill: $md-clr-grey-600;
+        }
+      }
+
+      @include m(active) {
+        .forumContainer__like__icon path {
+          fill: $md-clr-red-600;
+        }
+        &:hover {
+          .forumContainer__like__icon path {
+            fill: $md-clr-red-600;
+          }
+        }
+      }
+    }
+
+    @include e(icon) {
+      @include translate(-50%, -50%);
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 1em;
+
+      path {
+        @include transition(fill 0.2s);
+        fill: $md-clr-grey-500;
+      }
+    }
+  }
+  @include e(theTopic) {
+    @include span(17 of 18 last);
     @include box-shadow(0 0 7px rgba(#000, 0.05), 0 3px 0 darken($md-clr-grey-300, 4%));
-    @include clearfix();
     @include transition(box-shadow 0.3s);
-    @include span(10 of 13 last);
     background: $md-clr-grey-50;
     height: 65px;
-    margin: 7px 0;
+    padding-left: 6px;
     position: relative;
 
-    &:first-of-type {
-      margin-top: 25px;
-    }
     &:hover {
       @include transition(box-shadow 0.2s);
       @include box-shadow(
@@ -144,6 +197,18 @@
         max-width: 170px;
         width: 170px;
       }
+    }
+  }
+
+  @include e(topic) {
+    @include clearfix();
+    margin: 7px 0;
+    padding-bottom: 3px;
+    @include b(m) {
+      @include span(10 of 13 last);
+    }
+    &:first-of-type {
+      margin-top: 25px;
     }
     @include m(new) {
       @include box-shadow(
@@ -161,64 +226,8 @@
         );
       }
     }
-    @include e(likes) {
-      @include flexbox((
-              display: flex,
-              flex-direction: column,
-              justify-content: center,
-      ));
-      float: left;
-      height: 100%;
-      position: relative;
-      text-align: center;
-      width: 50px;
+    @include e(topic) {
 
-      @include e(counter) {
-        @include translateY(-50%);
-        font-size: 14px;
-        left: 0;
-        position: absolute;
-        top: 50%;
-        width: 100%;
-      }
-      @include e(icon) {
-        height: 1.5em;
-        width: 1.5em;
-      }
-      @include e(like) {
-        cursor: pointer;
-        height: 1.5em;
-        left: 0;
-        position: absolute;
-        top: 6px;
-        width: 100%;
-
-        &:hover {
-          .forumContainer__topic__likes__like__path {
-            fill: $md-clr-green-700;
-          }
-        }
-        @include e(path) {
-          @include transition(fill 0.1s);
-        }
-      }
-      @include e(dislike) {
-        bottom: 4px;
-        cursor: pointer;
-        height: 1.5em;
-        left: 0;
-        position: absolute;
-        width: 100%;
-
-        &:hover {
-          .forumContainer__topic__likes__dislike__path {
-            fill: $md-clr-red-700;
-          }
-        }
-        @include e(path) {
-          @include transition(fill 0.1s);
-        }
-      }
     }
     @include e(author) {
       float: left;
@@ -358,8 +367,11 @@
 
 .forum {
   @include e(container) {
-    @include span(10 of 13 last);
+    @include span(1 of 1 last);
     @include container;
+    @include b(m) {
+      @include span(10 of 13 last);
+    }
 
     @include m(alternateOrder) {
       .forum:nth-of-type(-n+3) {
@@ -407,7 +419,31 @@
     font-weight: 600;
     margin-bottom: 8px;
     margin-top: 15px;
+    position: relative;
     width: 100%;
+    @include b(m) {
+      span {
+        background-color: $bg-color;
+        padding-right: 0.5em;
+      }
+      &:before {
+        @include background-image(linear-gradient(to right, $ft-color, $ft-color, $bg-color));
+        content: " ";
+        display: block;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        z-index: -1;
+      }
+    }
+
+    @include e(container) {
+      display: none;
+      @include b(m) {
+        display: block;
+      }
+    }
   }
   @include e(title) {
     color: inherit;

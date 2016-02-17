@@ -14,7 +14,7 @@ class TagsTableSeeder extends Seeder
         for($i = 1; $i <= 5; $i++) {
             DB::table('tags')->insert([
                 'name' => 'Tag_'.$i,
-                'is_official' => array_rand([0,1]),
+                'is_official' => rand(0, 1),
                 'content' => str_random(),
                 'slug' => str_random(),
                 'category_id' => 1,

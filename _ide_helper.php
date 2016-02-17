@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.6 on 2016-01-01.
+ * Generated for Laravel 5.2.16 on 2016-02-17.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1237,6 +1237,29 @@ namespace {
         }
         
         /**
+         * Get the user resolver callback.
+         *
+         * @return \Closure
+         * @static
+         */
+        public static function userResolver()
+        {
+            return \Illuminate\Auth\AuthManager::userResolver();
+        }
+
+        /**
+         * Set the callback to be used to resolve users.
+         *
+         * @param \Closure $userResolver
+         * @return $this
+         * @static
+         */
+        public static function resolveUsersUsing($userResolver)
+        {
+            return \Illuminate\Auth\AuthManager::resolveUsersUsing($userResolver);
+        }
+
+        /**
          * Register a custom driver creator Closure.
          *
          * @param string $driver
@@ -1752,18 +1775,6 @@ namespace {
          */
         public static function forget($key){
             return \Illuminate\Cache\Repository::forget($key);
-        }
-        
-        /**
-         * Begin executing a new tags operation if the store supports it.
-         *
-         * @param string $name
-         * @return \Illuminate\Cache\TaggedCache 
-         * @deprecated since version 5.1. Use tags instead.
-         * @static 
-         */
-        public static function section($name){
-            return \Illuminate\Cache\Repository::section($name);
         }
         
         /**
@@ -2556,8 +2567,8 @@ namespace {
          * Execute a Closure within a transaction.
          *
          * @param \Closure $callback
-         * @return mixed 
-         * @throws \Throwable
+         * @return mixed
+         * @throws \Exception|\Throwable
          * @static 
          */
         public static function transaction($callback){
@@ -2719,7 +2730,8 @@ namespace {
          * Set the PDO connection.
          *
          * @param \PDO|null $pdo
-         * @return $this 
+         * @return $this
+         * @throws \RuntimeException
          * @static 
          */
         public static function setPdo($pdo){
@@ -2900,15 +2912,42 @@ namespace {
         }
         
         /**
-         * Set the default fetch mode for the connection.
+         * Get the fetch argument to be applied when selecting.
+         *
+         * @return mixed
+         * @static
+         */
+        public static function getFetchArgument()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getFetchArgument();
+        }
+
+        /**
+         * Get custom constructor arguments for the PDO::FETCH_CLASS fetch mode.
+         *
+         * @return array
+         * @static
+         */
+        public static function getFetchConstructorArgument()
+        {
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::getFetchConstructorArgument();
+        }
+
+        /**
+         * Set the default fetch mode for the connection, and optional arguments for the given fetch mode.
          *
          * @param int $fetchMode
+         * @param mixed $fetchArgument
+         * @param array $fetchConstructorArgument
          * @return int 
          * @static 
          */
-        public static function setFetchMode($fetchMode){
+        public static function setFetchMode($fetchMode, $fetchArgument = null, $fetchConstructorArgument = array())
+        {
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\MySqlConnection::setFetchMode($fetchMode);
+            return \Illuminate\Database\MySqlConnection::setFetchMode($fetchMode, $fetchArgument, $fetchConstructorArgument);
         }
         
         /**
@@ -3283,7 +3322,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query.
+         * Add a relationship count / exists condition to the query.
          *
          * @param string $relation
          * @param string $operator
@@ -3298,7 +3337,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query.
+         * Add a relationship count / exists condition to the query.
          *
          * @param string $relation
          * @param string $boolean
@@ -3311,7 +3350,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses.
+         * Add a relationship count / exists condition to the query with where clauses.
          *
          * @param string $relation
          * @param \Closure $callback
@@ -3325,7 +3364,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses.
+         * Add a relationship count / exists condition to the query with where clauses.
          *
          * @param string $relation
          * @param \Closure|null $callback
@@ -3337,7 +3376,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with an "or".
+         * Add a relationship count / exists condition to the query with an "or".
          *
          * @param string $relation
          * @param string $operator
@@ -3350,7 +3389,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses and an "or".
+         * Add a relationship count / exists condition to the query with where clauses and an "or".
          *
          * @param string $relation
          * @param \Closure $callback
@@ -3497,7 +3536,8 @@ namespace {
          *
          * @param \Closure|\Illuminate\Database\Query\Builder|string $query
          * @param string $as
-         * @return \Illuminate\Database\Query\Builder|static 
+         * @return \Illuminate\Database\Query\Builder|static
+         * @throws \InvalidArgumentException
          * @static 
          */
         public static function selectSub($query, $as){
@@ -3782,6 +3822,20 @@ namespace {
         }
         
         /**
+         * Add an exists clause to the query.
+         *
+         * @param \Illuminate\Database\Query\Builder $query
+         * @param string $boolean
+         * @param bool $not
+         * @return $this
+         * @static
+         */
+        public static function addWhereExistsQuery($query, $boolean = 'and', $not = false)
+        {
+            return \Illuminate\Database\Query\Builder::addWhereExistsQuery($query, $boolean, $not);
+        }
+
+        /**
          * Add a "where in" clause to the query.
          *
          * @param string $column
@@ -3893,6 +3947,20 @@ namespace {
             return \Illuminate\Database\Query\Builder::whereDate($column, $operator, $value, $boolean);
         }
         
+        /**
+         * Add an "or where date" statement to the query.
+         *
+         * @param string $column
+         * @param string $operator
+         * @param int $value
+         * @return \Illuminate\Database\Query\Builder|static
+         * @static
+         */
+        public static function orWhereDate($column, $operator, $value)
+        {
+            return \Illuminate\Database\Query\Builder::orWhereDate($column, $operator, $value);
+        }
+
         /**
          * Add a "where day" statement to the query.
          *
@@ -5165,10 +5233,23 @@ namespace {
     class Input extends \Illuminate\Support\Facades\Input{
         
         /**
+         * Retrieve an input item from the request.
+         *
+         * @param string $key
+         * @param string|array|null $default
+         * @return string|array
+         * @static
+         */
+        public static function input($key = null, $default = null)
+        {
+            return \Illuminate\Http\Request::input($key, $default);
+        }
+
+        /**
          * Create a new Illuminate HTTP request from server variables.
          *
-         * @return static 
-         * @static 
+         * @return static
+         * @static
          */
         public static function capture(){
             return \Illuminate\Http\Request::capture();
@@ -5177,8 +5258,8 @@ namespace {
         /**
          * Return the Request instance.
          *
-         * @return $this 
-         * @static 
+         * @return $this
+         * @static
          */
         public static function instance(){
             return \Illuminate\Http\Request::instance();
@@ -5187,8 +5268,8 @@ namespace {
         /**
          * Get the request method.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function method(){
             return \Illuminate\Http\Request::method();
@@ -5197,8 +5278,8 @@ namespace {
         /**
          * Get the root URL for the application.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function root(){
             return \Illuminate\Http\Request::root();
@@ -5207,8 +5288,8 @@ namespace {
         /**
          * Get the URL (no query string) for the request.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function url(){
             return \Illuminate\Http\Request::url();
@@ -5217,8 +5298,8 @@ namespace {
         /**
          * Get the full URL for the request.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function fullUrl(){
             return \Illuminate\Http\Request::fullUrl();
@@ -5227,8 +5308,8 @@ namespace {
         /**
          * Get the current path info for the request.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function path(){
             return \Illuminate\Http\Request::path();
@@ -5237,8 +5318,8 @@ namespace {
         /**
          * Get the current encoded path info for the request.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function decodedPath(){
             return \Illuminate\Http\Request::decodedPath();
@@ -5249,8 +5330,8 @@ namespace {
          *
          * @param int $index
          * @param string|null $default
-         * @return string|null 
-         * @static 
+         * @return string|null
+         * @static
          */
         public static function segment($index, $default = null){
             return \Illuminate\Http\Request::segment($index, $default);
@@ -5259,8 +5340,8 @@ namespace {
         /**
          * Get all of the segments for the request path.
          *
-         * @return array 
-         * @static 
+         * @return array
+         * @static
          */
         public static function segments(){
             return \Illuminate\Http\Request::segments();
@@ -5270,18 +5351,30 @@ namespace {
          * Determine if the current request URI matches a pattern.
          *
          * @param mixed  string
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function is(){
             return \Illuminate\Http\Request::is();
         }
         
         /**
+         * Determine if the current request URL and query string matches a pattern.
+         *
+         * @param mixed  string
+         * @return bool
+         * @static
+         */
+        public static function fullUrlIs()
+        {
+            return \Illuminate\Http\Request::fullUrlIs();
+        }
+
+        /**
          * Determine if the request is the result of an AJAX call.
          *
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function ajax(){
             return \Illuminate\Http\Request::ajax();
@@ -5290,8 +5383,8 @@ namespace {
         /**
          * Determine if the request is the result of an PJAX call.
          *
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function pjax(){
             return \Illuminate\Http\Request::pjax();
@@ -5300,8 +5393,8 @@ namespace {
         /**
          * Determine if the request is over HTTPS.
          *
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function secure(){
             return \Illuminate\Http\Request::secure();
@@ -5310,8 +5403,8 @@ namespace {
         /**
          * Returns the client IP address.
          *
-         * @return string 
-         * @static 
+         * @return string
+         * @static
          */
         public static function ip(){
             return \Illuminate\Http\Request::ip();
@@ -5320,8 +5413,8 @@ namespace {
         /**
          * Returns the client IP addresses.
          *
-         * @return array 
-         * @static 
+         * @return array
+         * @static
          */
         public static function ips(){
             return \Illuminate\Http\Request::ips();
@@ -5331,8 +5424,8 @@ namespace {
          * Determine if the request contains a given input item key.
          *
          * @param string|array $key
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function exists($key){
             return \Illuminate\Http\Request::exists($key);
@@ -5342,8 +5435,8 @@ namespace {
          * Determine if the request contains a non-empty value for an input item.
          *
          * @param string|array $key
-         * @return bool 
-         * @static 
+         * @return bool
+         * @static
          */
         public static function has($key){
             return \Illuminate\Http\Request::has($key);
@@ -5352,23 +5445,11 @@ namespace {
         /**
          * Get all of the input and files for the request.
          *
-         * @return array 
-         * @static 
+         * @return array
+         * @static
          */
         public static function all(){
             return \Illuminate\Http\Request::all();
-        }
-        
-        /**
-         * Retrieve an input item from the request.
-         *
-         * @param string $key
-         * @param string|array|null $default
-         * @return string|array 
-         * @static 
-         */
-        public static function input($key = null, $default = null){
-            return \Illuminate\Http\Request::input($key, $default);
         }
         
         /**
@@ -5428,6 +5509,17 @@ namespace {
             return \Illuminate\Http\Request::cookie($key, $default);
         }
         
+        /**
+         * Get an array of all of the files on the request.
+         *
+         * @return array
+         * @static
+         */
+        public static function allFiles()
+        {
+            return \Illuminate\Http\Request::allFiles();
+        }
+
         /**
          * Retrieve a file from the request.
          *
@@ -5701,11 +5793,13 @@ namespace {
         /**
          * Get the user making the request.
          *
+         * @param string|null $guard
          * @return mixed 
          * @static 
          */
-        public static function user(){
-            return \Illuminate\Http\Request::user();
+        public static function user($guard = null)
+        {
+            return \Illuminate\Http\Request::user($guard);
         }
         
         /**
@@ -5722,7 +5816,8 @@ namespace {
         /**
          * Get a unique fingerprint for the request / route / IP address.
          *
-         * @return string 
+         * @return string
+         * @throws \RuntimeException
          * @static 
          */
         public static function fingerprint(){
@@ -6700,6 +6795,31 @@ namespace {
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
             return \Illuminate\Http\Request::isXmlHttpRequest();
         }
+
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param callable $macro
+         * @return void
+         * @static
+         */
+        public static function macro($name, $macro)
+        {
+            \Illuminate\Http\Request::macro($name, $macro);
+        }
+
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool
+         * @static
+         */
+        public static function hasMacro($name)
+        {
+            return \Illuminate\Http\Request::hasMacro($name);
+        }
         
     }
 
@@ -6743,7 +6863,7 @@ namespace {
          * @param array $replace
          * @param string|null $locale
          * @param bool $fallback
-         * @return string 
+         * @return string|array|null 
          * @static 
          */
         public static function get($key, $replace = array(), $locale = null, $fallback = true){
@@ -6754,7 +6874,7 @@ namespace {
          * Get a translation according to an integer value.
          *
          * @param string $key
-         * @param int $number
+         * @param int|array|\Countable $number
          * @param array $replace
          * @param string $locale
          * @return string 
@@ -6771,7 +6891,7 @@ namespace {
          * @param array $parameters
          * @param string $domain
          * @param string $locale
-         * @return string 
+         * @return string|array|null 
          * @static 
          */
         public static function trans($id, $parameters = array(), $domain = 'messages', $locale = null){
@@ -6782,7 +6902,7 @@ namespace {
          * Get a translation according to an integer value.
          *
          * @param string $id
-         * @param int $number
+         * @param int|array|\Countable $number
          * @param array $parameters
          * @param string $domain
          * @param string $locale
@@ -6931,12 +7051,26 @@ namespace {
     class Log extends \Illuminate\Support\Facades\Log{
         
         /**
+         * Log a message to the logs.
+         *
+         * @param string $level
+         * @param string $message
+         * @param array $context
+         * @return void
+         * @static
+         */
+        public static function log($level, $message, $context = array())
+        {
+            \Illuminate\Log\Writer::log($level, $message, $context);
+        }
+
+        /**
          * Adds a log record at the DEBUG level.
          *
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function debug($message, $context = array()){
             return \Monolog\Logger::debug($message, $context);
@@ -6948,7 +7082,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function info($message, $context = array()){
             return \Monolog\Logger::info($message, $context);
@@ -6960,7 +7094,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function notice($message, $context = array()){
             return \Monolog\Logger::notice($message, $context);
@@ -6972,7 +7106,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function warning($message, $context = array()){
             return \Monolog\Logger::warning($message, $context);
@@ -6984,7 +7118,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function error($message, $context = array()){
             return \Monolog\Logger::error($message, $context);
@@ -6996,7 +7130,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function critical($message, $context = array()){
             return \Monolog\Logger::critical($message, $context);
@@ -7008,7 +7142,7 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function alert($message, $context = array()){
             return \Monolog\Logger::alert($message, $context);
@@ -7020,23 +7154,10 @@ namespace {
          * @param string $message The log message
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
-         * @static 
+         * @static
          */
         public static function emergency($message, $context = array()){
             return \Monolog\Logger::emergency($message, $context);
-        }
-        
-        /**
-         * Log a message to the logs.
-         *
-         * @param string $level
-         * @param string $message
-         * @param array $context
-         * @return void 
-         * @static 
-         */
-        public static function log($level, $message, $context = array()){
-            \Illuminate\Log\Writer::log($level, $message, $context);
         }
         
         /**
@@ -7178,11 +7299,11 @@ namespace {
          *
          * @param string $text
          * @param mixed $callback
-         * @return int 
+         * @return void 
          * @static 
          */
         public static function raw($text, $callback){
-            return \Illuminate\Mail\Mailer::raw($text, $callback);
+            \Illuminate\Mail\Mailer::raw($text, $callback);
         }
         
         /**
@@ -7191,11 +7312,11 @@ namespace {
          * @param string $view
          * @param array $data
          * @param mixed $callback
-         * @return int 
+         * @return void 
          * @static 
          */
         public static function plain($view, $data, $callback){
-            return \Illuminate\Mail\Mailer::plain($view, $data, $callback);
+            \Illuminate\Mail\Mailer::plain($view, $data, $callback);
         }
         
         /**
@@ -7397,18 +7518,6 @@ namespace {
             \Illuminate\Auth\Passwords\PasswordBrokerManager::setDefaultDriver($name);
         }
         
-        /**
-         * Create the user provider implementation for the driver.
-         *
-         * @param string $provider
-         * @return \Illuminate\Contracts\Auth\UserProvider 
-         * @throws \InvalidArgumentException
-         * @static 
-         */
-        public static function createUserProvider($provider){
-            return \Illuminate\Auth\Passwords\PasswordBrokerManager::createUserProvider($provider);
-        }
-        
     }
 
 
@@ -7552,8 +7661,8 @@ namespace {
          * @param string $job
          * @param mixed $data
          * @param string $queue
-         * @return mixed 
-         * @throws \Throwable
+         * @return mixed
+         * @throws \Exception|\Throwable
          * @static 
          */
         public static function push($job, $data = '', $queue = null){
@@ -7941,6 +8050,18 @@ namespace {
         }
         
         /**
+         * Determine if the current request URL and query string matches a pattern.
+         *
+         * @param mixed  string
+         * @return bool
+         * @static
+         */
+        public static function fullUrlIs()
+        {
+            return \Illuminate\Http\Request::fullUrlIs();
+        }
+
+        /**
          * Determine if the request is the result of an AJAX call.
          *
          * @return bool 
@@ -8091,6 +8212,17 @@ namespace {
             return \Illuminate\Http\Request::cookie($key, $default);
         }
         
+        /**
+         * Get an array of all of the files on the request.
+         *
+         * @return array
+         * @static
+         */
+        public static function allFiles()
+        {
+            return \Illuminate\Http\Request::allFiles();
+        }
+
         /**
          * Retrieve a file from the request.
          *
@@ -8364,11 +8496,13 @@ namespace {
         /**
          * Get the user making the request.
          *
+         * @param string|null $guard
          * @return mixed 
          * @static 
          */
-        public static function user(){
-            return \Illuminate\Http\Request::user();
+        public static function user($guard = null)
+        {
+            return \Illuminate\Http\Request::user($guard);
         }
         
         /**
@@ -8385,7 +8519,8 @@ namespace {
         /**
          * Get a unique fingerprint for the request / route / IP address.
          *
-         * @return string 
+         * @return string
+         * @throws \RuntimeException
          * @static 
          */
         public static function fingerprint(){
@@ -9363,6 +9498,31 @@ namespace {
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
             return \Illuminate\Http\Request::isXmlHttpRequest();
         }
+
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param callable $macro
+         * @return void
+         * @static
+         */
+        public static function macro($name, $macro)
+        {
+            \Illuminate\Http\Request::macro($name, $macro);
+        }
+
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool
+         * @static
+         */
+        public static function hasMacro($name)
+        {
+            return \Illuminate\Http\Request::hasMacro($name);
+        }
         
     }
 
@@ -9554,11 +9714,12 @@ namespace {
          * Register a new GET route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function get($uri, $action){
+        public static function get($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::get($uri, $action);
         }
         
@@ -9566,11 +9727,12 @@ namespace {
          * Register a new POST route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function post($uri, $action){
+        public static function post($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::post($uri, $action);
         }
         
@@ -9578,11 +9740,12 @@ namespace {
          * Register a new PUT route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function put($uri, $action){
+        public static function put($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::put($uri, $action);
         }
         
@@ -9590,11 +9753,12 @@ namespace {
          * Register a new PATCH route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function patch($uri, $action){
+        public static function patch($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::patch($uri, $action);
         }
         
@@ -9602,11 +9766,12 @@ namespace {
          * Register a new DELETE route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function delete($uri, $action){
+        public static function delete($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::delete($uri, $action);
         }
         
@@ -9614,11 +9779,12 @@ namespace {
          * Register a new OPTIONS route with the router.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function options($uri, $action){
+        public static function options($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::options($uri, $action);
         }
         
@@ -9626,11 +9792,12 @@ namespace {
          * Register a new route responding to all verbs.
          *
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function any($uri, $action){
+        public static function any($uri, $action = null)
+        {
             return \Illuminate\Routing\Router::any($uri, $action);
         }
         
@@ -9639,11 +9806,12 @@ namespace {
          *
          * @param array|string $methods
          * @param string $uri
-         * @param \Closure|array|string $action
+         * @param \Closure|array|string|null $action
          * @return \Illuminate\Routing\Route 
          * @static 
          */
-        public static function match($methods, $uri, $action){
+        public static function match($methods, $uri, $action = null)
+        {
             return \Illuminate\Routing\Router::match($methods, $uri, $action);
         }
         
@@ -10157,6 +10325,20 @@ namespace {
             return \Illuminate\Database\Schema\MySqlBuilder::hasColumns($table, $columns);
         }
         
+        /**
+         * Get the data type for the given column name.
+         *
+         * @param string $table
+         * @param string $column
+         * @return string
+         * @static
+         */
+        public static function getColumnType($table, $column)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+            return \Illuminate\Database\Schema\MySqlBuilder::getColumnType($table, $column);
+        }
+
         /**
          * Modify a table on the schema.
          *
@@ -10840,6 +11022,17 @@ namespace {
         }
         
         /**
+         * Get a default cloud filesystem instance.
+         *
+         * @return \Illuminate\Contracts\Filesystem\Filesystem
+         * @static
+         */
+        public static function cloud()
+        {
+            return \Illuminate\Filesystem\FilesystemManager::cloud();
+        }
+
+        /**
          * Create an instance of the local driver.
          *
          * @param array $config
@@ -10893,6 +11086,17 @@ namespace {
             return \Illuminate\Filesystem\FilesystemManager::getDefaultDriver();
         }
         
+        /**
+         * Get the default cloud driver name.
+         *
+         * @return string
+         * @static
+         */
+        public static function getDefaultCloudDriver()
+        {
+            return \Illuminate\Filesystem\FilesystemManager::getDefaultCloudDriver();
+        }
+
         /**
          * Register a custom driver creator Closure.
          *
@@ -11249,7 +11453,7 @@ namespace {
          * @param string $path
          * @param array $data
          * @param array $mergeData
-         * @return \Illuminate\View\View 
+         * @return \Illuminate\Contracts\View\View 
          * @static 
          */
         public static function file($path, $data = array(), $mergeData = array()){
@@ -11274,7 +11478,7 @@ namespace {
          *
          * @param string $view
          * @param mixed $data
-         * @return \Illuminate\View\View 
+         * @return \Illuminate\Contracts\View\View 
          * @static 
          */
         public static function of($view, $data = array()){
@@ -11393,7 +11597,7 @@ namespace {
         /**
          * Call the composer for a given view.
          *
-         * @param \Illuminate\View\View $view
+         * @param \Illuminate\Contracts\View\View $view
          * @return void 
          * @static 
          */
@@ -11404,7 +11608,7 @@ namespace {
         /**
          * Call the creator for a given view.
          *
-         * @param \Illuminate\View\View $view
+         * @param \Illuminate\Contracts\View\View $view
          * @return void 
          * @static 
          */
@@ -13012,6 +13216,20 @@ namespace {
         }
         
         /**
+         * Generate an html tag.
+         *
+         * @param string $tag
+         * @param mixed $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString
+         * @static
+         */
+        public static function tag($tag, $content, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::tag($tag, $content, $attributes);
+        }
+
+        /**
          * Register a custom macro.
          *
          * @param string $name
@@ -13098,6 +13316,76 @@ namespace {
          */
         public static function render($options = array()){
             return \Greggilbert\Recaptcha\Recaptcha::render($options);
+        }
+
+    }
+
+
+    class Transliteration extends \That0n3guy\Transliteration\Facades\Transliteration
+    {
+
+        /**
+         * Transliterates and sanitizes a file name.
+         *
+         * The resulting file name has white space replaced with underscores, consists
+         * of only US-ASCII characters, and is converted to lowercase (if configured).
+         * If multiple files have been submitted as an array, the names will be
+         * processed recursively.
+         *
+         * @param $filename A file name, or an array of file names.
+         * @param $source_langcode Optional ISO 639 language code that denotes the language of the input and
+         *   is used to apply language-specific variations. If the source language is
+         *   not known at the time of transliteration, it is recommended to set this
+         *   argument to the site default language to produce consistent results.
+         *   Otherwise the current display language will be used.
+         * @return \That0n3guy\Transliteration\Sanitized file name, or array of sanitized file names.
+         * @see language_default()
+         * @static
+         */
+        public static function clean_filename($filename, $source_langcode = null)
+        {
+            return \That0n3guy\Transliteration\Transliteration::clean_filename($filename, $source_langcode);
+        }
+
+        /**
+         * Transliterates UTF-8 encoded text to US-ASCII.
+         *
+         * Based on Mediawiki's UtfNormal::quickIsNFCVerify().
+         *      Swiped from drupal's transliteration module: https://drupal.org/project/transliteration
+         *
+         * @param $string UTF-8 encoded text input.
+         * @param $unknown Replacement string for characters that do not have a suitable ASCII
+         *   equivalent.
+         * @param $source_langcode Optional ISO 639 language code that denotes the language of the input and
+         *   is used to apply language-specific variations. If the source language is
+         *   not known at the time of transliteration, it is recommended to set this
+         *   argument to the site default language to produce consistent results.
+         *   Otherwise the current display language will be used.
+         * @return \That0n3guy\Transliteration\Transliterated text.
+         * @static
+         */
+        public static function transliteration_process($string, $unknown = '?', $source_langcode = null)
+        {
+            return \That0n3guy\Transliteration\Transliteration::transliteration_process($string, $unknown, $source_langcode);
+        }
+
+        /**
+         * Replaces a Unicode character using the transliteration database.
+         *
+         * Swiped from drupal's transliteration module: https://drupal.org/project/transliteration
+         *
+         * @param $ord An ordinal Unicode character code.
+         * @param $unknown Replacement string for characters that do not have a suitable ASCII
+         *   equivalent.
+         * @param $langcode Optional ISO 639 language code that denotes the language of the input and
+         *   is used to apply language-specific variations.  Defaults to the current
+         *   display language.
+         * @return \That0n3guy\Transliteration\ASCII replacement character.
+         * @static
+         */
+        public static function transliteration_replace($ord, $unknown = '?', $langcode = 'eng')
+        {
+            return \That0n3guy\Transliteration\Transliteration::transliteration_replace($ord, $unknown, $langcode);
         }
         
     }

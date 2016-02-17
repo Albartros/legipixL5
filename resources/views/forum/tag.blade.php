@@ -54,8 +54,8 @@
             <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterClassic') !!}</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.filterPopular') !!}</a>
             <strong class="forumBar__filters__name">{!! trans('forum.showBy') !!} :</strong>
-            <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.showAll') !!}</a>
-            <a href="#" class="forumBar__filter">{!! trans('forum.showFollowed') !!}</a>
+            <a href="#" class="forumBar__filter forumBar__filter--active">Tous</a>
+            <a href="#" class="forumBar__filter">Aimés</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.showMine') !!}</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.showFriends') !!}</a>
         </div>
@@ -66,81 +66,89 @@
 
         @foreach($topics as $topic)
             <article class="forumContainer__topic">
-                <div class="forumContainer__topic__likes">
-                    <button class="forumContainer__topic__likes__like">
-                        <svg class="forumContainer__topic__likes__icon" version="1.1" viewBox="0 0 1024 1024"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <path class="forumContainer__topic__likes__like__path" d="M316 658l-60-60 256-256 256 256-60
-                        60-196-196z"></path>
-                        </svg>
-                    </button>
-                    <span class="forumContainer__topic__likes__counter">{{ $topic->score }}</span>
-                    <button class="forumContainer__topic__likes__dislike">
-                        <svg class="forumContainer__topic__likes__icon" version="1.1" viewBox="0 0 1024 1024"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                            <path class="forumContainer__topic__likes__dislike__path" d="M316 334l196 196 196-196 60
-                        60-256 256-256-256z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="forumContainer__topic__author">
-                    <a class="forumContainer__topic__author__link" href="#">
-                        <img src="https://randomuser.me/api/portraits/thumb/women/2.jpg" alt="avatar"
-                             class="forumContainer__topic__author__avatar">
-                    </a>
-                </div>
-                <div class="forumContainer__topic__info">
-                    <h2 class="forumContainer__topic__info__name">
-                        <svg title="Verrouillé" class="forumContainer__topic__info__name__icon" version="1.1"
+                <div class="forumContainer__like">
+                    <button class="forumContainer__like__holder {{ $topic->posts->first()->liked() ? 'forumContainer__like__holder--active' : null }}">
+                        <svg class="forumContainer__like__icon" version="1.1"
                              viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
                              xmlns="http://www.w3.org/2000/svg">
-                            <path class="path1" d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
+                            <path d="M512 950.857q-14.857 0-25.143-10.286l-356.571-344q-5.714-4.571-15.714-14.857t-31.714-37.429-38.857-55.714-30.571-69.143-13.429-78.857q0-125.714 72.571-196.571t200.571-70.857q35.429 0 72.286 12.286t68.571 33.143 54.571 39.143 43.429 38.857q20.571-20.571 43.429-38.857t54.571-39.143 68.571-33.143 72.286-12.286q128 0 200.571 70.857t72.571 196.571q0 126.286-130.857 257.143l-356 342.857q-10.286 10.286-25.143 10.286z"></path>
                         </svg>
-                        <a href="{!! route('forum.getTopic') !!}">Ce sujet est une annonce</a>
-                    </h2>
-                    <h3 class="forumContainer__topic__info__post">
-                        <a class="forumContainer__topic__info__author" href="#">Auteur</a>, le
-                        <time>JJ Mois AAAA</time>
-                        <div class="forumContainer__topic__info__tags">
-                            <a href="{!! route('forum.getTag') !!}" rel="tag" class="forumContainer__topic__info__tag">#TAG</a>
-                            <a href="{!! route('forum.getTag') !!}" rel="tag" class="forumContainer__topic__info__tag">#TAG</a>
-                        </div>
-                    </h3>
+                    </button>
                 </div>
-                <div class="forumContainer__topic__actions">
-                    <a class="forumContainer__topic__action" href="#">Marquer comme non lu</a>
-                    <a class="forumContainer__topic__action" href="#">Suivre ce sujet</a>
-                </div>
-                <div class="forumContainer__topic__meta">
-                    <h4 class="forumContainer__topic__meta__last">
-                        <a class="forumContainer__topic__meta__author" href="#">Auteur</a>, il y a XX minutes
-                    </h4>
-                    <dl class="forumContainer__topic__meta__counter">
-                        <dd class="forumContainer__topic__meta__counter__icon">
-                            <svg class="forumContainer__topic__meta__counter__icon__icon" version="1.1"
+                <div class="forumContainer__theTopic">
+                    <div class="forumContainer__topic__author">
+                        <a class="forumContainer__topic__author__link" href="#">
+                            <img src="https://randomuser.me/api/portraits/thumb/women/2.jpg" alt="avatar"
+                                 class="forumContainer__topic__author__avatar">
+                        </a>
+                    </div>
+                    <div class="forumContainer__topic__info">
+                        <h2 class="forumContainer__topic__info__name">
+                            <svg title="Verrouillé" class="forumContainer__topic__info__name__icon" version="1.1"
                                  viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xmlns="http://www.w3.org/2000/svg">
-                                <path d="M512 384q52 0 90 38t38 90-38 90-90 38-90-38-38-90 38-90 90-38zM512 726q88 0 151-63t63-151-63-151-151-63-151 63-63 151 63 151 151 63zM512 192q158 0 286 88t184 232q-56 144-184 232t-286 88-286-88-184-232q56-144 184-232t286-88z"></path>
+                                <path class="path1"
+                                      d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
                             </svg>
-                        </dd>
-                        <dt class="forumContainer__topic__meta__counter__value">{{ rand(0, 20) }}</dt>
-                        <dd class="forumContainer__topic__meta__counter__icon">
-                            <svg class="forumContainer__topic__meta__counter__icon__icon forumContainer__topic__meta__counter__icon__icon--smaller"
-                                 version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
-                            </svg>
-                        </dd>
-                        <dt class="forumContainer__topic__meta__counter__value">{{ rand(0, 20) }}</dt>
-                        <dd class="forumContainer__topic__meta__counter__icon">
-                            <svg class="forumContainer__topic__meta__counter__icon__icon" version="1.1"
-                                 viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"></path>
-                            </svg>
-                        </dd>
-                        <dt class="forumContainer__topic__meta__counter__value">{{ rand(0, 20) }}</dt>
-                    </dl>
+                            <a href="{!! route('forum.getTopic', [(int) $topic->id, str_slug($topic->name)]) !!}">{{ $topic->name }}</a>
+                        </h2>
+                        <h3 class="forumContainer__topic__info__post">
+                            <a class="forumContainer__topic__info__author"
+                               href="{!! route('user.getUser', [e($topic->posts->first()->user->slug)]) !!}">{{ $topic->posts->first()->user->name }}</a>,
+                            <time>{{ $topic->posts->first()->created_at->isToday() ? $topic->posts->first()->created_at->diffForHumans() : $topic->posts->first()->created_at->formatLocalized('le %d-%m-%Y') }}</time>
+                            <div class="forumContainer__topic__info__tags">
+                                @foreach($topic->tags as $tag)
+                                    <a href="{!! route('forum.getTag', [e($tag->slug)]) !!}" rel="tag"
+                                       class="forumContainer__topic__info__tag">#{{ $tag->name }}</a>
+                                @endforeach
+                            </div>
+                        </h3>
+                    </div>
+                    <div class="forumContainer__topic__actions">
+                        <a class="forumContainer__topic__action" href="#">Marquer comme non lu</a>
+                        <a class="forumContainer__topic__action" href="#">Suivre ce sujet</a>
+                    </div>
+                    <div class="forumContainer__topic__meta">
+                        <h4 class="forumContainer__topic__meta__last">
+                            <a class="forumContainer__topic__meta__author" href="#">{{ $topic->posts->last()
+                            ->user->name }}</a>, {!! $topic->posts->last()->created_at->isToday() ? $topic->posts->last()->created_at->diffForHumans() : $topic->posts->last()->created_at->formatLocalized('le %d-%m-%Y') !!}
+                        </h4>
+                        <dl class="forumContainer__topic__meta__counter">
+                            <dd class="forumContainer__topic__meta__counter__icon">
+                                <svg class="forumContainer__topic__meta__counter__icon__icon forumContainer__topic__meta__counter__icon__icon--smaller"
+                                     version="1.1"
+                                     viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M512 950.857q-14.857 0-25.143-10.286l-356.571-344q-5.714-4.571-15.714-14.857t-31.714-37.429-38.857-55.714-30.571-69.143-13.429-78.857q0-125.714 72.571-196.571t200.571-70.857q35.429 0 72.286 12.286t68.571 33.143 54.571 39.143 43.429 38.857q20.571-20.571 43.429-38.857t54.571-39.143 68.571-33.143 72.286-12.286q128 0 200.571 70.857t72.571 196.571q0 126.286-130.857 257.143l-356 342.857q-10.286 10.286-25.143 10.286z"></path>
+                                </svg>
+                            </dd>
+                            <dt class="forumContainer__topic__meta__counter__value">{{ $topic->posts->first()->likeCount }}</dt>
+                            <dd class="forumContainer__topic__meta__counter__icon">
+                                <svg class="forumContainer__topic__meta__counter__icon__icon" version="1.1"
+                                     viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M512 384q52 0 90 38t38 90-38 90-90 38-90-38-38-90 38-90 90-38zM512 726q88 0 151-63t63-151-63-151-151-63-151 63-63 151 63 151 151 63zM512 192q158 0 286 88t184 232q-56 144-184 232t-286 88-286-88-184-232q56-144 184-232t286-88z"></path>
+                                </svg>
+                            </dd>
+                            <dt class="forumContainer__topic__meta__counter__value">{{ $topic->views }}</dt>
+                            <dd class="forumContainer__topic__meta__counter__icon">
+                                <svg class="forumContainer__topic__meta__counter__icon__icon forumContainer__topic__meta__counter__icon__icon--smaller"
+                                     version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
+                                </svg>
+                            </dd>
+                            <dt class="forumContainer__topic__meta__counter__value">{!! $topic->posts->count() !!}</dt>
+                            <dd class="forumContainer__topic__meta__counter__icon">
+                                <svg class="forumContainer__topic__meta__counter__icon__icon" version="1.1"
+                                     viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"></path>
+                                </svg>
+                            </dd>
+                            <dt class="forumContainer__topic__meta__counter__value">{{ $topic->posts->unique('user')->count() }}</dt>
+                        </dl>
+                    </div>
                 </div>
             </article>
         @endforeach

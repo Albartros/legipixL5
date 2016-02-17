@@ -227,15 +227,7 @@ class ForumController extends Controller
     {
         $tag = Tag::where(['slug' => $slug])->firstOrFail();
 
-        $topics = $tag->topics()->with('posts.user', 'posts.votes')->paginate(20);
-
-        foreach ($topics as $topic) {
-            $score = 0;
-            foreach ($topic->posts()->first()->votes as $vote) {
-                $score += (int)$vote->value;
-            }
-            $topic->score = $score;
-        }
+        $topics = $tag->topics()->with('tags', 'posts.user', 'posts.likeCounter')->paginate(20);
 
         return view('forum.tag')->with(['tag' => $tag, 'topics' => $topics]);
     }

@@ -80,29 +80,35 @@
             @if($isClassicDisplay == true)
                 @foreach($categories as $category)
                     <div class="forum__container">
-                        <h2 class="forum__category">{{ $category->name }}</h2>
-                        @foreach ($category->clearedTags as $tag)
-                            @if($tag->is_official)
-                                <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
-                                    <h2 class="forum__title">{{ $tag->name }}</h2>
-                                    <p class="forum__description">{{ $tag->content }}</p>
-                                </a>
-                            @else
-                                <a class="forum forum--unofficial" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
-                                    <h2 class="forum__title">{{ $tag->name }}</h2>
-                                    <dl class="forum__counter">
-                                        <dd class="forum__counter__icon">
-                                            <svg class="forum__counter__icon__icon" version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
-                                            </svg>
-                                        </dd>
-                                        <dt class="forum__counter__value">{{ $tag->topics->count() }}</dt>
-                                    </dl>
-                                </a>
-                            @endif
-                        @endforeach
+                        <h2 class="forum__category"><span>{{ $category->name }}</span></h2>
+                        <div class="forum__category__container">
+                            @foreach ($category->clearedTags as $tag)
+                                @if($tag->is_official)
+                                    <a class="forum" href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
+                                        <h2 class="forum__title">{{ $tag->name }}</h2>
+                                        <p class="forum__description">{{ $tag->content }}</p>
+                                    </a>
+                                @else
+                                    <a class="forum forum--unofficial"
+                                       href="{!! route('forum.getTag', [e($tag->slug)]) !!}">
+                                        <h2 class="forum__title">{{ $tag->name }}</h2>
+                                        <dl class="forum__counter">
+                                            <dd class="forum__counter__icon">
+                                                <svg class="forum__counter__icon__icon" version="1.1"
+                                                     viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
+                                                </svg>
+                                            </dd>
+                                            <dt class="forum__counter__value">{{ $tag->topics->count() }}</dt>
+                                        </dl>
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
+
             @else
                 <div class="forum__container">
                     @foreach ($filteredTags as $tag)
