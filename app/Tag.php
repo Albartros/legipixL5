@@ -51,6 +51,6 @@ class Tag extends Model
      */
     public function topics()
     {
-        return $this->belongsToMany('App\Topic');
+        return $this->belongsToMany('App\Topic')->orderBy('is_pinned', 'desc');
     }
 }

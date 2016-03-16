@@ -14,7 +14,8 @@
     <!-- Styles -->
     <link href="{!! asset('css/main.css') !!}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,100|Source+Sans+Pro:400,600" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link href="//cdn.jsdelivr.net/emojione/2.0.0/assets/css/emojione.min.css" rel="stylesheet" type="text/css">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="{!! asset('img/favicon/apple-icon-57x57.png') !!}">

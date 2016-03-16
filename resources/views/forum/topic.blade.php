@@ -6,11 +6,12 @@
     <header class="header">
         <img src="{!! asset('img/temporary/banner.jpg') !!}" alt="forum-banner" class="header__background">
         <nav class="breadcrumb">
-            <a class="breadcrumb__link" href="{!! route('forum') !!}">{!! trans('forum.forum') !!}</a><span
-                    class="breadcrumb__spacer">//</span><a class="breadcrumb__link" href="{!! route('forum.tag') !!}">Tag</a><span
-                    class="breadcrumb__spacer">//</span><span class="breadcrumb__item">Titre du topic</span>
+            <a class="breadcrumb__link" href="{!! route('forum.getForum') !!}">{!! trans('forum.forum') !!}</a><span
+                    class="breadcrumb__spacer">//</span><a class="breadcrumb__link"
+                                                           href="{!! route('forum.getTag', e($mainTag->slug)) !!}">{{ $mainTag->is_official ? $mainTag->name : '#' . $mainTag->name }}</a><span
+                    class="breadcrumb__spacer">//</span><span class="breadcrumb__item">{{ $topic->name }}</span>
         </nav>
-        <h1 class="header__tag header__tag--unofficial">Tag</h1>
+        <h1 class="header__tag @if( ! $mainTag->is_official)header__tag--unofficial @endif">{{ $mainTag->name }}</h1>
     </header>
 
     <div class="forumBar">
@@ -54,7 +55,7 @@
                 {!! trans('general.reload') !!}
             </button>
         </div>
-        <div class="forumBar__filters">
+        <div class="forumBar__filters hidden">
             <strong class="forumBar__filters__name">{!! trans('forum.filter') !!} :</strong>
             <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterChronology') !!}</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.filterPopular') !!}</a>
@@ -66,15 +67,20 @@
     </div>
 
     <div class="forumContainer">
-        @include('forum.followedTags')
+        <aside class="followedTags followedTags--no-filter">
+            @include('forum.followedTags')
+        </aside>
+
         <article class="post">
             <div class="topic">
                 <div class="topic__info">
-                    <h1 class="topic__info__name">Titre du topic</h1>
+                    <h1 class="topic__info__name">{{ $topic->name }}</h1>
 
                     <div class="topic__info__tags">
-                        <a href="{!! route('forum.tag') !!}" rel="tag" class="topic__info__tag">#TAG</a>
-                        <a href="{!! route('forum.tag') !!}" rel="tag" class="topic__info__tag">#TAG</a>
+                        @foreach($tags as $tag)
+                            <a href="{!! route('forum.getTag', e($tag->slug)) !!}" rel="tag"
+                               class="topic__info__tag">#{{ $tag->name }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="topic__meta">
@@ -85,7 +91,7 @@
                                 <path d="M512 384q52 0 90 38t38 90-38 90-90 38-90-38-38-90 38-90 90-38zM512 726q88 0 151-63t63-151-63-151-151-63-151 63-63 151 63 151 151 63zM512 192q158 0 286 88t184 232q-56 144-184 232t-286 88-286-88-184-232q56-144 184-232t286-88z"></path>
                             </svg>
                         </dd>
-                        <dt class="topic__meta__counter__value">{{ rand(0, 20) }}</dt>
+                        <dt class="topic__meta__counter__value">{{ $topic->views }}</dt>
                         <dd class="topic__meta__counter__icon">
                             <svg class="topic__meta__counter__icon__icon topic__meta__counter__icon__icon--smaller"
                                  version="1.1" viewBox="0 0 896 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -93,19 +99,19 @@
                                 <path d="M938 170v768l-170-170h-598q-34 0-59-26t-25-60v-512q0-34 25-59t59-25h684q34 0 59 25t25 59z"></path>
                             </svg>
                         </dd>
-                        <dt class="topic__meta__counter__value">{{ rand(0, 20) }}</dt>
+                        <dt class="topic__meta__counter__value">{{ $topic->posts->count() }}</dt>
                         <dd class="topic__meta__counter__icon">
                             <svg class="topic__meta__counter__icon__icon" version="1.1" viewBox="0 0 1024 1024"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M512 598q108 0 225 47t117 123v86h-684v-86q0-76 117-123t225-47zM512 512q-70 0-120-50t-50-120 50-121 120-51 120 51 50 121-50 120-120 50z"></path>
                             </svg>
                         </dd>
-                        <dt class="topic__meta__counter__value">{{ rand(0, 20) }}</dt>
+                        <dt class="topic__meta__counter__value">{{ $topic->posts->unique('user')->count() }}</dt>
                     </dl>
                 </div>
             </div>
 
-            <div class="poll">
+            <!--<div class="poll">
                 <h2 class="poll__question"><strong>Sondage :</strong> Lorem ipsum dolor sit amet, consectetur
                     adipisicing elit. Explicabo consequatur cumque ut ?</h2>
 
@@ -124,65 +130,10 @@
                     </div>
                 </div>
                 <div class="poll__meta">1250 participants</div>
-            </div>
+            </div>-->
 
             <div class="post__content withEmoji">
-                <img src="{!! asset('img/temporary/banner_halo.jpg') !!}" alt="banner-halo">
-
-                <h1>Lorem ipsum dolor sit amet, consectetur !</h1>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :smile:. Mollitia <strong>quibusdam
-                        numquam</strong>,
-                    magni impedit soluta vel asperiores veniam debitis magnam minima.</p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit.</li>
-                </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur <a href="http://www.google.fr/">adipisicing elit</a>. Ad,
-                    iure!</p>
-
-                <h2>Lorem ipsum dolor sit amet, consectetur !</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :poop:. Ratione atque expedita officiis corrupti
-                    vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit.</li>
-                </ul>
-                <h3>Lorem ipsum dolor sit amet, consectetur !</h3>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :atom:. Ratione atque expedita officiis corrupti
-                    vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit.</li>
-                </ul>
-                <h4>Lorem ipsum dolor sit amet, consectetur !</h4>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :doughnut:. Ratione atque expedita officiis corrupti
-                    vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit.</li>
-                </ul>
-                <h5>Lorem ipsum dolor sit amet, consectetur !</h5>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit :cop_tone5:. Ratione atque expedita officiis corrupti
-                    vel, nihil, commodi, nulla quisquam nemo eum id nisi debitis amet ab.</p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit.</li>
-                </ul>
+                {!! $firstPost->content !!}
             </div>
             <footer class="post__footer">
                 <div class="post__likes">
@@ -207,9 +158,11 @@
                          class="post__author__avatar">
 
                     <div class="post__author__info">
-                        <a href="#" class="post__author__info__name">Auteur</a>
+                        <a href="#" class="post__author__info__name">{{ $firstPost->user->name }}</a>
 
-                        <div class="post__author__info__quote">Lorem ipsum dolor sit amet, consectetur.</div>
+                        <div class="post__author__info__quote">
+                            icons here
+                        </div>
                     </div>
                 </div>
                 <div class="post__meta">
@@ -483,7 +436,6 @@
         </div>
     </div>
     <script src="//cdn.jsdelivr.net/emojione/2.0.0/lib/js/emojione.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.0.0/assets/css/emojione.min.css"/>
 @endsection
 
 @section('scripts')

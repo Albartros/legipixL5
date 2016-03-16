@@ -227,9 +227,41 @@ class ForumController extends Controller
     {
         $tag = Tag::where(['slug' => $slug])->firstOrFail();
 
-        $topics = $tag->topics()->with('tags', 'posts.user', 'posts.likeCounter')->paginate(20);
+        $topics = $tag->topics()->with('tags', 'posts.user', 'posts.likeCounter')->paginate
+        (20);
+
+        \Session::flash('flashTag', $tag);
 
         return view('forum.tag')->with(['tag' => $tag, 'topics' => $topics]);
+    }
+
+    /**
+     * Show the topic.
+     *
+     * @return Response
+     */
+    public function getTopic($id)
+    {
+        $topic = Topic::find($id);
+
+        $tags = $topic->tags()->get();
+
+        if (\Session::has('flashTag') && $tags->contains(\Session::get('flashTag'))) {
+            \Session::reflash('flashTag');
+
+            $mainTag = \Session::get('flashTag');
+        } else {
+            $mainTag = $tags->first();
+        }
+
+        $posts = $topic->posts()->with(['user', 'likeCounter'])->get();
+
+        $firstPost = $posts->shift();
+
+        return view('forum.topic')->with(['topic' => $topic, 'tags' => $tags, 'mainTag' => $mainTag, 'firstPost' =>
+            $firstPost,
+            'posts' =>
+                $posts]);
     }
 
     /**

@@ -26,6 +26,8 @@ Route::get('share/{short}', 'RedirectController@short')->name('share');
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index')->name('getHome');
+
+    // Pages
     Route::get('/page/{slug}', 'PageController@page')->name('getPage');
 
     // Membres
@@ -84,13 +86,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/', 'ForumController@postForum')->name('forum.postForum');
         Route::post('/update', 'ForumController@updateTags')->name('forum.updateTags');
         // Tags
-        Route::group(['prefix' => '/tag/{tag?}'], function () {
+        Route::group(['prefix' => '/tag/{tag}'], function () {
             Route::get('/', 'ForumController@getTag')->name('forum.getTag');
             Route::get('/post', 'ForumController@getTagRedactor')->name('forum.getTagRedactor');
             Route::post('/', 'ForumController@postTag')->name('forum.postTag');
         });
         // Sujets
-        Route::group(['prefix' => '/sujet/{id?}-{slug?}'], function () {
+        Route::group(['prefix' => '/sujet/{id}-{slug}'], function () {
             Route::get('/', 'ForumController@getTopic')->name('forum.getTopic');
             Route::get('/post', 'ForumController@getTopicRedactor')->name('forum.getTopicRedactor');
             Route::post('/', 'ForumController@postTopic')->name('forum.postTopic');

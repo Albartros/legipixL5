@@ -45,6 +45,9 @@
             width: 450px;
         }
     }
+  @include m(error) {
+    margin-top: 1em;
+  }
     @include m(cookie) {
         @include transform(scale(0.875) translateY(-50%));
         height: 1.5em;

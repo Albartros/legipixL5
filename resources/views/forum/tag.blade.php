@@ -49,7 +49,7 @@
                 {!! trans('general.reload') !!}
             </button>
         </div>
-        <div class="forumBar__filters">
+        <div class="forumBar__filters hidden">
             <strong class="forumBar__filters__name">{!! trans('forum.filterBy') !!} :</strong>
             <a href="#" class="forumBar__filter forumBar__filter--active">{!! trans('forum.filterClassic') !!}</a>
             <a href="#" class="forumBar__filter">{!! trans('forum.filterPopular') !!}</a>
@@ -62,12 +62,18 @@
     </div>
 
     <div class="forumContainer">
-        @include('forum.followedTags')
+        <aside class="followedTags followedTags--no-filter">
+            @include('forum.followedTags')
+        </aside>
 
         @foreach($topics as $topic)
             <article class="forumContainer__topic">
                 <div class="forumContainer__like">
-                    <button class="forumContainer__like__holder {{ $topic->posts->first()->liked() ? 'forumContainer__like__holder--active' : null }}">
+                    <button onclick="this.className = this.className + 'forumContainer__like__holder--active';"
+                            class="forumContainer__like__holder {{
+                    $topic->posts->first()->liked
+                    () ?
+                    'forumContainer__like__holder--active' : null }}">
                         <svg class="forumContainer__like__icon" version="1.1"
                              viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
                              xmlns="http://www.w3.org/2000/svg">
@@ -84,12 +90,21 @@
                     </div>
                     <div class="forumContainer__topic__info">
                         <h2 class="forumContainer__topic__info__name">
-                            <svg title="Verrouillé" class="forumContainer__topic__info__name__icon" version="1.1"
-                                 viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path class="path1"
-                                      d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
-                            </svg>
+                            @if($topic->is_pinned)
+                                <svg title="Annonce" class="forumContainer__topic__info__name__icon" version="1.1"
+                                     viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path class="path1"
+                                          d="M554 640v-86h-84v86h84zM554 470v-256h-84v256h84zM854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z"></path>
+                                </svg>
+                            @elseif($topic->is_locked)
+                                <svg title="Verrouillé" class="forumContainer__topic__info__name__icon" version="1.1"
+                                     viewBox="0 0 1024 1024" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path class="path1"
+                                          d="M644 342v-86q0-54-39-93t-93-39-93 39-39 93v86h264zM512 726q34 0 60-26t26-60-26-60-60-26-60 26-26 60 26 60 60 26zM768 342q34 0 60 25t26 59v428q0 34-26 59t-60 25h-512q-34 0-60-25t-26-59v-428q0-34 26-59t60-25h42v-86q0-88 63-151t151-63 151 63 63 151v86h42z"></path>
+                                </svg>
+                            @endif
                             <a href="{!! route('forum.getTopic', [(int) $topic->id, str_slug($topic->name)]) !!}">{{ $topic->name }}</a>
                         </h2>
                         <h3 class="forumContainer__topic__info__post">

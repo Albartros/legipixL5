@@ -46,4 +46,6 @@ return [
 
     'moderation' => 'Modération',
 
+    'noTags' => 'Aucun tag n\'a été trouvé :anguished:',
+
 ];

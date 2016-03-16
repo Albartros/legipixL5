@@ -73,9 +73,11 @@
         {!! Form::close() !!}
     </div>
     <div class="forumContainer">
-        @include('forum.followedTags')
-        @if( (isset($categories) && empty($categories)) || (isset($tags) && empty($tags)) )
-            <h1>Aucun Tag ne correspond à vos critères de recherche.</h1>
+        <aside class="followedTags">
+            @include('forum.followedTags')
+        </aside>
+        @if( (isset($categories) && empty($categories)) || (isset($filteredTags) && empty($filteredTags)) )
+            <h1 class="forumContainer__empty withEmoji">{!! trans('forum.noTags') !!}</h1>
         @else
             @if($isClassicDisplay == true)
                 @foreach($categories as $category)
@@ -137,7 +139,9 @@
     </div>
 @endsection
 
+<script src="//cdn.jsdelivr.net/emojione/2.0.0/lib/js/emojione.min.js"></script>
 @section('scripts')
     ForumTagFilters.init();
+    Emoji.init();
     @parent
 @endsection

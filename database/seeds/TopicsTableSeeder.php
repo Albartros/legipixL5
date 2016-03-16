@@ -14,7 +14,9 @@ class TopicsTableSeeder extends Seeder
         for($i = 1; $i <= 5; $i++) {
             DB::table('topics')->insert([
                 'name' => 'Topic_'.$i,
-                'views' => 0,
+                'views' => rand(1, 250),
+                'is_locked' => rand(0, 1),
+                'is_pinned' => rand(0, 1),
                 'user_id' => 1,
                 'created_at' => \Carbon\Carbon::now(),
             ]);

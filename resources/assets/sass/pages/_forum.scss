@@ -68,6 +68,9 @@
   display: none;
   position: relative;
   top: -82px;
+  @include m(no-filter) {
+    top: -47px;
+  }
   @include b(m) {
     @include span(3 of 13);
     display: block;
@@ -130,6 +133,11 @@
 
 .forumContainer {
   @include container;
+
+  @include e(empty) {
+    text-align: center;
+    padding-top: 2em;
+  }
 
   @include e(like) {
     @include span(1 of 18);
